@@ -1,0 +1,281 @@
+<form [formGroup]="playersForm">
+  <div class="col-12">
+    <div class="row">
+      <mat-form-field class="col-12 col-md-4">
+        <input matInput placeholder="Name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field class="col-12 col-md-4">
+        <input matInput placeholder="Last Name" formControlName="lastName" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="row">
+      <mat-form-field class="col-12 col-md-4">
+        <input matInput placeholder="Collection" formControlName="collection" />
+      </mat-form-field>
+      <mat-form-field class="col-12 col-md-4">
+        <input
+          matInput
+          placeholder="Subcollection"
+          formControlName="subcollection"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="row">
+      <mat-form-field class="col-12 col-md-4">
+        <input matInput placeholder="Overall" formControlName="overall" />
+      </mat-form-field>
+      <mat-form-field class="col-12 col-md-4">
+        <input matInput placeholder="Position" formControlName="position" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="row">
+      <mat-form-field class="col-2">
+        <input matInput placeholder="Inside" formControlName="inside" />
+      </mat-form-field>
+      <mat-form-field class="col-2">
+        <input matInput placeholder="Outside" formControlName="outside" />
+      </mat-form-field>
+      <mat-form-field class="col-2">
+        <input matInput placeholder="Playmaking" formControlName="playmaking" />
+      </mat-form-field>
+      <mat-form-field class="col-2">
+        <input matInput placeholder="Athletism" formControlName="athletism" />
+      </mat-form-field>
+      <mat-form-field class="col-2">
+        <input matInput placeholder="Defending" formControlName="defending" />
+      </mat-form-field>
+      <mat-form-field class="col-2">
+        <input matInput placeholder="Rebounding" formControlName="rebounding" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="row">
+      <mat-form-field class="col-4">
+        <input
+          matInput
+          placeholder="Total attributes"
+          formControlName="totalAttributes"
+        />
+      </mat-form-field>
+      <mat-form-field class="col-4">
+        <input matInput placeholder="Height" formControlName="height" />
+      </mat-form-field>
+      <mat-form-field class="col-4">
+        <input matInput placeholder="Image" formControlName="image" />
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+
+<div class="col-12">
+  <button class="btn btn-primary" (click)="sendForm(playersForm.value)">
+    Enviar
+  </button>
+</div>
+
+<div class="col-12">
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      (keyup)="filterPlayers($event.target.value)"
+      placeholder="Filter"
+    />
+  </mat-form-field>
+</div>
+<div class="col-12 col-xl-8 offset-xl-2">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>NAME</th>
+      <td class="player-card" mat-cell *matCellDef="let player">
+        <div class="player">
+          <img class="player-image mr-2" [src]="player.image" />
+        </div>
+        <div>
+          <span class="player-name"
+            >{{ player.name }} {{ player.lastName }}</span
+          >
+          <span class="player-collection">
+            {{ player.collection }} / {{ player.subcollection }}
+          </span>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Overall Column -->
+    <ng-container matColumnDef="overall">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>OVR</th>
+      <td mat-cell *matCellDef="let player">
+        <span
+          [ngClass]="{
+            'overall-bronze': player.overall >= 60 && player.overall < 70,
+            'overall-silver': player.overall >= 70 && player.overall < 75,
+            'overall-gold': player.overall >= 75 && player.overall < 80,
+            'overall-emerald': player.overall >= 80 && player.overall < 84,
+            'overall-sapphire': player.overall >= 84 && player.overall < 87,
+            'overall-ruby': player.overall >= 87 && player.overall < 90,
+            'overall-amethyst': player.overall >= 90 && player.overall < 94,
+            'overall-diamond': player.overall >= 94 && player.overall < 96,
+            'overall-pink-diamond': player.overall >= 96 && player.overall < 99,
+            'overall-galaxy-opal': player.overall == 99
+          }"
+          class="badge badge-success"
+          >{{ player.overall }}</span
+        >
+      </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>POS</th>
+      <td mat-cell *matCellDef="let player">{{ player.position }}</td>
+    </ng-container>
+
+    <!-- Inside Column -->
+    <ng-container matColumnDef="inside">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>INS</th>
+      <td mat-cell *matCellDef="let player">
+        <span
+          [ngClass]="{
+            attributeLowest: player.overall >= 25 && player.overall < 50,
+            attributeLow: player.overall >= 50 && player.overall < 60,
+            attributeMedium: player.overall >= 60 && player.overall < 80,
+            attributeHigh: player.overall >= 80 && player.overall < 90,
+            attributeHighest: player.overall >= 90
+          }"
+          class="badge badge-success"
+          >{{ player.inside }}</span
+        >
+      </td>
+    </ng-container>
+
+    <!-- Outside Column -->
+    <ng-container matColumnDef="outside">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>OUT</th>
+      <td mat-cell *matCellDef="let player">
+        <span
+          [ngClass]="{
+            attributeLowest: player.outside >= 25 && player.outside < 50,
+            attributeLow: player.outside >= 50 && player.outside < 60,
+            attributeMedium: player.outside >= 60 && player.outside < 80,
+            attributeHigh: player.outside >= 80 && player.outside < 90,
+            attributeHighest: player.outside >= 90
+          }"
+          class="badge badge-success"
+          >{{ player.outside }}</span
+        >
+      </td>
+    </ng-container>
+
+    <!-- Playmaking Column -->
+    <ng-container matColumnDef="playmaking">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>PLY</th>
+      <td mat-cell *matCellDef="let player">
+        <span
+          [ngClass]="{
+            attributeLowest: player.playmaking >= 25 && player.playmaking < 50,
+            attributeLow: player.playmaking >= 50 && player.playmaking < 60,
+            attributeMedium: player.playmaking >= 60 && player.playmaking < 80,
+            attributeHigh: player.playmaking >= 80 && player.playmaking < 90,
+            attributeHighest: player.playmaking >= 90
+          }"
+          class="badge badge-success"
+          >{{ player.playmaking }}</span
+        >
+      </td>
+    </ng-container>
+
+    <!-- Athletism Column -->
+    <ng-container matColumnDef="athletism">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ATH</th>
+      <td mat-cell *matCellDef="let player">
+        <span
+          [ngClass]="{
+            attributeLowest: player.athletism >= 25 && player.athletism < 50,
+            attributeLow: player.athletism >= 50 && player.athletism < 60,
+            attributeMedium: player.athletism >= 60 && player.athletism < 80,
+            attributeHigh: player.athletism >= 80 && player.athletism < 90,
+            attributeHighest: player.athletism >= 90
+          }"
+          class="badge badge-success"
+          >{{ player.athletism }}</span
+        >
+      </td>
+    </ng-container>
+
+    <!-- Defending Column -->
+    <ng-container matColumnDef="defending">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>DEF</th>
+      <td mat-cell *matCellDef="let player">
+        <span
+          [ngClass]="{
+            attributeLowest: player.defending >= 25 && player.defending < 50,
+            attributeLow: player.defending >= 50 && player.defending < 60,
+            attributeMedium: player.defending >= 60 && player.defending < 80,
+            attributeHigh: player.defending >= 80 && player.defending < 90,
+            attributeHighest: player.defending >= 90
+          }"
+          class="badge badge-success"
+          >{{ player.defending }}</span
+        >
+      </td>
+    </ng-container>
+
+    <!-- Rebounding Column -->
+    <ng-container matColumnDef="rebounding">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>REB</th>
+      <td mat-cell *matCellDef="let player">
+        <span
+          [ngClass]="{
+            attributeLowest: player.rebounding >= 25 && player.rebounding < 50,
+            attributeLow: player.rebounding >= 50 && player.rebounding < 60,
+            attributeMedium: player.rebounding >= 60 && player.rebounding < 80,
+            attributeHigh: player.rebounding >= 80 && player.rebounding < 90,
+            attributeHighest: player.rebounding >= 90
+          }"
+          class="badge badge-success"
+          >{{ player.rebounding }}</span
+        >
+      </td>
+    </ng-container>
+
+    <!-- Height Column -->
+    <ng-container matColumnDef="height">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>HEIGHT</th>
+      <td mat-cell *matCellDef="let player">{{ player.height }}</td>
+    </ng-container>
+
+    <!-- Total attributes Column -->
+    <ng-container matColumnDef="totalAttributes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        TOTAL ATTRIBUTES
+      </th>
+      <td mat-cell *matCellDef="let player">{{ player.totalAttributes }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="selectPlayer(row)"
+    ></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[2, 5, 10, 20, 50, 100]"
+    [pageSize]="10"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

@@ -1,0 +1,173 @@
+app-players-list {
+  table {
+    width: 100%;
+  }
+
+  .players-table {
+    height: 400px;
+    overflow: auto;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  mat-cell:first-of-type,
+  mat-footer-cell:first-of-type,
+  mat-header-cell:first-of-type {
+    padding-left: 2%;
+  }
+
+  .player {
+    float: left;
+  }
+
+  .player-image {
+    width: 28px;
+    height: 100%;
+  }
+
+  .player-name {
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: capitalize;
+    display: inline;
+  }
+
+  .player-collection {
+    font-size: 10px;
+    text-transform: capitalize;
+    display: block;
+  }
+
+  .mat-column-name {
+    flex: 0 0 35% !important;
+    justify-content: left !important;
+  }
+
+  .mat-column-overall {
+    padding: 7px !important;
+  }
+
+  .mat-column-position {
+    padding: 7px !important;
+  }
+
+  .mat-row:hover {
+    background-color: #f5f5f5;
+  }
+
+  .mat-row {
+    cursor: pointer;
+  }
+
+  mat-cell {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  mat-header-cell {
+    display: flex;
+    justify-content: center;
+  }
+
+  .overall-galaxy-opal {
+    font-size: 15px;
+    background: linear-gradient(rgba(75, 168, 255, 0.1), rgba(0, 0, 0, 0.7)),
+      linear-gradient(to bottom left, #188fff, #e1a6e7, #f9a205);
+    box-shadow: 0 0 10px #f9a205;
+  }
+
+  .overall-pink-diamond {
+    font-size: 15px;
+    background: linear-gradient(#ff88c4, #002831);
+    box-shadow: 0 0 10px #f5a;
+  }
+
+  .overall-diamond {
+    font-size: 15px;
+    background: linear-gradient(#007a97, #002831);
+  }
+
+  .overall-amethyst {
+    font-size: 15px;
+    background: linear-gradient(#b84eff, #8a00e7);
+  }
+
+  .overall-ruby {
+    font-size: 15px;
+    background: linear-gradient(#ae0000, #480000);
+  }
+
+  .overall-sapphire {
+    font-size: 15px;
+    background: linear-gradient(#0020c7, #001061);
+  }
+
+  .overall-emerald {
+    font-size: 15px;
+    background: linear-gradient(#05c715, #03630b);
+  }
+
+  .overall-gold {
+    font-size: 15px;
+    background: linear-gradient(#d6bb5c, #a38829);
+  }
+
+  .overall-silver {
+    font-size: 15px;
+    background: linear-gradient(#a2a2a2, #6f6f6f);
+  }
+
+  .overall-bronze {
+    font-size: 15px;
+    background: linear-gradient(#cc5b00, #662d00);
+  }
+
+  .attributeLowest {
+    font-size: 15px;
+    background-color: #900;
+  }
+
+  .attributeLow {
+    font-size: 15px;
+    background-color: #d40;
+  }
+
+  .attributeMedium {
+    font-size: 15px;
+    background-color: #c90;
+  }
+
+  .attributeHigh {
+    font-size: 15px;
+    background-color: #070;
+  }
+
+  .attributeHighest {
+    font-size: 15px;
+    background-color: #0a0;
+  }
+
+  @media (max-width: 992px) {
+    .player-image {
+      width: 22px;
+    }
+  }
+
+  @media (max-width: 875px) {
+    .player-name {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .player-image {
+      width: 18px;
+    }
+
+    .badge {
+      font-size: 13px;
+    }
+  }
+}
