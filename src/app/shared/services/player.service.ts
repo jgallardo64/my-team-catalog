@@ -11,7 +11,7 @@ export class PlayerService {
   public getAll(headers?: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        filter: `{ "order": "overall DESC"}`
+        filter: `{"include": "collectionInfo"}`
       })
     };
     return this.http
