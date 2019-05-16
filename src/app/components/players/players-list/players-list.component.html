@@ -13,14 +13,35 @@
   <div class="col-12">
     <div class="row">
       <mat-form-field class="col-12 col-md-4">
-        <input matInput placeholder="Collection" formControlName="collection" />
+        <mat-select
+          placeholder="Collection"
+          formControlName="collection"
+          (selectionChange)="getSubCollections($event)"
+        >
+          <mat-option
+            *ngFor="let collection of collectionList"
+            [value]="collection.id"
+          >
+            {{ collection.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field class="col-12 col-md-4">
-        <input
-          matInput
-          placeholder="Subcollection"
-          formControlName="subcollection"
-        />
+        <mat-select placeholder="Subcollection" formControlName="subcollection">
+          <mat-option
+            *ngFor="let subcollection of subcollectionList"
+            [value]="subcollection.id"
+          >
+            {{ subcollection.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-12 col-md-4">
+        <mat-select placeholder="Team" formControlName="team">
+          <mat-option *ngFor="let team of teamsList" [value]="team.id">
+            {{ team.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
   </div>
@@ -32,6 +53,19 @@
       </mat-form-field>
       <mat-form-field class="col-12 col-md-4">
         <input matInput placeholder="Position" formControlName="position" />
+      </mat-form-field>
+      <mat-form-field class="col-12 col-md-4">
+        <mat-select placeholder="Badges" formControlName="badges" multiple>
+          <mat-option *ngFor="let badge of badgeList" [value]="badge.id"
+            ><img
+              [src]="badge.image"
+              style="
+            width: 20px;
+            margin-right: 5px;
+        "
+            />{{ badge.name }}</mat-option
+          >
+        </mat-select>
       </mat-form-field>
     </div>
   </div>
@@ -48,7 +82,11 @@
         <input matInput placeholder="Playmaking" formControlName="playmaking" />
       </mat-form-field>
       <mat-form-field class="col-2">
-        <input matInput placeholder="Athletism" formControlName="athletism" />
+        <input
+          matInput
+          placeholder="Athleticism"
+          formControlName="athleticism"
+        />
       </mat-form-field>
       <mat-form-field class="col-2">
         <input matInput placeholder="Defending" formControlName="defending" />
@@ -105,10 +143,11 @@
         </div>
         <div>
           <span class="player-name"
-            >{{ player.name }} {{ player.lastName }}</span
+            >{{ player?.name }} {{ player?.lastName }}</span
           >
           <span class="player-collection">
-            {{ player.collection }} / {{ player.subcollection }}
+            {{ player?.subcollection?.collection?.name }} /
+            {{ player?.subcollection?.name }}
           </span>
         </div>
       </td>
@@ -132,7 +171,7 @@
             'overall-galaxy-opal': player.overall == 99
           }"
           class="badge badge-success"
-          >{{ player.overall }}</span
+          >{{ player?.overall }}</span
         >
       </td>
     </ng-container>
@@ -140,7 +179,7 @@
     <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef>POS</th>
-      <td mat-cell *matCellDef="let player">{{ player.position }}</td>
+      <td mat-cell *matCellDef="let player">{{ player?.position }}</td>
     </ng-container>
 
     <!-- Inside Column -->
@@ -156,7 +195,7 @@
             attributeHighest: player.overall >= 90
           }"
           class="badge badge-success"
-          >{{ player.inside }}</span
+          >{{ player?.inside }}</span
         >
       </td>
     </ng-container>
@@ -174,7 +213,7 @@
             attributeHighest: player.outside >= 90
           }"
           class="badge badge-success"
-          >{{ player.outside }}</span
+          >{{ player?.outside }}</span
         >
       </td>
     </ng-container>
@@ -192,25 +231,27 @@
             attributeHighest: player.playmaking >= 90
           }"
           class="badge badge-success"
-          >{{ player.playmaking }}</span
+          >{{ player?.playmaking }}</span
         >
       </td>
     </ng-container>
 
-    <!-- Athletism Column -->
-    <ng-container matColumnDef="athletism">
+    <!-- Athleticism Column -->
+    <ng-container matColumnDef="athleticism">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>ATH</th>
       <td mat-cell *matCellDef="let player">
         <span
           [ngClass]="{
-            attributeLowest: player.athletism >= 25 && player.athletism < 50,
-            attributeLow: player.athletism >= 50 && player.athletism < 60,
-            attributeMedium: player.athletism >= 60 && player.athletism < 80,
-            attributeHigh: player.athletism >= 80 && player.athletism < 90,
-            attributeHighest: player.athletism >= 90
+            attributeLowest:
+              player.athleticism >= 25 && player.athleticism < 50,
+            attributeLow: player.athleticism >= 50 && player.athleticism < 60,
+            attributeMedium:
+              player.athleticism >= 60 && player.athleticism < 80,
+            attributeHigh: player.athleticism >= 80 && player.athleticism < 90,
+            attributeHighest: player.athleticism >= 90
           }"
           class="badge badge-success"
-          >{{ player.athletism }}</span
+          >{{ player?.athleticism }}</span
         >
       </td>
     </ng-container>
@@ -228,7 +269,7 @@
             attributeHighest: player.defending >= 90
           }"
           class="badge badge-success"
-          >{{ player.defending }}</span
+          >{{ player?.defending }}</span
         >
       </td>
     </ng-container>
@@ -246,7 +287,7 @@
             attributeHighest: player.rebounding >= 90
           }"
           class="badge badge-success"
-          >{{ player.rebounding }}</span
+          >{{ player?.rebounding }}</span
         >
       </td>
     </ng-container>
@@ -254,7 +295,7 @@
     <!-- Height Column -->
     <ng-container matColumnDef="height">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>HEIGHT</th>
-      <td mat-cell *matCellDef="let player">{{ player.height }}</td>
+      <td mat-cell *matCellDef="let player">{{ player?.height }}</td>
     </ng-container>
 
     <!-- Total attributes Column -->
@@ -262,7 +303,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         TOTAL ATTRIBUTES
       </th>
-      <td mat-cell *matCellDef="let player">{{ player.totalAttributes }}</td>
+      <td mat-cell *matCellDef="let player">{{ player?.totalAttributes }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

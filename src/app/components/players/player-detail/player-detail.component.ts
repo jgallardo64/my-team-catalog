@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { PlayerService } from "src/app/shared/services/player.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { ROUTER_DEFINITIONS } from "src/app/shared/constants/router-definitions";
 
 @Component({
   selector: "app-player-detail",
@@ -11,6 +12,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class PlayerDetailComponent implements OnInit {
   playerId;
   player;
+
+  routerDefinitions = ROUTER_DEFINITIONS;
 
   constructor(
     private playerService: PlayerService,

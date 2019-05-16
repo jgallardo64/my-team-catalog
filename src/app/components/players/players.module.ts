@@ -8,10 +8,16 @@ import { MatTableModule } from "@angular/material/table";
 import {
   MatPaginatorModule,
   MatSortModule,
-  MatInputModule
+  MatInputModule,
+  MatSelectModule,
+  MatCheckboxModule
 } from "@angular/material";
 import { ReactiveFormsModule } from "@angular/forms";
 import { PlayerService } from "src/app/shared/services/player.service";
+import { BadgeService } from "src/app/shared/services/badge.service";
+import { CollectionService } from "src/app/shared/services/collection.service";
+import { SubcollectionService } from "src/app/shared/services/subcollection.service";
+import { TeamService } from "src/app/shared/services/team.service";
 
 @NgModule({
   declarations: [
@@ -23,11 +29,19 @@ import { PlayerService } from "src/app/shared/services/player.service";
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSelectModule,
+    MatCheckboxModule,
     MatSortModule,
     MatInputModule,
     ReactiveFormsModule,
     PlayersRoutingModule
   ],
-  providers: [PlayerService]
+  providers: [
+    PlayerService,
+    BadgeService,
+    CollectionService,
+    SubcollectionService,
+    TeamService
+  ]
 })
 export class PlayersModule {}

@@ -5,24 +5,18 @@ import { map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 
 @Injectable()
-export class PlayerService {
+export class BadgeService {
   constructor(private http: HttpClient) {}
 
   public getAll(headers?: any): Observable<any> {
     return this.http
-      .get<any>(environment.apiUrl + `Players`)
+      .get<any>(environment.apiUrl + `Badges`)
       .pipe(map((data: any[]) => data));
   }
 
-  public createPlayer(values: any, headers?: any): Observable<any> {
+  public getById(badgeId: any): Observable<any> {
     return this.http
-      .post<any>(environment.apiUrl + `Players`, values)
-      .pipe(map((data: any[]) => data));
-  }
-
-  public getById(playerId: any): Observable<any> {
-    return this.http
-      .get<any>(environment.apiUrl + `Players/${playerId}`)
+      .get<any>(environment.apiUrl + `Badges/${badgeId}`)
       .pipe(map((data: any[]) => data));
   }
 }

@@ -4,6 +4,10 @@ import { Router } from "@angular/router";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { PlayerService } from "src/app/shared/services/player.service";
 import { ToastrService } from "ngx-toastr";
+import { ROUTER_DEFINITIONS } from "src/app/shared/constants/router-definitions";
+import { BadgeService } from "src/app/shared/services/badge.service";
+import { CollectionService } from "src/app/shared/services/collection.service";
+import { TeamService } from "src/app/shared/services/team.service";
 
 @Component({
   selector: "app-players-list",
@@ -13,6 +17,10 @@ import { ToastrService } from "ngx-toastr";
 })
 export class PlayersListComponent implements OnInit {
   players;
+  badgeList;
+  collectionList;
+  subcollectionList;
+  teamsList;
   playersForm: FormGroup;
   displayedColumns: string[] = [
     "name",
@@ -21,12 +29,14 @@ export class PlayersListComponent implements OnInit {
     "inside",
     "outside",
     "playmaking",
-    "athletism",
+    "athleticism",
     "defending",
     "rebounding",
     "height",
     "totalAttributes"
   ];
+
+  routerDefinitions = ROUTER_DEFINITIONS;
   dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -37,12 +47,18 @@ export class PlayersListComponent implements OnInit {
     private playerService: PlayerService,
     private router: Router,
     private formBuilder: FormBuilder,
+    private badgeService: BadgeService,
+    private collectionService: CollectionService,
+    private teamService: TeamService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit() {
     this.getPlayers();
     this.buildForm();
+    this.getBadges();
+    this.getCollections();
+    this.getTeams();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
@@ -53,17 +69,19 @@ export class PlayersListComponent implements OnInit {
       lastName: [{ value: null, disabled: false }],
       collection: [{ value: null, disabled: false }],
       subcollection: [{ value: null, disabled: false }],
+      team: [{ value: null, disabled: false }],
       overall: [{ value: null, disabled: false }],
       position: [{ value: null, disabled: false }],
       inside: [{ value: null, disabled: false }],
       outside: [{ value: null, disabled: false }],
       playmaking: [{ value: null, disabled: false }],
       defending: [{ value: null, disabled: false }],
-      athletism: [{ value: null, disabled: false }],
+      athleticism: [{ value: null, disabled: false }],
       rebounding: [{ value: null, disabled: false }],
       totalAttributes: [{ value: null, disabled: false }],
       height: [{ value: null, disabled: false }],
-      image: [{ value: null, disabled: false }]
+      badges: [{ value: null, disabled: false }],
+      image: [{ value: [], disabled: false }]
     });
   }
 
@@ -77,12 +95,42 @@ export class PlayersListComponent implements OnInit {
   }
 
   getPlayers() {
-    // const filter = `{"where":{"name":"Giannis"}}`;
-
     this.playerService.getAll().subscribe(response => {
       this.dataSource.data = response;
     });
   }
+
+  getBadges() {
+    this.badgeService.getAll().subscribe(response => {
+      this.badgeList = response;
+    });
+  }
+
+  getCollections() {
+    this.collectionService.getAll().subscribe(response => {
+      this.collectionList = response;
+    });
+  }
+
+  getSubCollections(event) {
+    this.collectionService
+      .getSubCollectionsFromCollection(event.value)
+      .subscribe(response => {
+        this.subcollectionList = response;
+      });
+  }
+
+  getTeams() {
+    this.teamService.getAll().subscribe(response => {
+      this.teamsList = response;
+    });
+  }
+
+  // getSubCollections() {
+  //   this.subcollectionService.getAll().subscribe(response => {
+  //     this.subcollectionList = response;
+  //   });
+  // }
 
   getPlayerById(id) {
     this.playerService.getById(id).subscribe(response => {
@@ -96,6 +144,8 @@ export class PlayersListComponent implements OnInit {
 
   selectPlayer(player) {
     // this.playersForm.patchValue(player);
-    this.router.navigate(["players/detail/" + player.id]);
+    this.router.navigate([
+      this.routerDefinitions.players + "/detail/" + player.id
+    ]);
   }
 }

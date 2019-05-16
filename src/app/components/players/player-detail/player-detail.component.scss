@@ -9,6 +9,16 @@ app-player-detail {
     height: 100%;
   }
 
+  .outside-card,
+  .inside-card,
+  .playmaking-card,
+  .rebounding-card,
+  .athleticism-card,
+  .defending-card,
+  .total-attributes-card {
+    margin: 5px;
+  }
+
   .player-image {
     padding: 30px;
   }
@@ -22,9 +32,18 @@ app-player-detail {
 
   .player-collection {
     text-transform: capitalize;
-    color: goldenrod;
+    color: #ffc34b;
     font-size: 20px;
     font-weight: bold;
+
+    a {
+      text-decoration: none;
+      color: #ffc34b;
+    }
+
+    a:hover {
+      color: #ffb218;
+    }
   }
 
   .player-bio {
@@ -84,80 +103,84 @@ app-player-detail {
   }
 
   .overall-galaxy-opal {
-    font-size: 15px;
+    font-size: 30px;
     background: linear-gradient(rgba(75, 168, 255, 0.1), rgba(0, 0, 0, 0.7)),
       linear-gradient(to bottom left, #188fff, #e1a6e7, #f9a205);
     box-shadow: 0 0 10px #f9a205;
   }
 
   .overall-pink-diamond {
-    font-size: 15px;
+    font-size: 30px;
     background: linear-gradient(#ff88c4, #002831);
     box-shadow: 0 0 10px #f5a;
   }
 
   .overall-diamond {
-    font-size: 15px;
+    font-size: 30px;
     background: linear-gradient(#007a97, #002831);
   }
 
   .overall-amethyst {
-    font-size: 15px;
+    font-size: 30px;
     background: linear-gradient(#b84eff, #8a00e7);
   }
 
   .overall-ruby {
-    font-size: 15px;
+    font-size: 30px;
     background: linear-gradient(#ae0000, #480000);
   }
 
   .overall-sapphire {
-    font-size: 15px;
+    font-size: 30px;
     background: linear-gradient(#0020c7, #001061);
   }
 
   .overall-emerald {
-    font-size: 15px;
+    font-size: 30px;
     background: linear-gradient(#05c715, #03630b);
   }
 
   .overall-gold {
-    font-size: 15px;
+    font-size: 30px;
     background: linear-gradient(#d6bb5c, #a38829);
   }
 
   .overall-silver {
-    font-size: 15px;
+    font-size: 30px;
     background: linear-gradient(#a2a2a2, #6f6f6f);
   }
 
   .overall-bronze {
-    font-size: 15px;
+    font-size: 30px;
     background: linear-gradient(#cc5b00, #662d00);
   }
 
+  .totalAttributes {
+    background-color: #07f;
+  }
+
   .attributeLowest {
-    font-size: 15px;
+    font-size: 16px;
     background-color: #900;
   }
 
   .attributeLow {
-    font-size: 15px;
+    font-size: 16px;
     background-color: #d40;
   }
 
   .attributeMedium {
-    font-size: 15px;
+    font-size: 16px;
     background-color: #c90;
   }
 
   .attributeHigh {
-    font-size: 15px;
+    font-size: 16px;
     background-color: #070;
   }
 
   .attributeHighest {
-    font-size: 15px;
+    font-size: 16px;
     background-color: #0a0;
   }
 
