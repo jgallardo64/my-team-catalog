@@ -1,25 +1,25 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { HomeComponent } from "./components/home/home.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: HomeComponent,
-    pathMatch: "full"
+    pathMatch: 'full'
   },
   {
-    path: "players",
-    loadChildren: "./components/players/players.module#PlayersModule"
+    path: 'players',
+    loadChildren: './components/players/players.module#PlayersModule'
   },
   {
-    path: "collections",
+    path: 'collections',
     loadChildren:
-      "./components/collections/collections.module#CollectionsModule"
+      './components/collections/collections.module#CollectionsModule'
   },
   {
-    path: "lineups",
-    loadChildren: "./components/lineups/lineups.module#LineupsModule"
+    path: 'lineups',
+    loadChildren: './components/lineups/lineups.module#LineupsModule'
   }
 ];
 

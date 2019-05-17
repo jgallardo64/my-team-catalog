@@ -17,19 +17,12 @@
                   {{ player?.name }} {{ player?.lastName }}
                 </h5>
                 <h5 class="player-collection">
-                  <a [routerLink]="routerDefinitions.collections + '/list/'">{{
-                    player?.subcollection?.collection?.name
-                  }}</a>
+                  <a [routerLink]="routerDefinitions.collections + '/list/'">
+                    {{ player?.subcollection?.collection?.name }}</a>
                   /
-                  <a
-                    [routerLink]="
-                      routerDefinitions.collections +
-                      '/detail/' +
-                      player?.subcollection?.id
-                    "
-                  >
-                    {{ player?.subcollection?.name }}</a
-                  >
+                  <a [routerLink]="routerDefinitions.collections + '/detail/' + player?.subcollection?.id">
+                    {{ player?.subcollection?.name }}
+                  </a>
                 </h5>
                 <hr />
               </div>
@@ -38,7 +31,9 @@
               <div class="col-12 col-lg-6">
                 <div class="row">
                   <div class="col-12 pb-4">
-                    <h3 class="section-title">Player bio</h3>
+                    <h3 class="section-title">
+                      Player bio
+                    </h3>
                   </div>
                 </div>
                 <div class="row pb-2">
@@ -50,7 +45,9 @@
                   </div>
                   <div class="col-6">
                     <h3 class="section-info">POSITION</h3>
-                    <h3 class="section-collection">{{ player?.position }}</h3>
+                    <h3 class="section-collection">
+                      {{ player?.position }}
+                    </h3>
                   </div>
                 </div>
                 <div class="row pb-2">
@@ -85,39 +82,27 @@
                     <div class="row badge-list pt-3">
                       <div class="col-xs-4">
                         <div class="badge-container">
-                          <img
-                            class="badges"
-                            [src]="
+                          <img class="badges" [src]="
                               '../../../../assets/icons/icon_badge_bronze_count_light.png'
-                            "
-                          />
+                            " />
                           <div class="badge-count">1</div>
                         </div>
                         <div class="badge-container">
-                          <img
-                            class="badges"
-                            [src]="
+                          <img class="badges" [src]="
                               '../../../../assets/icons/icon_badge_silver_count_light.png'
-                            "
-                          />
+                            " />
                           <div class="badge-count">2</div>
                         </div>
                         <div class="badge-container">
-                          <img
-                            class="badges"
-                            [src]="
+                          <img class="badges" [src]="
                               '../../../../assets/icons/icon_badge_gold_count_light.png'
-                            "
-                          />
+                            " />
                           <div class="badge-count">3</div>
                         </div>
                         <div class="badge-container">
-                          <img
-                            class="badges"
-                            [src]="
+                          <img class="badges" [src]="
                               '../../../../assets/icons/icon_badge_hof_count_light.png'
-                            "
-                          />
+                            " />
                           <div class="badge-count">4</div>
                         </div>
                       </div>
@@ -140,8 +125,7 @@
         <div class="col-12">
           <div class="card p-2">
             <h3>
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   'overall-bronze':
                     player?.overall >= 60 && player?.overall < 70,
                   'overall-silver':
@@ -159,10 +143,7 @@
                   'overall-pink-diamond':
                     player?.overall >= 96 && player?.overall < 99,
                   'overall-galaxy-opal': player?.overall == 99
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.overall }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.overall }}</span>
               <strong>Overall</strong>
             </h3>
           </div>
@@ -173,8 +154,7 @@
           <!-- Row 1 -->
           <div class="outside-card card p-2">
             <h5>
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.outside >= 25 && player?.outside < 50,
                   attributeLow: player?.outside >= 50 && player?.outside < 60,
@@ -182,15 +162,11 @@
                     player?.outside >= 60 && player?.outside < 80,
                   attributeHigh: player?.outside >= 80 && player?.outside < 90,
                   attributeHighest: player?.outside >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.outside }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.outside }}</span>
               <strong>Outside scoring</strong>
             </h5>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.openMid >= 25 && player?.openMid < 50,
                   attributeLow: player?.openMid >= 50 && player?.openMid < 60,
@@ -198,15 +174,11 @@
                     player?.openMid >= 60 && player?.openMid < 80,
                   attributeHigh: player?.openMid >= 80 && player?.openMid < 90,
                   attributeHighest: player?.openMid >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.openMid }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.openMid }}</span>
               Open shot mid
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.contestedMid >= 25 && player?.contestedMid < 50,
                   attributeLow:
@@ -216,15 +188,11 @@
                   attributeHigh:
                     player?.contestedMid >= 80 && player?.contestedMid < 90,
                   attributeHighest: player?.contestedMid >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.contestedMid }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.contestedMid }}</span>
               Contested shot mid
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.movingMid >= 25 && player?.movingMid < 50,
                   attributeLow:
@@ -234,15 +202,11 @@
                   attributeHigh:
                     player?.movingMid >= 80 && player?.movingMid < 90,
                   attributeHighest: player?.movingMid >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.movingMid }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.movingMid }}</span>
               Off dribble shot mid
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.open3PT >= 25 && player?.open3PT < 50,
                   attributeLow: player?.open3PT >= 50 && player?.open3PT < 60,
@@ -250,15 +214,11 @@
                     player?.open3PT >= 60 && player?.open3PT < 80,
                   attributeHigh: player?.open3PT >= 80 && player?.open3PT < 90,
                   attributeHighest: player?.open3PT >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.open3PT }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.open3PT }}</span>
               Open shot 3pt
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.contested3PT >= 25 && player?.contested3PT < 50,
                   attributeLow:
@@ -268,15 +228,11 @@
                   attributeHigh:
                     player?.contested3PT >= 80 && player?.contested3PT < 90,
                   attributeHighest: player?.contested3PT >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.contested3PT }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.contested3PT }}</span>
               Contested shot 3pt
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.moving3PT >= 25 && player?.moving3PT < 50,
                   attributeLow:
@@ -286,29 +242,21 @@
                   attributeHigh:
                     player?.moving3PT >= 80 && player?.moving3PT < 90,
                   attributeHighest: player?.moving3PT >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.moving3PT }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.moving3PT }}</span>
               Off dribble shot 3pt
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest: player?.shotIQ >= 25 && player?.shotIQ < 50,
                   attributeLow: player?.shotIQ >= 50 && player?.shotIQ < 60,
                   attributeMedium: player?.shotIQ >= 60 && player?.shotIQ < 80,
                   attributeHigh: player?.shotIQ >= 80 && player?.shotIQ < 90,
                   attributeHighest: player?.shotIQ >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.shotIQ }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.shotIQ }}</span>
               Shot IQ
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.freeThrow >= 25 && player?.freeThrow < 50,
                   attributeLow:
@@ -318,15 +266,11 @@
                   attributeHigh:
                     player?.freeThrow >= 80 && player?.freeThrow < 90,
                   attributeHighest: player?.freeThrow >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.freeThrow }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.freeThrow }}</span>
               Free throw
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.offConsistency >= 25 && player?.offConsistency < 50,
                   attributeLow:
@@ -336,17 +280,13 @@
                   attributeHigh:
                     player?.offConsistency >= 80 && player?.offConsistency < 90,
                   attributeHighest: player?.offConsistency >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.offConsistency }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.offConsistency }}</span>
               Offensive consistency
             </p>
           </div>
           <div class="athleticism-card card p-2">
             <h5>
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.athleticism >= 25 && player?.athleticism < 50,
                   attributeLow:
@@ -356,29 +296,21 @@
                   attributeHigh:
                     player?.athleticism >= 80 && player?.athleticism < 90,
                   attributeHighest: player?.athleticism >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.athleticism }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.athleticism }}</span>
               <strong>Athleticism</strong>
             </h5>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest: player?.speed >= 25 && player?.speed < 50,
                   attributeLow: player?.speed >= 50 && player?.speed < 60,
                   attributeMedium: player?.speed >= 60 && player?.speed < 80,
                   attributeHigh: player?.speed >= 80 && player?.speed < 90,
                   attributeHighest: player?.speed >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.speed }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.speed }}</span>
               Speed
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.acceleration >= 25 && player?.acceleration < 50,
                   attributeLow:
@@ -388,15 +320,11 @@
                   attributeHigh:
                     player?.acceleration >= 80 && player?.acceleration < 90,
                   attributeHighest: player?.acceleration >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.acceleration }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.acceleration }}</span>
               Acceleration
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.vertical >= 25 && player?.vertical < 50,
                   attributeLow: player?.vertical >= 50 && player?.vertical < 60,
@@ -405,15 +333,11 @@
                   attributeHigh:
                     player?.vertical >= 80 && player?.vertical < 90,
                   attributeHighest: player?.vertical >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.vertical }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.vertical }}</span>
               Vertical
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.strength >= 25 && player?.strength < 50,
                   attributeLow: player?.strength >= 50 && player?.strength < 60,
@@ -422,15 +346,11 @@
                   attributeHigh:
                     player?.strength >= 80 && player?.strength < 90,
                   attributeHighest: player?.strength >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.strength }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.strength }}</span>
               Strength
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.stamina >= 25 && player?.stamina < 50,
                   attributeLow: player?.stamina >= 50 && player?.stamina < 60,
@@ -438,29 +358,21 @@
                     player?.stamina >= 60 && player?.stamina < 80,
                   attributeHigh: player?.stamina >= 80 && player?.stamina < 90,
                   attributeHighest: player?.stamina >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.stamina }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.stamina }}</span>
               Stamina
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest: player?.hustle >= 25 && player?.hustle < 50,
                   attributeLow: player?.hustle >= 50 && player?.hustle < 60,
                   attributeMedium: player?.hustle >= 60 && player?.hustle < 80,
                   attributeHigh: player?.hustle >= 80 && player?.hustle < 90,
                   attributeHighest: player?.hustle >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.hustle }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.hustle }}</span>
               Hustle
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.durability >= 25 && player?.durability < 50,
                   attributeLow:
@@ -470,10 +382,7 @@
                   attributeHigh:
                     player?.durability >= 80 && player?.durability < 90,
                   attributeHighest: player?.durability >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.durability }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.durability }}</span>
               Overall durability
             </p>
           </div>
@@ -482,22 +391,17 @@
           <!-- Row 2 -->
           <div class="inside-card card p-2">
             <h5>
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest: player?.inside >= 25 && player?.inside < 50,
                   attributeLow: player?.inside >= 50 && player?.inside < 60,
                   attributeMedium: player?.inside >= 60 && player?.inside < 80,
                   attributeHigh: player?.inside >= 80 && player?.inside < 90,
                   attributeHighest: player?.inside >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.inside }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.inside }}</span>
               <strong>Inside scoring</strong>
             </h5>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.shotClose >= 25 && player?.shotClose < 50,
                   attributeLow:
@@ -507,15 +411,11 @@
                   attributeHigh:
                     player?.shotClose >= 80 && player?.shotClose < 90,
                   attributeHighest: player?.shotClose >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.shotClose }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.shotClose }}</span>
               Shot close
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.standingLayup >= 25 && player?.standingLayup < 50,
                   attributeLow:
@@ -525,15 +425,11 @@
                   attributeHigh:
                     player?.standingLayup >= 80 && player?.standingLayup < 90,
                   attributeHighest: player?.standingLayup >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.standingLayup }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.standingLayup }}</span>
               Standing layup
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.drivingLayup >= 25 && player?.drivingLayup < 50,
                   attributeLow:
@@ -543,15 +439,11 @@
                   attributeHigh:
                     player?.drivingLayup >= 80 && player?.drivingLayup < 90,
                   attributeHighest: player?.drivingLayup >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.drivingLayup }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.drivingLayup }}</span>
               Driving layup
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.standingDunk >= 25 && player?.standingDunk < 50,
                   attributeLow:
@@ -561,15 +453,11 @@
                   attributeHigh:
                     player?.standingDunk >= 80 && player?.standingDunk < 90,
                   attributeHighest: player?.overstandingDunkall >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.standingDunk }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.standingDunk }}</span>
               Standing dunk
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     playerdrivingDunk >= 25 && player?.drivingDunk < 50,
                   attributeLow:
@@ -579,15 +467,11 @@
                   attributeHigh:
                     player?.drivingDunk >= 80 && player?.drivingDunk < 90,
                   attributeHighest: player?.drivingDunk >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.drivingDunk }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.drivingDunk }}</span>
               Driving dunk
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.contactDunk >= 25 && player?.contactDunk < 50,
                   attributeLow:
@@ -597,15 +481,11 @@
                   attributeHigh:
                     player?.contactDunk >= 80 && player?.contactDunk < 90,
                   attributeHighest: player?.contactDunk >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.contactDunk }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.contactDunk }}</span>
               Contact dunk
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.drawFoul >= 25 && player?.drawFoul < 50,
                   attributeLow: player?.drawFoul >= 50 && player?.drawFoul < 60,
@@ -614,15 +494,11 @@
                   attributeHigh:
                     player?.drawFoul >= 80 && player?.drawFoul < 90,
                   attributeHighest: player?.drawFoul >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.drawFoul }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.drawFoul }}</span>
               Draw foul
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.postControl >= 25 && player?.postControl < 50,
                   attributeLow:
@@ -632,15 +508,11 @@
                   attributeHigh:
                     player?.postControl >= 80 && player?.postControl < 90,
                   attributeHighest: player?.postControl >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.postControl }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.postControl }}</span>
               Post control
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.postHook >= 25 && player?.postHook < 50,
                   attributeLow: player?.postHook >= 50 && player?.postHook < 60,
@@ -649,15 +521,11 @@
                   attributeHigh:
                     player?.postHook >= 80 && player?.postHook < 90,
                   attributeHighest: player?.postHook >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.postHook }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.postHook }}</span>
               Post hook
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.postFade >= 25 && player?.postFade < 50,
                   attributeLow: player?.postFade >= 50 && player?.postFade < 60,
@@ -666,31 +534,23 @@
                   attributeHigh:
                     player?.postFade >= 80 && player?.postFade < 90,
                   attributeHighest: player?.postFade >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.postFade }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.postFade }}</span>
               Post fadeaway
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest: player?.hands >= 25 && player?.hands < 50,
                   attributeLow: player?.hands >= 50 && player?.hands < 60,
                   attributeMedium: player?.hands >= 60 && player?.hands < 80,
                   attributeHigh: player?.hands >= 80 && player?.hands < 90,
                   attributeHighest: player?.hands >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.hands }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.hands }}</span>
               Hands
             </p>
           </div>
           <div class="playmaking-card card p-2">
             <h5>
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.playmaking >= 25 && player?.playmaking < 50,
                   attributeLow:
@@ -700,15 +560,11 @@
                   attributeHigh:
                     player?.playmaking >= 80 && player?.playmaking < 90,
                   attributeHighest: player?.playmaking >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.playmaking }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.playmaking }}</span>
               <strong>Playmaking</strong>
             </h5>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.ballControl >= 25 && player?.ballControl < 50,
                   attributeLow:
@@ -718,15 +574,11 @@
                   attributeHigh:
                     player?.ballControl >= 80 && player?.ballControl < 90,
                   attributeHighest: player?.ballControl >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.ballControl }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.ballControl }}</span>
               Ball control
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.passAccuracy >= 25 && player?.passAccuracy < 50,
                   attributeLow:
@@ -736,15 +588,11 @@
                   attributeHigh:
                     player?.passAccuracy >= 80 && player?.passAccuracy < 90,
                   attributeHighest: player?.passAccuracy >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.passAccuracy }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.passAccuracy }}</span>
               Passing accuracy
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.passVision >= 25 && player?.passVision < 50,
                   attributeLow:
@@ -754,29 +602,21 @@
                   attributeHigh:
                     player?.passVision >= 80 && player?.passVision < 90,
                   attributeHighest: player?.passVision >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.passVision }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.passVision }}</span>
               Passing vision
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest: player?.passIQ >= 25 && player?.passIQ < 50,
                   attributeLow: player?.passIQ >= 50 && player?.passIQ < 60,
                   attributeMedium: player?.passIQ >= 60 && player?.passIQ < 80,
                   attributeHigh: player?.passIQ >= 80 && player?.passIQ < 90,
                   attributeHighest: player?.passIQ >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.passIQ }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.passIQ }}</span>
               Passing IQ
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.speedBall >= 25 && player?.speedBall < 50,
                   attributeLow:
@@ -786,10 +626,7 @@
                   attributeHigh:
                     player?.speedBall >= 80 && player?.speedBall < 90,
                   attributeHighest: player?.speedBall >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.speedBall }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.speedBall }}</span>
               Speed with ball
             </p>
           </div>
@@ -798,8 +635,7 @@
           <!-- Row 3 -->
           <div class="defending-card card p-2">
             <h5>
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.defending >= 25 && player?.defending < 50,
                   attributeLow:
@@ -809,15 +645,11 @@
                   attributeHigh:
                     player?.defending >= 80 && player?.defending < 90,
                   attributeHighest: player?.defending >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.defending }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.defending }}</span>
               <strong>Defending</strong>
             </h5>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.onBallDefIQ >= 25 && player?.onBallDefIQ < 50,
                   attributeLow:
@@ -827,15 +659,11 @@
                   attributeHigh:
                     player?.onBallDefIQ >= 80 && player?.onBallDefIQ < 90,
                   attributeHighest: player?.onBallDefIQ >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.onBallDefIQ }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.onBallDefIQ }}</span>
               On-ball defense IQ
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.lowPostDefIQ >= 25 && player?.lowPostDefIQ < 50,
                   attributeLow:
@@ -845,15 +673,11 @@
                   attributeHigh:
                     player?.lowPostDefIQ >= 80 && player?.lowPostDefIQ < 90,
                   attributeHighest: player?.lowPostDefIQ >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.lowPostDefIQ }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.lowPostDefIQ }}</span>
               Low post defense IQ
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.pickNRollDefIQ >= 25 && player?.pickNRollDefIQ < 50,
                   attributeLow:
@@ -863,15 +687,11 @@
                   attributeHigh:
                     player?.pickNRollDefIQ >= 80 && player?.pickNRollDefIQ < 90,
                   attributeHighest: player?.pickNRollDefIQ >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.pickNRollDefIQ }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.pickNRollDefIQ }}</span>
               Pick & roll defense IQ
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.helpDefIQ >= 25 && player?.helpDefIQ < 50,
                   attributeLow:
@@ -881,15 +701,11 @@
                   attributeHigh:
                     player?.helpDefIQ >= 80 && player?.helpDefIQ < 90,
                   attributeHighest: player?.helpDefIQ >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.helpDefIQ }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.helpDefIQ }}</span>
               Help defense IQ
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.lateralQuickness >= 25 &&
                     player?.lateralQuickness < 50,
@@ -903,15 +719,11 @@
                     player?.lateralQuickness >= 80 &&
                     player?.lateralQuickness < 90,
                   attributeHighest: player?.lateralQuickness >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.lateralQuickness }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.lateralQuickness }}</span>
               Lateral quickness
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.passPerception >= 25 && player?.passPerception < 50,
                   attributeLow:
@@ -921,15 +733,11 @@
                   attributeHigh:
                     player?.passPerception >= 80 && player?.passPerception < 90,
                   attributeHighest: player?.passPerception >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.passPerception }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.passPerception }}</span>
               Pass perception
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.reactionTime >= 25 && player?.reactionTime < 50,
                   attributeLow:
@@ -939,43 +747,31 @@
                   attributeHigh:
                     player?.reactionTime >= 80 && player?.reactionTime < 90,
                   attributeHighest: player?.reactionTime >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.reactionTime }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.reactionTime }}</span>
               Reaction time
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest: player?.steal >= 25 && player?.steal < 50,
                   attributeLow: player?.steal >= 50 && player?.steal < 60,
                   attributeMedium: player?.steal >= 60 && player?.steal < 80,
                   attributeHigh: player?.steal >= 80 && player?.steal < 90,
                   attributeHighest: player?.steal >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.steal }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.steal }}</span>
               Steal
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest: player?.block >= 25 && player?.block < 50,
                   attributeLow: player?.block >= 50 && player?.block < 60,
                   attributeMedium: player?.block >= 60 && player?.block < 80,
                   attributeHigh: player?.block >= 80 && player?.block < 90,
                   attributeHighest: player?.block >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.block }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.block }}</span>
               Block
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.shotContest >= 25 && player?.shotContest < 50,
                   attributeLow:
@@ -985,15 +781,11 @@
                   attributeHigh:
                     player?.shotContest >= 80 && player?.shotContest < 90,
                   attributeHighest: player?.shotContest >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.shotContest }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.shotContest }}</span>
               Shot contest
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.defConsistency >= 25 && player?.defConsistency < 50,
                   attributeLow:
@@ -1003,17 +795,13 @@
                   attributeHigh:
                     player?.defConsistency >= 80 && player?.defConsistency < 90,
                   attributeHighest: player?.defConsistency >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.defConsistency }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.defConsistency }}</span>
               Defensive consistency
             </p>
           </div>
           <div class="rebounding-card card p-2">
             <h5>
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.rebounding >= 25 && player?.rebounding < 50,
                   attributeLow:
@@ -1023,15 +811,11 @@
                   attributeHigh:
                     player?.rebounding >= 80 && player?.rebounding < 90,
                   attributeHighest: player?.rebounding >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.rebounding }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.rebounding }}</span>
               <strong>Rebounding</strong>
             </h5>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.offRebound >= 25 && player?.offRebound < 50,
                   attributeLow:
@@ -1041,15 +825,11 @@
                   attributeHigh:
                     player?.offRebound >= 80 && player?.offRebound < 90,
                   attributeHighest: player?.offRebound >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.offRebound }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.offRebound }}</span>
               Offensive rebound
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest:
                     player?.defRebound >= 25 && player?.defRebound < 50,
                   attributeLow:
@@ -1059,24 +839,17 @@
                   attributeHigh:
                     player?.defRebound >= 80 && player?.defRebound < 90,
                   attributeHighest: player?.defRebound >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.defRebound }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.defRebound }}</span>
               Defensive rebound
             </p>
             <p class="m-0">
-              <span
-                [ngClass]="{
+              <span [ngClass]="{
                   attributeLowest: player?.boxout >= 25 && player?.boxout < 50,
                   attributeLow: player?.boxout >= 50 && player?.boxout < 60,
                   attributeMedium: player?.boxout >= 60 && player?.boxout < 80,
                   attributeHigh: player?.boxout >= 80 && player?.boxout < 90,
                   attributeHighest: player?.boxout >= 90
-                }"
-                class="badge badge-success m-1 p-1"
-                >{{ player?.boxout }}</span
-              >
+                }" class="badge badge-success m-1 p-1">{{ player?.boxout }}</span>
               Boxout
             </p>
           </div>

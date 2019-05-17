@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
-import { MatTableDataSource, MatSort, MatPaginator } from "@angular/material";
-import { Router } from "@angular/router";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { PlayerService } from "src/app/shared/services/player.service";
-import { ToastrService } from "ngx-toastr";
-import { ROUTER_DEFINITIONS } from "src/app/shared/constants/router-definitions";
-import { BadgeService } from "src/app/shared/services/badge.service";
-import { CollectionService } from "src/app/shared/services/collection.service";
-import { TeamService } from "src/app/shared/services/team.service";
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { PlayerService } from 'src/app/shared/services/player.service';
+import { ToastrService } from 'ngx-toastr';
+import { ROUTER_DEFINITIONS } from 'src/app/shared/constants/router-definitions';
+import { BadgeService } from 'src/app/shared/services/badge.service';
+import { CollectionService } from 'src/app/shared/services/collection.service';
+import { TeamService } from 'src/app/shared/services/team.service';
 
 @Component({
-  selector: "app-players-list",
-  templateUrl: "./players-list.component.html",
-  styleUrls: ["./players-list.component.scss"],
+  selector: 'app-players-list',
+  templateUrl: './players-list.component.html',
+  styleUrls: ['./players-list.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class PlayersListComponent implements OnInit {
@@ -23,17 +23,17 @@ export class PlayersListComponent implements OnInit {
   teamsList;
   playersForm: FormGroup;
   displayedColumns: string[] = [
-    "name",
-    "overall",
-    "position",
-    "inside",
-    "outside",
-    "playmaking",
-    "athleticism",
-    "defending",
-    "rebounding",
-    "height",
-    "totalAttributes"
+    'name',
+    'overall',
+    'position',
+    'inside',
+    'outside',
+    'playmaking',
+    'athleticism',
+    'defending',
+    'rebounding',
+    'height',
+    'totalAttributes'
   ];
 
   routerDefinitions = ROUTER_DEFINITIONS;
@@ -51,7 +51,7 @@ export class PlayersListComponent implements OnInit {
     private collectionService: CollectionService,
     private teamService: TeamService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getPlayers();
@@ -86,24 +86,30 @@ export class PlayersListComponent implements OnInit {
   }
 
   sendForm(values) {
-    this.playerService.createPlayer(values).subscribe(response => {
-      console.log(response);
-      this.toastr.success("Jugador creado correctamente", "Listo");
-      this.getPlayers();
-      this.playersForm.reset();
-    });
+    this.playerService
+      .createPlayer(values)
+      .subscribe(response => {
+        console.log(response);
+        this.toastr.success('Jugador creado correctamente', 'Listo');
+        this.getPlayers();
+        this.playersForm.reset();
+      });
   }
 
   getPlayers() {
-    this.playerService.getAll().subscribe(response => {
-      this.dataSource.data = response;
-    });
+    this.playerService
+      .getAll()
+      .subscribe(response => {
+        this.dataSource.data = response;
+      });
   }
 
   getBadges() {
-    this.badgeService.getAll().subscribe(response => {
-      this.badgeList = response;
-    });
+    this.badgeService
+      .getAll()
+      .subscribe(response => {
+        this.badgeList = response;
+      });
   }
 
   getCollections() {
@@ -121,21 +127,19 @@ export class PlayersListComponent implements OnInit {
   }
 
   getTeams() {
-    this.teamService.getAll().subscribe(response => {
-      this.teamsList = response;
-    });
+    this.teamService
+      .getAll()
+      .subscribe(response => {
+        this.teamsList = response;
+      });
   }
 
-  // getSubCollections() {
-  //   this.subcollectionService.getAll().subscribe(response => {
-  //     this.subcollectionList = response;
-  //   });
-  // }
-
   getPlayerById(id) {
-    this.playerService.getById(id).subscribe(response => {
-      console.log(response);
-    });
+    this.playerService
+      .getById(id)
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 
   filterPlayers(value) {
@@ -143,9 +147,8 @@ export class PlayersListComponent implements OnInit {
   }
 
   selectPlayer(player) {
-    // this.playersForm.patchValue(player);
     this.router.navigate([
-      this.routerDefinitions.players + "/detail/" + player.id
+      this.routerDefinitions.players + '/detail/' + player.id
     ]);
   }
 }
