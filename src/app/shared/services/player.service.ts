@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -9,7 +9,14 @@ export class PlayerService {
   constructor(private http: HttpClient) { }
 
   public getAll(): Observable<any> {
-    return this.http.get<any>(environment.apiUrl + `Players`)
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          filter: `{ "order": "overall DESC"}`
+        }
+      )
+    };
+    return this.http.get<any>(environment.apiUrl + `Players`, httpOptions)
       .pipe(map((data: any[]) => data));
   }
 

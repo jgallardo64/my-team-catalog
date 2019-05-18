@@ -1,0 +1,43 @@
+app-header {
+
+  mat-toolbar {
+    position: sticky !important;
+    background-color: #2f2f2f !important;
+    top: 0px;
+    height: 40px !important;
+    z-index: 1000 !important;
+  }
+
+  .header {
+    background-color: #2f2f2f;
+    height: 47px;
+  }
+
+  .header-logo {
+    height: 35px;
+    cursor: pointer;
+    margin: 5px 10px 0px 0px;
+  }
+
+  .header-logo:focus {
+    outline: none;
+  }
+
+  .header-links {
+    padding: 10px;
+    a {
+      color: #9d9d9d;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 13px 0px 18px 0px;
+    }
+  }
+
+  .header-links:hover {
+    background-color: black;
+    a {
+      color: white;
+    }
+  }
+
+}

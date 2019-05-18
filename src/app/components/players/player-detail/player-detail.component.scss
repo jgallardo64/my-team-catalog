@@ -81,15 +81,12 @@ app-player-detail {
     margin: 5px;
   }
 
-  .badge-list {
-    padding-left: 25px;
-  }
-
   .badge-container {
     position: relative;
     text-align: center;
     color: white;
     display: inline;
+    cursor: pointer;
   }
 
   .badge-count {

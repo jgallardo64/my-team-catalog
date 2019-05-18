@@ -18,6 +18,8 @@ import { BadgeService } from 'src/app/shared/services/badge.service';
 import { CollectionService } from 'src/app/shared/services/collection.service';
 import { SubcollectionService } from 'src/app/shared/services/subcollection.service';
 import { TeamService } from 'src/app/shared/services/team.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { TeamService } from 'src/app/shared/services/team.service';
     MatTableModule,
     MatPaginatorModule,
     MatSelectModule,
+    NgSelectModule,
     MatCheckboxModule,
+    NgbModule,
     MatSortModule,
     MatInputModule,
     ReactiveFormsModule,

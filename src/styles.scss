@@ -3,33 +3,8 @@
 @import "~bootstrap/scss/bootstrap";
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@ng-select/ng-select/themes/material.theme.css";
 
 @import "~ngx-toastr/toastr.css";
 @import "~ngx-toastr/toastr-bs4-alert";
 
-@font-face {
-  font-family: "customFont-regular";
-  src: url("./assets/fonts/Hind-Regular.ttf");
-}
-@font-face {
-  font-family: "customFont-light";
-  src: url("./assets/fonts/Hind-Light.ttf");
-}
-@font-face {
-  font-family: "customFont-bold";
-  src: url("./assets/fonts/Hind-SemiBold.ttf");
-}
-
-html,
-body {
-  font-family: "customFont-regular" !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "customFont-bold";
-}

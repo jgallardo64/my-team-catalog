@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ROUTER_DEFINITIONS } from 'src/app/shared/constants/router-definitions';
+import { BadgeService } from 'src/app/shared/services/badge.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-player-detail',
@@ -12,13 +14,18 @@ import { ROUTER_DEFINITIONS } from 'src/app/shared/constants/router-definitions'
 export class PlayerDetailComponent implements OnInit {
   playerId;
   player;
+  hofBadges = [];
+  goldBadges = [];
+  silverBadges = [];
+  bronzeBadges = [];
 
   routerDefinitions = ROUTER_DEFINITIONS;
 
   constructor(
     private playerService: PlayerService,
+    private badgeService: BadgeService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private modalService: NgbModal
   ) {
     this.playerId = this.activatedRoute.snapshot.params['id'];
   }
@@ -32,6 +39,40 @@ export class PlayerDetailComponent implements OnInit {
       .getById(this.playerId)
       .subscribe(response => {
         this.player = response;
+        if (response.badges) {
+          this.getListOfBadges(response.badges);
+        }
       });
   }
+
+  getListOfBadges(badges) {
+    badges.forEach(element => {
+      this.badgeService
+        .getById(element)
+        .subscribe((badge: any) => {
+          switch (badge.tier) {
+            case 'hof':
+              this.hofBadges.push(badge);
+              break;
+
+            case 'gold':
+              this.goldBadges.push(badge);
+              break;
+
+            case 'silver':
+              this.silverBadges.push(badge);
+              break;
+
+            case 'bronze':
+              this.bronzeBadges.push(badge);
+              break;
+          }
+        });
+    });
+  }
+
+  showBadges(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'xl', centered: true });
+  }
+
 }

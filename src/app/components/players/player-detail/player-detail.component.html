@@ -81,30 +81,70 @@
                   <div class="col-12">
                     <div class="row badge-list pt-3">
                       <div class="col-xs-4">
-                        <div class="badge-container">
-                          <img class="badges" [src]="
-                              '../../../../assets/icons/icon_badge_bronze_count_light.png'
-                            " />
-                          <div class="badge-count">1</div>
-                        </div>
-                        <div class="badge-container">
-                          <img class="badges" [src]="
-                              '../../../../assets/icons/icon_badge_silver_count_light.png'
-                            " />
-                          <div class="badge-count">2</div>
-                        </div>
-                        <div class="badge-container">
-                          <img class="badges" [src]="
-                              '../../../../assets/icons/icon_badge_gold_count_light.png'
-                            " />
-                          <div class="badge-count">3</div>
-                        </div>
-                        <div class="badge-container">
-                          <img class="badges" [src]="
-                              '../../../../assets/icons/icon_badge_hof_count_light.png'
-                            " />
-                          <div class="badge-count">4</div>
-                        </div>
+                        <ng-container *ngIf="bronzeBadges.length > 0">
+                          <div class="badge-container" (click)="showBadges(modalBronzeBadges)">
+                            <img class="badges" [src]="'../../../../assets/icons/icon_badge_bronze_count_light.png'" />
+                            <div class="badge-count">
+                              {{ bronzeBadges?.length }}
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="bronzeBadges.length === 0">
+                          <div class="badge-container">
+                            <img class="badges" [src]="'../../../../assets/icons/icon_badge_bronze_count_light.png'" />
+                            <div class="badge-count">
+                              {{ bronzeBadges?.length }}
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="silverBadges.length > 0">
+                          <div class="badge-container" (click)="showBadges(modalSilverBadges)">
+                            <img class="badges" [src]="'../../../../assets/icons/icon_badge_silver_count_light.png'" />
+                            <div class="badge-count">
+                              {{ silverBadges?.length }}
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="silverBadges.length === 0">
+                          <div class="badge-container">
+                            <img class="badges" [src]="'../../../../assets/icons/icon_badge_silver_count_light.png'" />
+                            <div class="badge-count">
+                              {{ silverBadges?.length }}
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="goldBadges.length > 0">
+                          <div class="badge-container" (click)="showBadges(modalGoldBadges)">
+                            <img class="badges" [src]="'../../../../assets/icons/icon_badge_gold_count_light.png'" />
+                            <div class="badge-count">
+                              {{ goldBadges?.length }}
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="goldBadges.length === 0">
+                          <div class="badge-container">
+                            <img class="badges" [src]="'../../../../assets/icons/icon_badge_gold_count_light.png'" />
+                            <div class="badge-count">
+                              {{ goldBadges?.length }}
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="hofBadges.length > 0">
+                          <div class="badge-container" (click)="showBadges(modalHOFBadges)">
+                            <img class="badges" [src]="'../../../../assets/icons/icon_badge_hof_count_light.png'" />
+                            <div class="badge-count">
+                              {{ hofBadges?.length }}
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="hofBadges.length === 0">
+                          <div class="badge-container">
+                            <img class="badges" [src]="'../../../../assets/icons/icon_badge_hof_count_light.png'" />
+                            <div class="badge-count">
+                              {{ hofBadges?.length }}
+                            </div>
+                          </div>
+                        </ng-container>
                       </div>
                     </div>
                   </div>
@@ -121,8 +161,8 @@
 <div class="container-fluid mt-4">
   <div class="row">
     <div class="col-12 col-xl-10 offset-xl-1 pb-2">
-      <div class="row">
-        <div class="col-12">
+      <!-- <div class="row">
+        <div class="col-12"> -->
           <div class="card p-2">
             <h3>
               <span [ngClass]="{
@@ -143,12 +183,14 @@
                   'overall-pink-diamond':
                     player?.overall >= 96 && player?.overall < 99,
                   'overall-galaxy-opal': player?.overall == 99
-                }" class="badge badge-success m-1 p-1">{{ player?.overall }}</span>
+                }" class="badge badge-success m-1 p-1">
+                {{ player?.overall }}
+              </span>
               <strong>Overall</strong>
             </h3>
           </div>
-        </div>
-      </div>
+        <!-- </div>
+      </div> -->
       <div class="row mt-3">
         <div class="col-12 col-md-6 col-xl-4">
           <!-- Row 1 -->
@@ -866,3 +908,103 @@
     </div>
   </div>
 </div>
+
+<ng-template #modalBronzeBadges let-modal>
+  <div class="row" style="max-height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin: 5px;
+    justify-content: center;">
+    <ng-container *ngFor="let badge of bronzeBadges">
+      <div class="col-4">
+        <div class="card p-2 mb-2" style="
+          height: 125px;">
+          <div class="row">
+            <div class="col-3">
+              <img [src]="badge.image" style="width: 60px">
+            </div>
+            <div class="col-9">
+              <h5>{{ badge.name }}</h5>
+              <p style="font-size: 14px;">{{ badge.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #modalSilverBadges let-modal>
+  <div class="row" style="max-height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin: 5px;
+    justify-content: center;">
+    <ng-container *ngFor="let badge of silverBadges">
+      <div class="col-4">
+        <div class="card p-2 mb-2" style="
+          height: 125px;">
+          <div class="row">
+            <div class="col-3">
+              <img [src]="badge.image" style="width: 60px">
+            </div>
+            <div class="col-9">
+              <h5>{{ badge.name }}</h5>
+              <p style="font-size: 14px;">{{ badge.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #modalGoldBadges let-modal>
+  <div class="row" style="max-height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin: 5px;
+    justify-content: center;">
+    <ng-container *ngFor="let badge of goldBadges">
+      <div class="col-4">
+        <div class="card p-2 mb-2" style="
+          height: 125px;">
+          <div class="row">
+            <div class="col-3">
+              <img [src]="badge.image" style="width: 60px">
+            </div>
+            <div class="col-9">
+              <h5>{{ badge.name }}</h5>
+              <p style="font-size: 14px;">{{ badge.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #modalHOFBadges let-modal>
+  <div class="row" style="max-height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin: 5px;
+    justify-content: center;">
+    <ng-container *ngFor="let badge of hofBadges">
+      <div class="col-12 col-lg-6 col-xl-4">
+        <div class="card p-2 mb-2" style="
+        height: 125px;">
+          <div class="row">
+            <div class="col-3">
+              <img [src]="badge.image" style="width: 60px">
+            </div>
+            <div class="col-9">
+              <h5>{{ badge.name }}</h5>
+              <p style="font-size: 14px;">{{ badge.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>

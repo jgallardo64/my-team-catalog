@@ -1,4 +1,4 @@
-<form [formGroup]="playersForm">
+<!-- <form [formGroup]="playersForm">
   <div class="col-12">
     <div class="row">
       <mat-form-field class="col-12 col-md-4">
@@ -12,27 +12,25 @@
 
   <div class="col-12">
     <div class="row">
-      <mat-form-field class="col-12 col-md-4">
-        <mat-select placeholder="Collection" formControlName="collection" (selectionChange)="getSubCollections($event)">
-          <mat-option *ngFor="let collection of collectionList" [value]="collection.id">
-            {{ collection.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="col-12 col-md-4">
-        <mat-select placeholder="Subcollection" formControlName="subcollection">
-          <mat-option *ngFor="let subcollection of subcollectionList" [value]="subcollection.id">
-            {{ subcollection.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="col-12 col-md-4">
-        <mat-select placeholder="Team" formControlName="team">
-          <mat-option *ngFor="let team of teamsList" [value]="team.id">
-            {{ team.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="col-12 col-md-4">
+
+
+        <ng-select class="picker" [items]="collectionList" formControlName="collectionId"
+          bindLabel="name" bindValue="id" placeholder="Collection" (change)="getSubCollections($event)">
+        </ng-select>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <ng-select class="picker" [items]="subcollectionList" formControlName="subcollectionId"
+          bindLabel="name" bindValue="id" placeholder="Subcollection">
+        </ng-select>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <ng-select class="picker" [items]="teamsList" formControlName="teamId" bindLabel="name"
+          bindValue="id" placeholder="Team">
+        </ng-select>
+      </div>
     </div>
   </div>
 
@@ -44,49 +42,206 @@
       <mat-form-field class="col-12 col-md-4">
         <input matInput placeholder="Position" formControlName="position" />
       </mat-form-field>
-      <mat-form-field class="col-12 col-md-4">
-        <mat-select placeholder="Badges" formControlName="badges" multiple>
-          <mat-option *ngFor="let badge of badgeList" [value]="badge.id"><img [src]="badge.image" style="
-            width: 20px;
-            margin-right: 5px;
-        " />{{ badge.name }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="col-12 col-md-4">
+        <ng-select class="picker" [items]="badgeList" formControlName="badges" bindLabel="name"
+          [multiple]="true" bindValue="id" placeholder="Badges">
+          <ng-template ng-option-tmp let-item="item" let-index="index">
+            <img width="20" [src]="item.image" />
+            {{item.name}}
+          </ng-template>
+        </ng-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="row">
+      <div class="col-2">
+        <mat-form-field>
+          <input matInput placeholder="Outside" formControlName="outside" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Open shot mid" formControlName="openMid" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Contested shot mid" formControlName="contestedMid" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Off dribble shot mid" formControlName="movingMid" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Open shot 3pt" formControlName="open3PT" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Contested shot 3pt" formControlName="contested3PT" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Off dribble shot 3pt" formControlName="moving3PT" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Shot IQ" formControlName="shotIQ" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Free throw" formControlName="freeThrow" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Offensive consistency" formControlName="offConsistency" />
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-form-field>
+          <input matInput placeholder="Athleticism" formControlName="athleticism" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Speed" formControlName="speed" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Acceleration" formControlName="acceleration" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Vertical" formControlName="vertical" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Strength" formControlName="strength" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Stamina" formControlName="stamina" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Hustle" formControlName="hustle" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Overall durability" formControlName="durability" />
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-form-field>
+          <input matInput placeholder="Inside" formControlName="inside" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Shot close" formControlName="shotClose" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Standing layup" formControlName="standingLayup" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Driving layup" formControlName="drivingLayup" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Standing dunk" formControlName="standingDunk" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Driving dunk" formControlName="drivingDunk" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Contact dunk" formControlName="contactDunk" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Draw foul" formControlName="drawFoul" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Post control" formControlName="postControl" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Post hook" formControlName="postHook" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Post fadeaway" formControlName="postFade" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Hands" formControlName="hands" />
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-form-field>
+          <input matInput placeholder="Playmaking" formControlName="playmaking" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Ball control" formControlName="ballControl" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Passing accuracy" formControlName="passAccuracy" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Passing vision" formControlName="passVision" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Passing IQ" formControlName="passIQ" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Speed with ball" formControlName="speedBall" />
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-form-field>
+          <input matInput placeholder="Defending" formControlName="defending" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="On-ball defense IQ" formControlName="onBallDefIQ" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Low post defense IQ" formControlName="lowPostDefIQ" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Pick & roll defense IQ" formControlName="pickNRollDefIQ" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Help defense IQ" formControlName="helpDefIQ" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Lateral quickness" formControlName="lateralQuickness" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Pass perception" formControlName="passPerception" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Reaction time" formControlName="reactionTime" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Steal" formControlName="steal" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Block" formControlName="block" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Shot contest" formControlName="shotContest" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Defensive consistency" formControlName="defConsistency" />
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-form-field>
+          <input matInput placeholder="Rebounding" formControlName="rebounding" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Offensive rebound" formControlName="offRebound" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Defensive rebound" formControlName="defRebound" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Boxout" formControlName="boxout" />
+        </mat-form-field>
+      </div>
     </div>
   </div>
 
   <div class="col-12">
     <div class="row">
       <mat-form-field class="col-2">
-        <input matInput placeholder="Inside" formControlName="inside" />
-      </mat-form-field>
-      <mat-form-field class="col-2">
-        <input matInput placeholder="Outside" formControlName="outside" />
-      </mat-form-field>
-      <mat-form-field class="col-2">
-        <input matInput placeholder="Playmaking" formControlName="playmaking" />
-      </mat-form-field>
-      <mat-form-field class="col-2">
-        <input matInput placeholder="Athleticism" formControlName="athleticism" />
-      </mat-form-field>
-      <mat-form-field class="col-2">
-        <input matInput placeholder="Defending" formControlName="defending" />
-      </mat-form-field>
-      <mat-form-field class="col-2">
-        <input matInput placeholder="Rebounding" formControlName="rebounding" />
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div class="col-12">
-    <div class="row">
-      <mat-form-field class="col-4">
         <input matInput placeholder="Total attributes" formControlName="totalAttributes" />
       </mat-form-field>
-      <mat-form-field class="col-4">
+      <mat-form-field class="col-2">
         <input matInput placeholder="Height" formControlName="height" />
       </mat-form-field>
-      <mat-form-field class="col-4">
+      <mat-form-field class="col-2">
+        <input matInput placeholder="Weight" formControlName="weight" />
+      </mat-form-field>
+      <mat-form-field class="col-2">
+        <input matInput placeholder="Age" formControlName="age" />
+      </mat-form-field>
+      <mat-form-field class="col-2">
         <input matInput placeholder="Image" formControlName="image" />
       </mat-form-field>
     </div>
@@ -97,14 +252,47 @@
   <button class="btn btn-primary" (click)="sendForm(playersForm.value)">
     Enviar
   </button>
-</div>
-
-<div class="col-12">
-  <mat-form-field>
-    <input matInput type="text" (keyup)="filterPlayers($event.target.value)" placeholder="Filter" />
-  </mat-form-field>
-</div>
-<div class="col-12 col-xl-8 offset-xl-2">
+</div> -->
+<div class="col-12 col-xl-10 offset-xl-1">
+  <div class="col-12">
+    <mat-form-field>
+      <input matInput type="text" (keyup)="filterPlayers($event.target.value)" placeholder="Filter" />
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <ng-select class="picker" [items]="listOfCollections" bindLabel="name" bindValue="id" placeholder="Collection">
+      </ng-select>
+      Position
+      <div class="btn-group w-100" role="group">
+        <button type="button" class="btn btn-outline-secondary">PG</button>
+        <button type="button" class="btn btn-outline-secondary">SG</button>
+        <button type="button" class="btn btn-outline-secondary">SF</button>
+        <button type="button" class="btn btn-outline-secondary">PF</button>
+        <button type="button" class="btn btn-outline-secondary">C</button>
+      </div>
+      Tier
+      <div class="btn-group w-100" role="group">
+        <button type="button" class="btn btn-outline-secondary">B</button>
+        <button type="button" class="btn btn-outline-secondary">S</button>
+        <button type="button" class="btn btn-outline-secondary">G</button>
+        <button type="button" class="btn btn-outline-secondary">E</button>
+        <button type="button" class="btn btn-outline-secondary">S</button>
+        <button type="button" class="btn btn-outline-secondary">R</button>
+        <button type="button" class="btn btn-outline-secondary">H</button>
+        <button type="button" class="btn btn-outline-secondary">A</button>
+        <button type="button" class="btn btn-outline-secondary">D</button>
+        <button type="button" class="btn btn-outline-secondary">P</button>
+        <button type="button" class="btn btn-outline-secondary">O</button>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      asdasd
+    </div>
+    <div class="col-12 col-md-4">
+      asdasd
+    </div>
+  </div>
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <!-- Name Column -->
     <ng-container matColumnDef="name">
