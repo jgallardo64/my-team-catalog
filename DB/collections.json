@@ -1,0 +1,8 @@
+{"_id":{"$oid":"5cdae98258c5ea4dd0279e6a"},"name":"Premium"}
+{"_id":{"$oid":"5cdaebb658c5ea4dd0279e7c"},"name":"Rewards"}
+{"_id":{"$oid":"5cdaecce58c5ea4dd0279e84"},"name":"Current NBA"}
+{"_id":{"$oid":"5cdaecd558c5ea4dd0279e85"},"name":"Heat Check"}
+{"_id":{"$oid":"5cdaecdb58c5ea4dd0279e86"},"name":"Moments"}
+{"_id":{"$oid":"5cdaece058c5ea4dd0279e87"},"name":"Throwback"}
+{"_id":{"$oid":"5cdaece458c5ea4dd0279e88"},"name":"Throwback Elite"}
+{"_id":{"$oid":"5cdaecef58c5ea4dd0279e89"},"name":"Free Agents"}
