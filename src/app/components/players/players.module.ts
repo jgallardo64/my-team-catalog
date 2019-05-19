@@ -10,7 +10,9 @@ import {
   MatSortModule,
   MatInputModule,
   MatSelectModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatButtonToggleModule,
+  MatButtonModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlayerService } from 'src/app/shared/services/player.service';
@@ -37,6 +39,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgbModule,
     MatSortModule,
     MatInputModule,
+    MatButtonModule,
+    MatButtonToggleModule,
     ReactiveFormsModule,
     PlayersRoutingModule
   ],

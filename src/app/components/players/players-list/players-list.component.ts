@@ -9,6 +9,7 @@ import { BadgeService } from 'src/app/shared/services/badge.service';
 import { CollectionService } from 'src/app/shared/services/collection.service';
 import { TeamService } from 'src/app/shared/services/team.service';
 import { SubcollectionService } from 'src/app/shared/services/subcollection.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-players-list',
@@ -23,7 +24,9 @@ export class PlayersListComponent implements OnInit {
   subcollectionList;
   listOfCollections;
   teamsList;
+  filter;
   playersForm: FormGroup;
+  filterForm: FormGroup;
   displayedColumns: string[] = [
     'name',
     'overall',
@@ -68,80 +71,100 @@ export class PlayersListComponent implements OnInit {
   }
 
   buildForm() {
-    this.playersForm = this.formBuilder.group({
-      name: [{ value: null, disabled: false }],
-      lastName: [{ value: null, disabled: false }],
-      collectionId: [{ value: null, disabled: false }],
-      subcollectionId: [{ value: null, disabled: false }],
-      teamId: [{ value: null, disabled: false }],
-      overall: [{ value: null, disabled: false }],
-      position: [{ value: null, disabled: false }],
-      outside: [{ value: null, disabled: false }],
-      openMid: [{ value: null, disabled: false }],
-      contestedMid: [{ value: null, disabled: false }],
-      movingMid: [{ value: null, disabled: false }],
-      open3PT: [{ value: null, disabled: false }],
-      contested3PT: [{ value: null, disabled: false }],
-      moving3PT: [{ value: null, disabled: false }],
-      shotIQ: [{ value: null, disabled: false }],
-      freeThrow: [{ value: null, disabled: false }],
-      offConsistency: [{ value: null, disabled: false }],
-      athleticism: [{ value: null, disabled: false }],
-      speed: [{ value: null, disabled: false }],
-      acceleration: [{ value: null, disabled: false }],
-      vertical: [{ value: null, disabled: false }],
-      strength: [{ value: null, disabled: false }],
-      stamina: [{ value: null, disabled: false }],
-      hustle: [{ value: null, disabled: false }],
-      durability: [{ value: null, disabled: false }],
-      inside: [{ value: null, disabled: false }],
-      shotClose: [{ value: null, disabled: false }],
-      standingLayup: [{ value: null, disabled: false }],
-      drivingLayup: [{ value: null, disabled: false }],
-      standingDunk: [{ value: null, disabled: false }],
-      drivingDunk: [{ value: null, disabled: false }],
-      contactDunk: [{ value: null, disabled: false }],
-      drawFoul: [{ value: null, disabled: false }],
-      postControl: [{ value: null, disabled: false }],
-      postHook: [{ value: null, disabled: false }],
-      postFade: [{ value: null, disabled: false }],
-      hands: [{ value: null, disabled: false }],
-      playmaking: [{ value: null, disabled: false }],
-      ballControl: [{ value: null, disabled: false }],
-      passAccuracy: [{ value: null, disabled: false }],
-      passVision: [{ value: null, disabled: false }],
-      passIQ: [{ value: null, disabled: false }],
-      speedBall: [{ value: null, disabled: false }],
-      defending: [{ value: null, disabled: false }],
-      onBallDefIQ: [{ value: null, disabled: false }],
-      lowPostDefIQ: [{ value: null, disabled: false }],
-      pickNRollDefIQ: [{ value: null, disabled: false }],
-      helpDefIQ: [{ value: null, disabled: false }],
-      lateralQuickness: [{ value: null, disabled: false }],
-      passPerception: [{ value: null, disabled: false }],
-      reactionTime: [{ value: null, disabled: false }],
-      steal: [{ value: null, disabled: false }],
-      block: [{ value: null, disabled: false }],
-      shotContest: [{ value: null, disabled: false }],
-      defConsistency: [{ value: null, disabled: false }],
-      rebounding: [{ value: null, disabled: false }],
-      offRebound: [{ value: null, disabled: false }],
-      defRebound: [{ value: null, disabled: false }],
-      boxout: [{ value: null, disabled: false }],
-      totalAttributes: [{ value: null, disabled: false }],
-      height: [{ value: null, disabled: false }],
-      weight: [{ value: null, disabled: false }],
-      age: [{ value: null, disabled: false }],
-      badges: [{ value: null, disabled: false }],
-      image: [{ value: [], disabled: false }]
+    this.filterForm = this.formBuilder.group({
+      collection: [{value: null, disabled: false}],
+      position: [{value: null, disabled: false}],
+      tier: [{value: null, disabled: false}]
     });
   }
+
+  createFilter(filterValues) {
+    const startFilter = ',';
+    const collectionFilter = '"where":{"subcollectionId":"' + filterValues.collection + '"}';
+    const finishFilter = '}';
+
+    this.filter = startFilter
+    .concat((filterValues.collectionFilter !== '' && filterValues.collectionFilter !== null) ? collectionFilter : '')
+    .concat(finishFilter);
+
+    this.getPlayers();
+    // {"where": {"or": [{"overall": 99}, {"overall": 79}]}}
+  }
+
+  // buildForm() {
+  //   this.playersForm = this.formBuilder.group({
+  //     name: [{ value: null, disabled: false }],
+  //     lastName: [{ value: null, disabled: false }],
+  //     collectionId: [{ value: null, disabled: false }],
+  //     subcollectionId: [{ value: null, disabled: false }],
+  //     teamId: [{ value: null, disabled: false }],
+  //     overall: [{ value: null, disabled: false }],
+  //     position: [{ value: null, disabled: false }],
+  //     outside: [{ value: null, disabled: false }],
+  //     openMid: [{ value: null, disabled: false }],
+  //     contestedMid: [{ value: null, disabled: false }],
+  //     movingMid: [{ value: null, disabled: false }],
+  //     open3PT: [{ value: null, disabled: false }],
+  //     contested3PT: [{ value: null, disabled: false }],
+  //     moving3PT: [{ value: null, disabled: false }],
+  //     shotIQ: [{ value: null, disabled: false }],
+  //     freeThrow: [{ value: null, disabled: false }],
+  //     offConsistency: [{ value: null, disabled: false }],
+  //     athleticism: [{ value: null, disabled: false }],
+  //     speed: [{ value: null, disabled: false }],
+  //     acceleration: [{ value: null, disabled: false }],
+  //     vertical: [{ value: null, disabled: false }],
+  //     strength: [{ value: null, disabled: false }],
+  //     stamina: [{ value: null, disabled: false }],
+  //     hustle: [{ value: null, disabled: false }],
+  //     durability: [{ value: null, disabled: false }],
+  //     inside: [{ value: null, disabled: false }],
+  //     shotClose: [{ value: null, disabled: false }],
+  //     standingLayup: [{ value: null, disabled: false }],
+  //     drivingLayup: [{ value: null, disabled: false }],
+  //     standingDunk: [{ value: null, disabled: false }],
+  //     drivingDunk: [{ value: null, disabled: false }],
+  //     contactDunk: [{ value: null, disabled: false }],
+  //     drawFoul: [{ value: null, disabled: false }],
+  //     postControl: [{ value: null, disabled: false }],
+  //     postHook: [{ value: null, disabled: false }],
+  //     postFade: [{ value: null, disabled: false }],
+  //     hands: [{ value: null, disabled: false }],
+  //     playmaking: [{ value: null, disabled: false }],
+  //     ballControl: [{ value: null, disabled: false }],
+  //     passAccuracy: [{ value: null, disabled: false }],
+  //     passVision: [{ value: null, disabled: false }],
+  //     passIQ: [{ value: null, disabled: false }],
+  //     speedBall: [{ value: null, disabled: false }],
+  //     defending: [{ value: null, disabled: false }],
+  //     onBallDefIQ: [{ value: null, disabled: false }],
+  //     lowPostDefIQ: [{ value: null, disabled: false }],
+  //     pickNRollDefIQ: [{ value: null, disabled: false }],
+  //     helpDefIQ: [{ value: null, disabled: false }],
+  //     lateralQuickness: [{ value: null, disabled: false }],
+  //     passPerception: [{ value: null, disabled: false }],
+  //     reactionTime: [{ value: null, disabled: false }],
+  //     steal: [{ value: null, disabled: false }],
+  //     block: [{ value: null, disabled: false }],
+  //     shotContest: [{ value: null, disabled: false }],
+  //     defConsistency: [{ value: null, disabled: false }],
+  //     rebounding: [{ value: null, disabled: false }],
+  //     offRebound: [{ value: null, disabled: false }],
+  //     defRebound: [{ value: null, disabled: false }],
+  //     boxout: [{ value: null, disabled: false }],
+  //     totalAttributes: [{ value: null, disabled: false }],
+  //     height: [{ value: null, disabled: false }],
+  //     weight: [{ value: null, disabled: false }],
+  //     age: [{ value: null, disabled: false }],
+  //     badges: [{ value: null, disabled: false }],
+  //     image: [{ value: [], disabled: false }]
+  //   });
+  // }
 
   sendForm(values) {
     this.playerService
       .createPlayer(values)
       .subscribe(response => {
-        console.log(response);
         this.toastr.success('Jugador creado correctamente', 'Listo');
         this.getPlayers();
         this.playersForm.reset();
@@ -150,7 +173,7 @@ export class PlayersListComponent implements OnInit {
 
   getPlayers() {
     this.playerService
-      .getAll()
+      .getAll(this.filter)
       .subscribe(response => {
         this.dataSource.data = response;
       });
@@ -161,7 +184,6 @@ export class PlayersListComponent implements OnInit {
       .getAll()
       .subscribe(response => {
         this.badgeList = response;
-        console.log(this.badgeList);
       });
   }
 
@@ -204,7 +226,6 @@ export class PlayersListComponent implements OnInit {
     this.playerService
       .getById(id)
       .subscribe(response => {
-        console.log(response);
       });
   }
 

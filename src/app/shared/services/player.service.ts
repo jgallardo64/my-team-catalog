@@ -8,14 +8,16 @@ import { environment } from 'src/environments/environment';
 export class PlayerService {
   constructor(private http: HttpClient) { }
 
-  public getAll(): Observable<any> {
+  public getAll(filterValues?: any): Observable<any> {
+    if (!filterValues) {
+      filterValues = '}';
+    }
     const httpOptions = {
-      headers: new HttpHeaders(
-        {
-          filter: `{ "order": "overall DESC"}`
-        }
-      )
+      headers: new HttpHeaders({
+        filter: `{"order": "overall DESC"` + filterValues
+      })
     };
+    console.log(httpOptions);
     return this.http.get<any>(environment.apiUrl + `Players`, httpOptions)
       .pipe(map((data: any[]) => data));
   }

@@ -259,40 +259,57 @@
       <input matInput type="text" (keyup)="filterPlayers($event.target.value)" placeholder="Filter" />
     </mat-form-field>
   </div>
-  <div class="row">
-    <div class="col-12 col-md-4">
-      <ng-select class="picker" [items]="listOfCollections" bindLabel="name" bindValue="id" placeholder="Collection">
-      </ng-select>
-      Position
-      <div class="btn-group w-100" role="group">
-        <button type="button" class="btn btn-outline-secondary">PG</button>
-        <button type="button" class="btn btn-outline-secondary">SG</button>
-        <button type="button" class="btn btn-outline-secondary">SF</button>
-        <button type="button" class="btn btn-outline-secondary">PF</button>
-        <button type="button" class="btn btn-outline-secondary">C</button>
+  <form [formGroup]="filterForm">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <ng-select class="picker" [items]="listOfCollections" formControlName="collection" bindLabel="name" bindValue="id" placeholder="Collection">
+        </ng-select>
+        <div class="mb-2">
+          Position
+          <mat-button-toggle-group name="position" class=" w-100" formControlName="position" multiple>
+            <mat-button-toggle id="pg" value="PG" class="position pg-btn w-100">PG</mat-button-toggle>
+            <mat-button-toggle id="sg" value="SG" class="position w-100">SG</mat-button-toggle>
+            <mat-button-toggle id="sf" value="SF" class="position w-100">SF</mat-button-toggle>
+            <mat-button-toggle id="pf" value="PF" class="position w-100">PF</mat-button-toggle>
+            <mat-button-toggle id="c" value="C" class="position w-100">C</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="mb-2">
+          Tier
+          <mat-button-toggle-group name="tier" class="w-100" formControlName="tier" multiple>
+            <mat-button-toggle value="bronze" class="bronze-btn w-100">B</mat-button-toggle>
+            <mat-button-toggle value="silver" class="silver-btn w-100">S</mat-button-toggle>
+            <mat-button-toggle value="gold" class="gold-btn w-100">G</mat-button-toggle>
+            <mat-button-toggle value="emerald" class="emerald-btn w-100">E</mat-button-toggle>
+            <mat-button-toggle value="sapphire" class="sapphire-btn w-100">S</mat-button-toggle>
+            <mat-button-toggle value="ruby" class="ruby-btn w-100">R</mat-button-toggle>
+            <mat-button-toggle value="heatcheck" class="heat-check-btn w-100">H</mat-button-toggle>
+            <mat-button-toggle value="amethyst" class="amethyst-btn w-100">A</mat-button-toggle>
+            <mat-button-toggle value="onyx" class="onyx-btn w-100">O</mat-button-toggle>
+            <mat-button-toggle value="diamond" class="diamond-btn w-100">D</mat-button-toggle>
+            <mat-button-toggle value="pinkdiamond" class="pink-diamond-btn w-100">P</mat-button-toggle>
+            <mat-button-toggle value="galaxyopal" class="galaxy-opal-btn w-100">O</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="mb-2">
+          <div class="row">
+            <div class="col-6 pr-1">
+              <button mat-raised-button color="primary" class="w-100" (click)="createFilter(filterForm.value)">Filter</button>
+            </div>
+            <div class="col-6 pl-1">
+                <button mat-stroked-button color="primary" class="w-100" (click)="getPlayers()">Reset</button>
+            </div>
+          </div>
+        </div>
       </div>
-      Tier
-      <div class="btn-group w-100" role="group">
-        <button type="button" class="btn btn-outline-secondary">B</button>
-        <button type="button" class="btn btn-outline-secondary">S</button>
-        <button type="button" class="btn btn-outline-secondary">G</button>
-        <button type="button" class="btn btn-outline-secondary">E</button>
-        <button type="button" class="btn btn-outline-secondary">S</button>
-        <button type="button" class="btn btn-outline-secondary">R</button>
-        <button type="button" class="btn btn-outline-secondary">H</button>
-        <button type="button" class="btn btn-outline-secondary">A</button>
-        <button type="button" class="btn btn-outline-secondary">D</button>
-        <button type="button" class="btn btn-outline-secondary">P</button>
-        <button type="button" class="btn btn-outline-secondary">O</button>
+      <div class="col-12 col-md-4">
+        asdasd
+      </div>
+      <div class="col-12 col-md-4">
+        asdasd
       </div>
     </div>
-    <div class="col-12 col-md-4">
-      asdasd
-    </div>
-    <div class="col-12 col-md-4">
-      asdasd
-    </div>
-  </div>
+  </form>
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <!-- Name Column -->
     <ng-container matColumnDef="name">
