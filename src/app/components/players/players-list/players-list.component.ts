@@ -79,16 +79,28 @@ export class PlayersListComponent implements OnInit {
   }
 
   createFilter(filterValues) {
-    const startFilter = ',';
-    const collectionFilter = '"where":{"subcollectionId":"' + filterValues.collection + '"}';
-    const finishFilter = '}';
+    // {"where": {"and": [{"overall": 99}, {"position": "SF"}]}}
+    const startFilter = ',"where": {"and":[';
+    const collectionFilter = '{"subcollectionId":"' + filterValues.collection + '"}';
+    const positionFilter = '{"position":{"inq":[' + filterValues.position + ']}}';
+    const finishFilter = ']}}';
+
+    // {"position":{"inq":["SF"]}}
 
     this.filter = startFilter
-    .concat((filterValues.collectionFilter !== '' && filterValues.collectionFilter !== null) ? collectionFilter : '')
+    .concat((filterValues.collection !== '' && filterValues.collection !== null) ? collectionFilter : '')
+    .concat((filterValues.collection && filterValues.position.length > 0) ? ',' : '')
+    .concat((filterValues.position !== '' && filterValues.position !== null) && filterValues.position.length > 0 ? positionFilter : '')
     .concat(finishFilter);
 
     this.getPlayers();
     // {"where": {"or": [{"overall": 99}, {"overall": 79}]}}
+  }
+
+  resetFilter() {
+    this.filterForm.reset();
+    this.filter = '';
+    this.getPlayers();
   }
 
   // buildForm() {
