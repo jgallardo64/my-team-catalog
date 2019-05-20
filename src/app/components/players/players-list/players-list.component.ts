@@ -74,23 +74,31 @@ export class PlayersListComponent implements OnInit {
     this.filterForm = this.formBuilder.group({
       collection: [{value: null, disabled: false}],
       position: [{value: null, disabled: false}],
-      tier: [{value: null, disabled: false}]
+      tier: [{value: null, disabled: false}],
+      team: [{value: null, disabled: false}],
     });
   }
 
   createFilter(filterValues) {
+    console.log(filterValues);
     // {"where": {"and": [{"overall": 99}, {"position": "SF"}]}}
     const startFilter = ',"where": {"and":[';
     const collectionFilter = '{"subcollectionId":"' + filterValues.collection + '"}';
     const positionFilter = '{"position":{"inq":[' + filterValues.position + ']}}';
+    const tierFilter = '{"tier":{"inq":[' + filterValues.tier + ']}}';
+    const teamFilter = '{"teamId":{"inq":[' + filterValues.team + ']}}';
     const finishFilter = ']}}';
 
     // {"position":{"inq":["SF"]}}
 
     this.filter = startFilter
     .concat((filterValues.collection !== '' && filterValues.collection !== null) ? collectionFilter : '')
-    .concat((filterValues.collection && filterValues.position.length > 0) ? ',' : '')
-    .concat((filterValues.position !== '' && filterValues.position !== null) && filterValues.position.length > 0 ? positionFilter : '')
+    .concat((filterValues.collection && filterValues.position !== null && filterValues.position.length > 0) ? ',' : '')
+    .concat((filterValues.position !== '' && filterValues.position !== null && filterValues.position.length > 0) ? positionFilter : '')
+    .concat((filterValues.position && filterValues.tier !== null && filterValues.tier.length > 0) ? ',' : '')
+    .concat((filterValues.tier && filterValues.tier !== null && filterValues.tier.length > 0) ? tierFilter : '')
+    .concat((filterValues.tier && filterValues.team !== null && filterValues.team.length > 0) ? ',' : '')
+    .concat((filterValues.team && filterValues.team !== null && filterValues.team.length > 0) ? teamFilter : '')
     .concat(finishFilter);
 
     this.getPlayers();

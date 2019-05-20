@@ -221,6 +221,21 @@ app-players-list {
         linear-gradient(to bottom left, #188fff, #e1a6e7, #f9a205);
   }
 
+  .mat-tab-body-content {
+    height: 198px !important;
+    overflow: scroll !important;
+    overflow-x: hidden !important;
+  }
+
+  .mat-tab-group {
+    border: 1px solid #949494;
+    border-radius: 4px;
+  }
+
+  .mat-tab-label {
+    width: 50%;
+  }
+
   .attributeLowest {
     font-size: 15px;
     background-color: #900;

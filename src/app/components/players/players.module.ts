@@ -12,7 +12,9 @@ import {
   MatSelectModule,
   MatCheckboxModule,
   MatButtonToggleModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTabsModule,
+  MatListModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlayerService } from 'src/app/shared/services/player.service';
@@ -34,6 +36,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     MatTableModule,
     MatPaginatorModule,
     MatSelectModule,
+    MatTabsModule,
+    MatListModule,
     NgSelectModule,
     MatCheckboxModule,
     NgbModule,
