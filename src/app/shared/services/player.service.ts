@@ -17,7 +17,6 @@ export class PlayerService {
         filter: `{"order": "overall DESC"` + filterValues
       })
     };
-    console.log(httpOptions);
     return this.http.get<any>(environment.apiUrl + `Players`, httpOptions)
       .pipe(map((data: any[]) => data));
   }

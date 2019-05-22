@@ -89,20 +89,20 @@ export class PlayersListComponent implements OnInit {
     const teamFilter = '{"teamId":{"inq":[' + filterValues.team + ']}}';
     const finishFilter = ']}}';
 
-    // {"position":{"inq":["SF"]}}
-
     this.filter = startFilter
     .concat((filterValues.collection !== '' && filterValues.collection !== null) ? collectionFilter : '')
     .concat((filterValues.collection && filterValues.position !== null && filterValues.position.length > 0) ? ',' : '')
     .concat((filterValues.position !== '' && filterValues.position !== null && filterValues.position.length > 0) ? positionFilter : '')
-    .concat((filterValues.position && filterValues.tier !== null && filterValues.tier.length > 0) ? ',' : '')
+// tslint:disable-next-line: max-line-length
+    .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0)) && (filterValues.tier !== null && filterValues.tier.length > 0)) ? ',' : '')
     .concat((filterValues.tier && filterValues.tier !== null && filterValues.tier.length > 0) ? tierFilter : '')
-    .concat((filterValues.tier && filterValues.team !== null && filterValues.team.length > 0) ? ',' : '')
+// tslint:disable-next-line: max-line-length
+    .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0) || (filterValues.tier !== null && filterValues.tier.length > 0)) && (filterValues.team !== null && filterValues.team.length > 0)) ? ',' : '')
     .concat((filterValues.team && filterValues.team !== null && filterValues.team.length > 0) ? teamFilter : '')
     .concat(finishFilter);
 
     this.getPlayers();
-    // {"where": {"or": [{"overall": 99}, {"overall": 79}]}}
+    
   }
 
   resetFilter() {
