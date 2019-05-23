@@ -222,9 +222,26 @@ app-players-list {
   }
 
   .mat-tab-body-content {
-    height: 198px !important;
+    height: 192px !important;
     overflow: scroll !important;
     overflow-x: hidden !important;
+  }
+
+  .mat-tab-label {
+    height: 30px !important;
+  }
+
+  .form-buttons {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .sorting-column {
+    height: 225px !important;
+    overflow: scroll !important;
+    overflow-x: hidden !important;
+    border: 1px solid #949494;
+    border-radius: 4px;
   }
 
   .mat-tab-group {

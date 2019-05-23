@@ -254,11 +254,17 @@
   </button>
 </div> -->
 <div class="col-12 col-xl-10 offset-xl-1">
-  <div class="col-12">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="p-3">2K19 MyTeam Players</h1>
+      <hr>
+    </div>
+  </div>
+  <!-- <div class="col-12">
     <mat-form-field>
       <input matInput type="text" (keyup)="filterPlayers($event.target.value)" placeholder="Filter" />
     </mat-form-field>
-  </div>
+  </div> -->
   <form class="mb-3" [formGroup]="filterForm">
     <div class="row">
       <div class="col-12 col-md-4">
@@ -266,7 +272,7 @@
           bindValue="id" placeholder="Collection">
         </ng-select>
         <div class="mb-2">
-          Position
+          <strong>Position</strong>
           <mat-button-toggle-group name="position" class=" w-100" formControlName="position" multiple>
             <mat-button-toggle id="pg" value='"PG"' class="position pg-btn w-100">PG</mat-button-toggle>
             <mat-button-toggle id="sg" value='"SG"' class="position w-100">SG</mat-button-toggle>
@@ -276,7 +282,7 @@
           </mat-button-toggle-group>
         </div>
         <div class="mb-2">
-          Tier
+          <strong>Tier</strong>
           <mat-button-toggle-group name="tier" class="w-100" formControlName="tier" multiple>
             <mat-button-toggle value='"bronze"' class="bronze-btn w-100">B</mat-button-toggle>
             <mat-button-toggle value='"silver"' class="silver-btn w-100">S</mat-button-toggle>
@@ -295,18 +301,25 @@
         <div class="mb-2">
           <div class="row">
             <div class="col-6 pr-1">
-              <button mat-raised-button color="primary" class="w-100"
+              <button mat-raised-button color="primary" class="form-buttons"
                 (click)="createFilter(filterForm.value)">Filter</button>
             </div>
             <div class="col-6 pl-1">
-              <button mat-stroked-button color="primary" class="w-100" (click)="resetFilter()">Reset</button>
+              <button mat-stroked-button color="primary" class="form-buttons" (click)="resetFilter()">Reset</button>
             </div>
           </div>
         </div>
       </div>
       <div class="col-12 col-md-4">
+        <strong>Collections</strong>
         <mat-tab-group class="collection-team-tab">
-          <mat-tab label="Collections">Content 1</mat-tab>
+          <mat-tab label="Collections">
+            <mat-selection-list #teams formControlName="subcollection">
+              <mat-list-option value='"{{collection.id}}"' *ngFor="let collection of listOfCollections">
+                {{collection.name}}
+              </mat-list-option>
+            </mat-selection-list>
+          </mat-tab>
           <mat-tab label="Teams">
             <mat-selection-list #teams formControlName="team">
               <mat-list-option value='"{{team.id}}"' *ngFor="let team of teamsList">
@@ -317,7 +330,53 @@
         </mat-tab-group>
       </div>
       <div class="col-12 col-md-4">
-        asdasd
+        <strong>Sorting</strong>
+        <!-- <button type="button" class="btn btn-primary" (click)="createSort('open3PT')">3PT</button>
+        <button type="button" class="btn btn-primary" (click)="createSort('speed')">SPD</button> -->
+        <div class="sorting-column pt-2 pl-3">
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox color="primary">asdasdsa</mat-checkbox>
+          </div>
+        </div>
       </div>
     </div>
   </form>
@@ -356,6 +415,22 @@
             'overall-galaxy-opal': player.overall == 99
           }" class="badge badge-success">{{ player?.overall }}</span>
       </td>
+    </ng-container>
+
+    <!-- Dynamic column -->
+    <ng-container *ngIf="sorting">
+      <ng-container matColumnDef="{{sorting}}">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{statHeader}}</th>
+        <td mat-cell *matCellDef="let player">
+          <span [ngClass]="{
+              attributeLowest: player.playmaking >= 25 && player.playmaking < 50,
+              attributeLow: player.playmaking >= 50 && player.playmaking < 60,
+              attributeMedium: player.playmaking >= 60 && player.playmaking < 80,
+              attributeHigh: player.playmaking >= 80 && player.playmaking < 90,
+              attributeHighest: player.playmaking >= 90
+            }" class="badge badge-success">{{ player?.sorting}}</span>
+        </td>
+      </ng-container>
     </ng-container>
 
     <!-- Position Column -->

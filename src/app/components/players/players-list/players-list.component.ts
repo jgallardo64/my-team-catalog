@@ -9,7 +9,7 @@ import { BadgeService } from 'src/app/shared/services/badge.service';
 import { CollectionService } from 'src/app/shared/services/collection.service';
 import { TeamService } from 'src/app/shared/services/team.service';
 import { SubcollectionService } from 'src/app/shared/services/subcollection.service';
-import { HttpHeaders } from '@angular/common/http';
+import { STATS } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-players-list',
@@ -25,6 +25,7 @@ export class PlayersListComponent implements OnInit {
   listOfCollections;
   teamsList;
   filter;
+  sorting;
   playersForm: FormGroup;
   filterForm: FormGroup;
   displayedColumns: string[] = [
@@ -41,7 +42,23 @@ export class PlayersListComponent implements OnInit {
     'totalAttributes'
   ];
 
+  standardColumns: string[] = [
+    'name',
+    'overall',
+    'position',
+    'inside',
+    'outside',
+    'playmaking',
+    'athleticism',
+    'defending',
+    'rebounding',
+    'height',
+    'totalAttributes'
+  ];
+
   routerDefinitions = ROUTER_DEFINITIONS;
+  statsDefinitions = STATS;
+  statHeader;
   dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -73,6 +90,7 @@ export class PlayersListComponent implements OnInit {
   buildForm() {
     this.filterForm = this.formBuilder.group({
       collection: [{value: null, disabled: false}],
+      subcollection: [{value: null, disabled: false}],
       position: [{value: null, disabled: false}],
       tier: [{value: null, disabled: false}],
       team: [{value: null, disabled: false}],
@@ -86,6 +104,7 @@ export class PlayersListComponent implements OnInit {
     const collectionFilter = '{"subcollectionId":"' + filterValues.collection + '"}';
     const positionFilter = '{"position":{"inq":[' + filterValues.position + ']}}';
     const tierFilter = '{"tier":{"inq":[' + filterValues.tier + ']}}';
+    const subcollectionFilter = '{"subcollectionId":{"inq":[' + filterValues.subcollection + ']}}';
     const teamFilter = '{"teamId":{"inq":[' + filterValues.team + ']}}';
     const finishFilter = ']}}';
 
@@ -99,16 +118,34 @@ export class PlayersListComponent implements OnInit {
 // tslint:disable-next-line: max-line-length
     .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0) || (filterValues.tier !== null && filterValues.tier.length > 0)) && (filterValues.team !== null && filterValues.team.length > 0)) ? ',' : '')
     .concat((filterValues.team && filterValues.team !== null && filterValues.team.length > 0) ? teamFilter : '')
+// tslint:disable-next-line: max-line-length
+    .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0) || (filterValues.tier !== null && filterValues.tier.length > 0)) || (filterValues.team !== null && filterValues.team.length > 0) && (filterValues.team !== null && filterValues.subcollection.length > 0)) ? ',' : '')
+// tslint:disable-next-line: max-line-length
+    .concat((filterValues.subcollection && filterValues.subcollection !== null && filterValues.subcollection.length > 0) ? subcollectionFilter : '')
     .concat(finishFilter);
 
     this.getPlayers();
-    
   }
 
   resetFilter() {
     this.filterForm.reset();
     this.filter = '';
     this.getPlayers();
+    this.displayedColumns = this.standardColumns;
+  }
+
+  createSort(filter) {
+    if (this.displayedColumns.length !== 11) {
+      this.displayedColumns.splice(2, 1);
+    }
+    this.displayedColumns.splice(2, 0, filter);
+    console.log(this.displayedColumns);
+    this.statsDefinitions.forEach(element => {
+      if (element.value === filter) {
+        this.statHeader = element.name;
+      }
+    });
+    this.sorting = filter;
   }
 
   // buildForm() {

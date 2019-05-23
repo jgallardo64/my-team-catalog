@@ -2,14 +2,14 @@ app-header {
 
   mat-toolbar {
     position: sticky !important;
-    background-color: #2f2f2f !important;
+    background-color: #222 !important;
     top: 0px;
     height: 40px !important;
     z-index: 1000 !important;
   }
 
   .header {
-    background-color: #2f2f2f;
+    background-color: #222;
     height: 47px;
   }
 
@@ -21,6 +21,13 @@ app-header {
 
   .header-logo:focus {
     outline: none;
+  }
+
+  .search-bar {
+    margin-top: 5px;
+    background: #2f2f2f;
+    color: white;
+    font-size: 18px;
   }
 
   .header-links {
