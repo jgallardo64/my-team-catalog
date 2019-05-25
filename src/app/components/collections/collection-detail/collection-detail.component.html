@@ -32,8 +32,9 @@
     <div class="col-12 col-xl-10 offset-xl-1">
       <div class="row">
         <div class="col-12">
-          <h2>{{ collection?.name }}</h2>
-          <h4>{{ collection?.collection?.name }}</h4>
+          <h1 class="pt-3 pl-3">{{ collection?.name }}</h1>
+          <h3 class="pl-3">{{ collection?.collection?.name }}</h3>
+          <hr>
         </div>
       </div>
       <div class="row">
@@ -50,7 +51,7 @@
         </div>
         <div class="col-xs-12 col-md-3">
           <div *ngIf="reward">
-            <h4>Completion reward</h4>
+            <h2>Completion reward</h2>
             <a [routerLink]="routerDefinitions.players + '/detail/' + reward?.id">
               <img class="player-image" [src]="reward?.image">
             </a>
