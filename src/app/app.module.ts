@@ -15,6 +15,7 @@ import { LineupsComponent } from './components/lineups/lineups.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatToolbarModule } from '@angular/material';
     CollectionsComponent,
     LineupsComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
