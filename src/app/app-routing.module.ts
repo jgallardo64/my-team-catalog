@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'lineups',
     loadChildren: './components/lineups/lineups.module#LineupsModule'
+  },
+  {
+    path: 'admin',
+    loadChildren: './components/admin/admin.module#AdminModule'
   }
 ];
 
