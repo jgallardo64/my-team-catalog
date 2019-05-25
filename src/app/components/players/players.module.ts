@@ -16,7 +16,7 @@ import {
   MatTabsModule,
   MatListModule
 } from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { BadgeService } from 'src/app/shared/services/badge.service';
 import { CollectionService } from 'src/app/shared/services/collection.service';
@@ -46,6 +46,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     MatButtonModule,
     MatButtonToggleModule,
     ReactiveFormsModule,
+    FormsModule,
     PlayersRoutingModule
   ],
   providers: [

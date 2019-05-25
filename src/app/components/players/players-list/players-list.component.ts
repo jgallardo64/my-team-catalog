@@ -25,7 +25,8 @@ export class PlayersListComponent implements OnInit {
   listOfCollections;
   teamsList;
   filter;
-  sorting;
+  orderColumn;
+  orderValue;
   playersForm: FormGroup;
   filterForm: FormGroup;
   displayedColumns: string[] = [
@@ -89,42 +90,67 @@ export class PlayersListComponent implements OnInit {
 
   buildForm() {
     this.filterForm = this.formBuilder.group({
-      collection: [{value: null, disabled: false}],
-      subcollection: [{value: null, disabled: false}],
-      position: [{value: null, disabled: false}],
-      tier: [{value: null, disabled: false}],
-      team: [{value: null, disabled: false}],
+      collection: [{ value: null, disabled: false }],
+      subcollection: [{ value: null, disabled: false }],
+      position: [{ value: null, disabled: false }],
+      tier: [{ value: null, disabled: false }],
+      team: [{ value: null, disabled: false }],
+      sorting: [{ value: null, disabled: false }]
     });
   }
 
   createFilter(filterValues) {
-    console.log(filterValues);
-    // {"where": {"and": [{"overall": 99}, {"position": "SF"}]}}
-    const startFilter = ',"where": {"and":[';
+
+    let finishFilter;
+
+    this.orderColumn = this.orderValue;
+
+    if (this.displayedColumns.length !== 11) {
+      this.displayedColumns.splice(2, 1);
+    }
+    this.displayedColumns.splice(2, 0, this.orderValue);
+    this.statsDefinitions.forEach(element => {
+      if (element.value === this.orderValue) {
+        this.statHeader = element.header;
+      }
+    });
+
+    const startFilter = '{';
+    const orderFilter = '"order": "' + filterValues.sorting + ' DESC"';
+    const startWhereFilter = ',"where": {"and":[';
     const collectionFilter = '{"subcollectionId":"' + filterValues.collection + '"}';
     const positionFilter = '{"position":{"inq":[' + filterValues.position + ']}}';
     const tierFilter = '{"tier":{"inq":[' + filterValues.tier + ']}}';
     const subcollectionFilter = '{"subcollectionId":{"inq":[' + filterValues.subcollection + ']}}';
     const teamFilter = '{"teamId":{"inq":[' + filterValues.team + ']}}';
-    const finishFilter = ']}}';
+
+    if (filterValues.collection || filterValues.position || filterValues.tier || filterValues.subcollection || filterValues.team) {
+      finishFilter = ']}}';
+    } else {
+      finishFilter = '}';
+    }
 
     this.filter = startFilter
-    .concat((filterValues.collection !== '' && filterValues.collection !== null) ? collectionFilter : '')
-    .concat((filterValues.collection && filterValues.position !== null && filterValues.position.length > 0) ? ',' : '')
-    .concat((filterValues.position !== '' && filterValues.position !== null && filterValues.position.length > 0) ? positionFilter : '')
-// tslint:disable-next-line: max-line-length
-    .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0)) && (filterValues.tier !== null && filterValues.tier.length > 0)) ? ',' : '')
-    .concat((filterValues.tier && filterValues.tier !== null && filterValues.tier.length > 0) ? tierFilter : '')
-// tslint:disable-next-line: max-line-length
-    .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0) || (filterValues.tier !== null && filterValues.tier.length > 0)) && (filterValues.team !== null && filterValues.team.length > 0)) ? ',' : '')
-    .concat((filterValues.team && filterValues.team !== null && filterValues.team.length > 0) ? teamFilter : '')
-// tslint:disable-next-line: max-line-length
-    .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0) || (filterValues.tier !== null && filterValues.tier.length > 0)) || (filterValues.team !== null && filterValues.team.length > 0) && (filterValues.team !== null && filterValues.subcollection.length > 0)) ? ',' : '')
-// tslint:disable-next-line: max-line-length
-    .concat((filterValues.subcollection && filterValues.subcollection !== null && filterValues.subcollection.length > 0) ? subcollectionFilter : '')
-    .concat(finishFilter);
+      .concat((filterValues.sorting !== '' && filterValues.sorting !== null) ? orderFilter : '"order": "overall DESC"')
+      // tslint:disable-next-line: max-line-length
+      .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0) || (filterValues.tier !== null && filterValues.tier.length > 0)) || (filterValues.team !== null && filterValues.team.length > 0) || (filterValues.subcollection !== null && filterValues.subcollection.length > 0)) ? startWhereFilter : '')
+      .concat((filterValues.collection !== '' && filterValues.collection !== null) ? collectionFilter : '')
+      .concat((filterValues.collection && filterValues.position !== null && filterValues.position.length > 0) ? ',' : '')
+      .concat((filterValues.position !== '' && filterValues.position !== null && filterValues.position.length > 0) ? positionFilter : '')
+      // tslint:disable-next-line: max-line-length
+      .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0)) && (filterValues.tier !== null && filterValues.tier.length > 0)) ? ',' : '')
+      .concat((filterValues.tier && filterValues.tier !== null && filterValues.tier.length > 0) ? tierFilter : '')
+      // tslint:disable-next-line: max-line-length
+      .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0) || (filterValues.tier !== null && filterValues.tier.length > 0)) && (filterValues.team !== null && filterValues.team.length > 0)) ? ',' : '')
+      .concat((filterValues.team && filterValues.team !== null && filterValues.team.length > 0) ? teamFilter : '')
+      // tslint:disable-next-line: max-line-length
+      .concat(((filterValues.collection || (filterValues.position !== null && filterValues.position.length > 0) || (filterValues.tier !== null && filterValues.tier.length > 0) || (filterValues.team !== null && filterValues.team.length > 0)) && (filterValues.subcollection !== null && filterValues.subcollection.length > 0)) ? ',' : '')
+      // tslint:disable-next-line: max-line-length
+      .concat((filterValues.subcollection && filterValues.subcollection !== null && filterValues.subcollection.length > 0) ? subcollectionFilter : '')
+      .concat(finishFilter);
 
     this.getPlayers();
+
   }
 
   resetFilter() {
@@ -132,21 +158,33 @@ export class PlayersListComponent implements OnInit {
     this.filter = '';
     this.getPlayers();
     this.displayedColumns = this.standardColumns;
+    this.statsDefinitions.forEach(element => {
+      element.selected = false;
+    });
   }
 
-  createSort(filter) {
-    if (this.displayedColumns.length !== 11) {
-      this.displayedColumns.splice(2, 1);
-    }
-    this.displayedColumns.splice(2, 0, filter);
-    console.log(this.displayedColumns);
-    this.statsDefinitions.forEach(element => {
-      if (element.value === filter) {
-        this.statHeader = element.name;
-      }
-    });
-    this.sorting = filter;
+  getTableValue(element, sorting) {
+
+    return element[sorting];
+
   }
+
+  checkSelectedOrder(value) {
+
+    this.orderValue = value;
+
+    this.filterForm.get('sorting').setValue(value);
+
+    this.statsDefinitions.forEach(element => {
+
+      if (element.value !== value) {
+        element.selected = false;
+      }
+
+    });
+
+  }
+
 
   // buildForm() {
   //   this.playersForm = this.formBuilder.group({
@@ -252,10 +290,10 @@ export class PlayersListComponent implements OnInit {
 
   getAllSubcollections() {
     this.subcollectionService
-    .getAll()
-    .subscribe((response) => {
-      this.listOfCollections = response;
-    })
+      .getAll()
+      .subscribe((response) => {
+        this.listOfCollections = response;
+      })
   }
 
   getSubCollections(event) {

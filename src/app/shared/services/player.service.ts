@@ -10,11 +10,11 @@ export class PlayerService {
 
   public getAll(filterValues?: any): Observable<any> {
     if (!filterValues) {
-      filterValues = '}';
+      filterValues = '{"order": "overall DESC"}';
     }
     const httpOptions = {
       headers: new HttpHeaders({
-        filter: `{"order": "overall DESC"` + filterValues
+        filter: filterValues
       })
     };
     return this.http.get<any>(environment.apiUrl + `Players`, httpOptions)

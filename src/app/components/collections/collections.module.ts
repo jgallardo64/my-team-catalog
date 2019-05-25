@@ -5,6 +5,7 @@ import { CollectionDetailComponent } from './collection-detail/collection-detail
 import { CollectionsRoutingModule } from './collections-routing.module';
 import { SubcollectionService } from 'src/app/shared/services/subcollection.service';
 import { PlayerService } from 'src/app/shared/services/player.service';
+import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { PlayerService } from 'src/app/shared/services/player.service';
   ],
   imports: [
     CommonModule,
+    MatTooltipModule,
     CollectionsRoutingModule
   ],
   providers: [SubcollectionService, PlayerService]
