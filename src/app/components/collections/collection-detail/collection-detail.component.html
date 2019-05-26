@@ -1,62 +1,25 @@
-<!-- <div class="container-fluid">
+<div class="col-12 col-xl-10 offset-xl-1">
   <div class="row">
-    <div class="col-12 col-xl-10 offset-xl-1">
-      <div class="row">
-        <div class="col-12">
-          <h2>{{ collection?.name }}</h2>
-          <h4>{{ collection?.collection?.name }}</h4>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-9">
-        <div class="row">
-          <ng-container *ngFor="let player of collectionPlayers">
-            <div class="col-3 p-0 mb-4 mt-4">
-              <a [routerLink]="routerDefinitions.players + '/detail/' + player.id">
-                <img class="player-image" [src]="player.image">
-              </a>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-3">
-        <div class="row">
-          Reward
-        </div>
-      </div>
+    <div class="col-12">
+      <h1 class="pt-3 pl-3">{{ collection?.name }}</h1>
+      <h3 class="pl-3">{{ collection?.collection?.name }}</h3>
+      <hr>
     </div>
   </div>
-</div> -->
-
-<div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-xl-10 offset-xl-1">
-      <div class="row">
-        <div class="col-12">
-          <h1 class="pt-3 pl-3">{{ collection?.name }}</h1>
-          <h3 class="pl-3">{{ collection?.collection?.name }}</h3>
-          <hr>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-md-9">
-          <div class="row">
-            <ng-container *ngFor="let player of collectionPlayers">
-              <div class="col-3 p-0 mb-4 mt-4">
-                <a [routerLink]="routerDefinitions.players + '/detail/' + player?.id">
-                  <img class="player-image" [src]="player?.image">
-                </a>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-3">
-          <div *ngIf="reward">
-            <h2>Completion reward</h2>
-            <a [routerLink]="routerDefinitions.players + '/detail/' + reward?.id">
-              <img class="player-image" [src]="reward?.image">
-            </a>
-          </div>
-        </div>
+    <div class="col-xs-12 col-md-9">
+      <ng-container *ngFor="let player of collectionPlayers">
+        <a [routerLink]="routerDefinitions.players + '/detail/' + player?.id">
+          <img class="player-image" [src]="player?.image">
+        </a>
+      </ng-container>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <div *ngIf="reward">
+        <h2>Completion reward</h2>
+        <a [routerLink]="routerDefinitions.players + '/detail/' + reward?.id">
+          <img class="reward-player-image" [src]="reward?.image">
+        </a>
       </div>
     </div>
   </div>

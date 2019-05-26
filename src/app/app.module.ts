@@ -14,8 +14,24 @@ import { CollectionsComponent } from './components/collections/collections.compo
 import { LineupsComponent } from './components/lineups/lineups.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
-import { MatToolbarModule } from '@angular/material';
+import {
+  MatToolbarModule,
+  MatFormFieldModule,
+  MatCheckboxModule,
+  MatInputModule,
+  MatButtonModule,
+  MatExpansionModule,
+  MatTableModule,
+  MatIconModule,
+  MatDialogModule
+} from '@angular/material';
 import { AdminComponent } from './components/admin/admin.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { PlayerService } from './shared/services/player.service';
+import { BadgeService } from './shared/services/badge.service';
+import { TeamService } from './shared/services/team.service';
+import { CollectionService } from './shared/services/collection.service';
+import { SubcollectionService } from './shared/services/subcollection.service';
 
 @NgModule({
   declarations: [
@@ -32,12 +48,30 @@ import { AdminComponent } from './components/admin/admin.component';
     BrowserAnimationsModule,
     NgbModule,
     NgSelectModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatIconModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    NgSelectModule,
+    MatCheckboxModule,
+    NgbModule,
+    MatInputModule,
+    MatButtonModule,
+    MatExpansionModule,
+    FormsModule,
     MatToolbarModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    PlayerService,
+    BadgeService,
+    TeamService,
+    CollectionService,
+    SubcollectionService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

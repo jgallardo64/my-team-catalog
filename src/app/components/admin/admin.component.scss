@@ -1,0 +1,18 @@
+app-admin {
+    .field-align {
+        margin-top: -12px;
+    }
+
+    .players-table {
+        max-height: 400px;
+        overflow: auto;
+      }
+
+    table {
+        width: 100%;
+      }
+
+    mat-form-field {
+        width: 90%;
+    }
+}

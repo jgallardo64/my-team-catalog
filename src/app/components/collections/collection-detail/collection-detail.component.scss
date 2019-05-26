@@ -1,6 +1,13 @@
 app-collection-detail {
+
   .player-image {
-    width: 70%;
+    width: 18%;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  .reward-player-image {
+    width: 80%;
     cursor: pointer;
   }
 }
