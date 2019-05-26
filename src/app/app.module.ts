@@ -32,6 +32,7 @@ import { BadgeService } from './shared/services/badge.service';
 import { TeamService } from './shared/services/team.service';
 import { CollectionService } from './shared/services/collection.service';
 import { SubcollectionService } from './shared/services/subcollection.service';
+import { DialogConfirmationComponent } from './shared/dialog-confirmation/dialog-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SubcollectionService } from './shared/services/subcollection.service';
     LineupsComponent,
     HomeComponent,
     HeaderComponent,
-    AdminComponent
+    AdminComponent,
+    DialogConfirmationComponent
   ],
   imports: [
     BrowserModule,
