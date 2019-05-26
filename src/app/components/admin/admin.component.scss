@@ -6,7 +6,11 @@ app-admin {
     .players-table {
         max-height: 400px;
         overflow: auto;
-      }
+    }
+
+    .rewards-container {
+        height: 300px;
+    }
 
     table {
         width: 100%;
@@ -14,5 +18,9 @@ app-admin {
 
     mat-form-field {
         width: 90%;
+    }
+
+    mat-icon {
+        cursor: pointer;
     }
 }

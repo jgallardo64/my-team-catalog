@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ROUTER_DEFINITIONS } from 'src/app/shared/constants/router-definitions';
 import { TIERS } from 'src/app/shared/constants/constants';
 import { MatTableDataSource, MatDialog } from '@angular/material';
+import { DialogConfirmationComponent } from 'src/app/shared/components/dialog-confirmation/dialog-confirmation.component';
 
 @Component({
   selector: 'app-admin',
@@ -20,14 +21,22 @@ export class AdminComponent implements OnInit {
 
   routerDefinitions = ROUTER_DEFINITIONS;
   tiers = TIERS;
+  playerId;
+  editing = false;
+
+  playersPanelState;
+  rewardsPanelState;
+  editDeletePanelState;
 
   badgeList;
   collectionList;
   subcollectionList;
   listOfCollections;
   teamsList;
+  playersList;
 
   playersForm: FormGroup;
+  rewardsForm: FormGroup;
 
   displayedColumns: string[] = [
     'name',
@@ -53,6 +62,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.getPlayers();
     this.buildForm();
+    this.buildRewardForm();
     this.getCollections();
     this.getListOfCollections();
     this.getBadges();
@@ -130,13 +140,36 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  sendForm(values) {
+  buildRewardForm() {
+    this.rewardsForm = this.formBuilder.group({
+      collectionId: [{ value: null, disabled: false }],
+      subcollectionId: [{ value: null, disabled: false }],
+      playerId: [{ value: null, disabled: false }]
+    });
+  }
+
+  createPlayer(values) {
     this.playerService
       .createPlayer(values)
       .subscribe(response => {
-        this.toastr.success('Jugador creado correctamente', 'Listo');
+        this.toastr.success('Player created succesfully', 'Done');
         this.playersForm.reset();
       });
+  }
+
+  editPlayer(player) {
+    this.playerService
+      .editPlayer(this.playerId, player)
+      .subscribe(response => {
+        this.toastr.success('Player edited succesfully', 'Done');
+        this.playersForm.reset();
+        this.getPlayers();
+      });
+  }
+
+  resetForm() {
+    this.playersForm.reset();
+    this.editing = false;
   }
 
   getPlayers() {
@@ -144,6 +177,7 @@ export class AdminComponent implements OnInit {
       .getAll()
       .subscribe(response => {
         this.dataSource.data = response;
+        this.playersList = response;
       });
   }
 
@@ -192,5 +226,59 @@ export class AdminComponent implements OnInit {
   filterPlayers(value) {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
+
+  patchPlayer(player) {
+    this.playerId = player.id;
+    this.playersForm.patchValue(player);
+    this.editDeletePanelState = false;
+    this.playersPanelState = true;
+    this.editing = true;
+  }
+
+  assignRewardToCollection(values) {
+
+    const newReward = {
+      reward: values.playerId
+    };
+
+    this.subcollectionService
+    .editSubcollection(values.subcollectionId, newReward)
+    .subscribe((response) => {
+      console.log(response);
+    });
+  }
+
+  showDialogDeletePlayer(player) {
+
+    const dialogRef = this.dialog.open(DialogConfirmationComponent, {
+      width: '388px',
+      height: '170px',
+      disableClose: true,
+      autoFocus: false,
+      data: {
+        title: 'Delete',
+        message: 'Are you sure you want to delete this player?'
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        this.playerService
+          .deletePlayer(player.id)
+          .subscribe(
+            (response) => {
+              this.playerService
+                .deletePlayer(player.id)
+                .subscribe((response) => {
+                  this.toastr.success('Player deleted succesfully', 'Done');
+                  this.getPlayers();
+                });
+            });
+      }
+    });
+
+  }
+
 
 }

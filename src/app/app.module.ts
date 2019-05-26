@@ -32,7 +32,7 @@ import { BadgeService } from './shared/services/badge.service';
 import { TeamService } from './shared/services/team.service';
 import { CollectionService } from './shared/services/collection.service';
 import { SubcollectionService } from './shared/services/subcollection.service';
-import { DialogConfirmationComponent } from './shared/dialog-confirmation/dialog-confirmation.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,6 @@ import { DialogConfirmationComponent } from './shared/dialog-confirmation/dialog
     HomeComponent,
     HeaderComponent,
     AdminComponent,
-    DialogConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +63,7 @@ import { DialogConfirmationComponent } from './shared/dialog-confirmation/dialog
     FormsModule,
     MatToolbarModule,
     HttpClientModule,
+    SharedModule,
     ToastrModule.forRoot(),
     AppRoutingModule
   ],

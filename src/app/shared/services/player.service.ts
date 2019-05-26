@@ -26,6 +26,16 @@ export class PlayerService {
       .pipe(map((data: any[]) => data));
   }
 
+  public editPlayer(playerId: string, values: any): Observable<any> {
+    return this.http.put<any>(environment.apiUrl + `Players/${playerId}`, values)
+      .pipe(map((data: any[]) => data));
+  }
+
+  public deletePlayer(playerId: string): Observable<any> {
+    return this.http.delete<any>(environment.apiUrl + `Players/${playerId}`)
+      .pipe(map((data: any[]) => data));
+  }
+
   public getById(playerId: any): Observable<any> {
     return this.http.get<any>(environment.apiUrl + `Players/${playerId}`)
       .pipe(map((data: any[]) => data));

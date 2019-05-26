@@ -22,4 +22,9 @@ export class SubcollectionService {
     return this.http.get<any>(environment.apiUrl + `Subcollections/${subcollectionId}/players`)
       .pipe(map((data: any[]) => data));
   }
+
+  public editSubcollection(subcollectionId: any, values: any): Observable<any> {
+    return this.http.patch<any>(environment.apiUrl + `Subcollections/${subcollectionId}`, values)
+      .pipe(map((data: any[]) => data));
+  }
 }
