@@ -4,8 +4,10 @@
       <div class="">
         <mat-toolbar>
           <img class="header-logo" [src]="'../../../assets/icons/logo.png'" [routerLink]="routerDefinitions.home">
-          <div>
-            <input type="text" class="search-bar" placeholder="Find players...">
+          <div style="width: 250px">
+            <form [formGroup]="searchForm">
+              <input type="text" class="search-bar" placeholder="Find players..." formControlName="search">
+            </form>
           </div>
           <div class="header-links">
             <a [routerLink]="routerDefinitions.players">
@@ -35,3 +37,10 @@
     </div>
   </div>
 </div>
+<!-- <div class="search-results">
+  <mat-list *ngFor="let result of results" style="width: auto">
+    <mat-list-item (click)="selectPlayer(result)">
+     {{ result.name }} {{ result.lastName }} ({{ result.overall}})
+    </mat-list-item>
+  </mat-list>
+</div> -->

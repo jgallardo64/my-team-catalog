@@ -23,7 +23,8 @@ import {
   MatExpansionModule,
   MatTableModule,
   MatIconModule,
-  MatDialogModule
+  MatDialogModule,
+  MatListModule
 } from '@angular/material';
 import { AdminComponent } from './components/admin/admin.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -56,6 +57,7 @@ import { SharedModule } from './shared/shared.module';
     MatFormFieldModule,
     NgSelectModule,
     MatCheckboxModule,
+    MatListModule,
     NgbModule,
     MatInputModule,
     MatButtonModule,

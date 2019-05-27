@@ -14,10 +14,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class PlayerDetailComponent implements OnInit {
   playerId;
   player;
-  hofBadges = [];
-  goldBadges = [];
-  silverBadges = [];
-  bronzeBadges = [];
+  hofBadges;
+  goldBadges;
+  silverBadges;
+  bronzeBadges;
 
   routerDefinitions = ROUTER_DEFINITIONS;
 
@@ -27,11 +27,16 @@ export class PlayerDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private modalService: NgbModal
   ) {
-    this.playerId = this.activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit() {
-    this.getPlayer();
+    this.activatedRoute.queryParams.subscribe(queryParams => {
+      // do something with the query params
+    });
+    this.activatedRoute.params.subscribe(routeParams => {
+      this.playerId = routeParams.id;
+      this.getPlayer();
+    });
   }
 
   getPlayer() {
@@ -46,6 +51,11 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   getListOfBadges(badges) {
+    this.hofBadges = [];
+    this.goldBadges = [];
+    this.silverBadges = [];
+    this.bronzeBadges = [];
+
     badges.forEach(element => {
       this.badgeService
         .getById(element)

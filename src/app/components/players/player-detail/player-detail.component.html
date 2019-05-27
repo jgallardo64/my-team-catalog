@@ -81,7 +81,7 @@
                   <div class="col-12">
                     <div class="row badge-list pt-3">
                       <div class="col-xs-4">
-                        <ng-container *ngIf="bronzeBadges.length > 0">
+                        <ng-container *ngIf="bronzeBadges && bronzeBadges.length > 0">
                           <div class="badge-container" (click)="showBadges(modalBronzeBadges)">
                             <img class="badges" [src]="'../../../../assets/icons/icon_badge_bronze_count_light.png'" />
                             <div class="badge-count">
@@ -89,7 +89,7 @@
                             </div>
                           </div>
                         </ng-container>
-                        <ng-container *ngIf="bronzeBadges.length === 0">
+                        <ng-container *ngIf="!bronzeBadges || bronzeBadges.length === 0">
                           <div class="badge-container">
                             <img class="badges" [src]="'../../../../assets/icons/icon_badge_bronze_count_light.png'" />
                             <div class="badge-count">
@@ -97,7 +97,7 @@
                             </div>
                           </div>
                         </ng-container>
-                        <ng-container *ngIf="silverBadges.length > 0">
+                        <ng-container *ngIf="silverBadges && silverBadges.length > 0">
                           <div class="badge-container" (click)="showBadges(modalSilverBadges)">
                             <img class="badges" [src]="'../../../../assets/icons/icon_badge_silver_count_light.png'" />
                             <div class="badge-count">
@@ -105,7 +105,7 @@
                             </div>
                           </div>
                         </ng-container>
-                        <ng-container *ngIf="silverBadges.length === 0">
+                        <ng-container *ngIf="!silverBadges || silverBadges.length === 0">
                           <div class="badge-container">
                             <img class="badges" [src]="'../../../../assets/icons/icon_badge_silver_count_light.png'" />
                             <div class="badge-count">
@@ -113,7 +113,7 @@
                             </div>
                           </div>
                         </ng-container>
-                        <ng-container *ngIf="goldBadges.length > 0">
+                        <ng-container *ngIf="goldBadges && goldBadges.length > 0">
                           <div class="badge-container" (click)="showBadges(modalGoldBadges)">
                             <img class="badges" [src]="'../../../../assets/icons/icon_badge_gold_count_light.png'" />
                             <div class="badge-count">
@@ -121,7 +121,7 @@
                             </div>
                           </div>
                         </ng-container>
-                        <ng-container *ngIf="goldBadges.length === 0">
+                        <ng-container *ngIf="!goldBadges || goldBadges.length === 0">
                           <div class="badge-container">
                             <img class="badges" [src]="'../../../../assets/icons/icon_badge_gold_count_light.png'" />
                             <div class="badge-count">
@@ -129,7 +129,7 @@
                             </div>
                           </div>
                         </ng-container>
-                        <ng-container *ngIf="hofBadges.length > 0">
+                        <ng-container *ngIf="hofBadges && hofBadges.length > 0">
                           <div class="badge-container" (click)="showBadges(modalHOFBadges)">
                             <img class="badges" [src]="'../../../../assets/icons/icon_badge_hof_count_light.png'" />
                             <div class="badge-count">
@@ -137,7 +137,7 @@
                             </div>
                           </div>
                         </ng-container>
-                        <ng-container *ngIf="hofBadges.length === 0">
+                        <ng-container *ngIf="!hofBadges || hofBadges.length === 0">
                           <div class="badge-container">
                             <img class="badges" [src]="'../../../../assets/icons/icon_badge_hof_count_light.png'" />
                             <div class="badge-count">

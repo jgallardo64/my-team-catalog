@@ -213,8 +213,6 @@ export class PlayersListComponent implements OnInit {
   }
 
   selectPlayer(player) {
-    this.router.navigate([
-      this.routerDefinitions.players + '/detail/' + player.id
-    ]);
+    this.router.navigate([this.routerDefinitions.players + '/detail/' + player.id]);
   }
 }
