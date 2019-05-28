@@ -6,7 +6,28 @@
           <img class="header-logo" [src]="'../../../assets/icons/logo.png'" [routerLink]="routerDefinitions.home">
           <div style="width: 250px">
             <form [formGroup]="searchForm">
-              <input type="text" class="search-bar" placeholder="Find players..." formControlName="search">
+              <!-- <input type="text" class="search-bar" id="search" placeholder="Find players..." formControlName="search" (keyup)="getPlayers()"> -->
+
+              <ng-select #elem class="custom" [items]="results" bindLabel="bindLabel" autofocus bindValue="id"
+                formControlName="search" [clearable]="false" placeholder="Find players..."
+                (open)="onOpen(elem)" (change)="selectPlayer(searchForm.value)">
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <img width="30" [src]="item.image" />
+                  <span class="ml-2">{{item.name}} {{item.lastName}}</span>
+                  <span [ngClass]="{
+                    'overall-bronze': item.overall >= 60 && item.overall < 70,
+                    'overall-silver': item.overall >= 70 && item.overall < 75,
+                    'overall-gold': item.overall >= 75 && item.overall < 80,
+                    'overall-emerald': item.overall >= 80 && item.overall < 84,
+                    'overall-sapphire': item.overall >= 84 && item.overall < 87,
+                    'overall-ruby': item.overall >= 87 && item.overall < 90,
+                    'overall-amethyst': item.overall >= 90 && item.overall < 94,
+                    'overall-diamond': item.overall >= 94 && item.overall < 96,
+                    'overall-pink-diamond': item.overall >= 96 && item.overall < 99,
+                    'overall-galaxy-opal': item.overall == 99
+                  }" class="badge badge-success float-right mt-2">{{ item?.overall }}</span>
+                </ng-template>
+              </ng-select>
             </form>
           </div>
           <div class="header-links">
@@ -38,11 +59,13 @@
   </div>
 </div>
 <div class="search-results">
-  <mat-list *ngFor="let result of results" style="width: auto">
-    <mat-list-item (click)="selectPlayer(result)">
-     <div class="result">{{ result.name }} {{ result.lastName }} ({{ result.overall}})</div>
-    </mat-list-item>
-  </mat-list>
+  <ng-container *ngIf="results.length > 0">
+    <mat-list *ngFor="let result of results" style="width: auto">
+      <mat-list-item (click)="selectPlayer(result)">
+        <div class="result">{{ result.name }} {{ result.lastName }} ({{ result.overall}})</div>
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
   <ng-container *ngIf="!results || results.length === 0">
     <div class="result p-3">No results found</div>
   </ng-container>

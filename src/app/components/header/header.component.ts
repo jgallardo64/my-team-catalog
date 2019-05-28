@@ -16,26 +16,23 @@ export class HeaderComponent implements OnInit {
 
   searchForm: FormGroup;
   filter;
-  results;
+  results = [];
   selectedPlayer;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private playerService: PlayerService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.buildForm();
     this.getPlayers();
-
-    this.searchForm.get('search').valueChanges.pipe(debounceTime(500)).subscribe(val => {
-      // tslint:disable-next-line: max-line-length
-      this.filter = '{"where":{"or":[{"name":{"like":"' + val + '.*","options":"i"}},{"lastName":{"like":"' + val + '.*","options":"i"}}]}}';
-      if (val.length > 0) {
-        this.getPlayers();
-      }
-    });
+    // this.searchForm.get('search').valueChanges.pipe(debounceTime(500)).subscribe(val => {
+    // tslint:disable-next-line: max-line-length
+    //   this.filter = '{"where":{"or":[{"name":{"like":"' + val + '.*","options":"i"}},{"lastName":{"like":"' + val + '.*","options":"i"}}]}}';
+    // });
   }
 
   // {"where":{"or":[{"name":{"like":"pau.*","options":"i"}},{"lastName":{"like":"pau.*","options":"i"}}]}}
@@ -48,15 +45,24 @@ export class HeaderComponent implements OnInit {
 
   getPlayers() {
     this.playerService
-      .getAll(this.filter)
+      .getAll()
       .subscribe((response) => {
-        this.results = [];
+        response.map((player: any) => {
+          player.bindLabel = player.name + ' ' + player.lastName + ' ' + player.overall;
+        });
         this.results = response;
       });
   }
 
+  onOpen(elem) {
+    if (elem.filterInput.nativeElement.value === '') {
+      elem.close();
+    }
+  }
+
   selectPlayer(player) {
-    this.router.navigate([this.routerDefinitions.players + '/detail/' + player.id]);
+    this.router.navigate([this.routerDefinitions.players + '/detail/' + player.search]);
+    this.searchForm.reset();
   }
 
 }
