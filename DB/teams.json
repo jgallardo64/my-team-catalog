@@ -1,30 +1,30 @@
-{"_id":{"$oid":"5ce47616b93db80557e3fafb"},"name":"Milwaukee Bucks","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fafc"},"name":"Chicago Bulls","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fafa"},"name":"Philadelphia 76ers","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fafd"},"name":"Cleveland Cavaliers","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fafe"},"name":"Boston Celtics","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3faff"},"name":"Los Angeles Clippers","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb00"},"name":"Memphis Grizzlies","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb01"},"name":"Atlanta Hawks","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb02"},"name":"Charlotte Hornets","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb03"},"name":"Miami Heat","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb04"},"name":"Utah Jazz","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb05"},"name":"Sacramento Kings","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb06"},"name":"New York Knicks","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb07"},"name":"Los Angeles Lakers","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb08"},"name":"Orlando Magic","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb09"},"name":"Dallas Mavericks","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb0a"},"name":"Brooklyn Nets","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb0b"},"name":"Denver Nuggets","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb0c"},"name":"Indiana Pacers","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb0d"},"name":"New Orleans Pelicans","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb0e"},"name":"Detroit Pistons","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb0f"},"name":"Toronto Raptors","conference":"Eastern"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb10"},"name":"Houston Rockets","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb11"},"name":"San Antonio Spurs","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb12"},"name":"Phoenix Suns","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb13"},"name":"Oklahoma City Thunder","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb14"},"name":"Minnesota Timberwolves","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb15"},"name":"Portland Trail Blazers","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb16"},"name":"Golden State Warriors","conference":"Western"}
-{"_id":{"$oid":"5ce47616b93db80557e3fb17"},"name":"Washington Wizards","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb1d"},"name":"Boston Celtics","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb19"},"name":"Philadelphia 76ers","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb1b"},"name":"Chicago Bulls","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb1c"},"name":"Cleveland Cavaliers","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb1a"},"name":"Milwaukee Bucks","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb20"},"name":"Atlanta Hawks","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb21"},"name":"Charlotte Hornets","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb1f"},"name":"Memphis Grizzlies","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb1e"},"name":"Los Angeles Clippers","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb22"},"name":"Miami Heat","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb25"},"name":"New York Knicks","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb26"},"name":"Los Angeles Lakers","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb24"},"name":"Sacramento Kings","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb23"},"name":"Utah Jazz","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb27"},"name":"Orlando Magic","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb2a"},"name":"Denver Nuggets","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb29"},"name":"Brooklyn Nets","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb2b"},"name":"Indiana Pacers","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb2c"},"name":"New Orleans Pelicans","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb28"},"name":"Dallas Mavericks","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb2e"},"name":"Toronto Raptors","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb2f"},"name":"Houston Rockets","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb31"},"name":"Phoenix Suns","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb30"},"name":"San Antonio Spurs","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb2d"},"name":"Detroit Pistons","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb33"},"name":"Minnesota Timberwolves","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb34"},"name":"Portland Trail Blazers","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb36"},"name":"Washington Wizards","conference":"Eastern"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb35"},"name":"Golden State Warriors","conference":"Western"}
+{"_id":{"$oid":"5ce476c6b93db80557e3fb32"},"name":"Oklahoma City Thunder","conference":"Western"}
