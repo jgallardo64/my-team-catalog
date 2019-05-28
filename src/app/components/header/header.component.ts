@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   searchForm: FormGroup;
   filter;
-  results = [];
+  results;
   selectedPlayer;
 
   constructor(
@@ -50,6 +50,7 @@ export class HeaderComponent implements OnInit {
     this.playerService
       .getAll(this.filter)
       .subscribe((response) => {
+        this.results = [];
         this.results = response;
       });
   }

@@ -37,10 +37,13 @@
     </div>
   </div>
 </div>
-<!-- <div class="search-results">
+<div class="search-results">
   <mat-list *ngFor="let result of results" style="width: auto">
     <mat-list-item (click)="selectPlayer(result)">
-     {{ result.name }} {{ result.lastName }} ({{ result.overall}})
+     <div class="result">{{ result.name }} {{ result.lastName }} ({{ result.overall}})</div>
     </mat-list-item>
   </mat-list>
-</div> -->
+  <ng-container *ngIf="!results || results.length === 0">
+    <div class="result p-3">No results found</div>
+  </ng-container>
+</div>
