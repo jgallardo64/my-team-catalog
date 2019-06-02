@@ -17,4 +17,9 @@ export class LineupService {
         return this.http.post<any>(environment.apiUrl + `Lineups`, values)
             .pipe(map((data: any[]) => data));
     }
+
+    edit(lineupId: string, values: any): Observable<any> {
+        return this.http.put<any>(environment.apiUrl + `Lineups/${lineupId}`, values)
+          .pipe(map((data: any[]) => data));
+      }
 }

@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MyLineupsComponent } from './my-lineups/my-lineups.component';
-import { CreateLineupComponent } from './create-lineup/create-lineup.component';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { LineupsRoutingModule } from './lineups-routing.module';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -10,9 +8,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatButtonModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
 import { LineupService } from 'src/app/shared/services/lineups.service';
+import { LineupsListComponent } from './lineups-list/lineups-list.component';
+import { LineupDetailComponent } from './lineup-detail/lineup-detail.component';
 
 @NgModule({
-  declarations: [MyLineupsComponent, CreateLineupComponent],
+  declarations: [
+    LineupsListComponent,
+    LineupDetailComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

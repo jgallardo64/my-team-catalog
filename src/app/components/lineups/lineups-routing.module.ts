@@ -1,22 +1,31 @@
 import { Routes, RouterModule } from '@angular/router';
-import { MyLineupsComponent } from './my-lineups/my-lineups.component';
-import { CreateLineupComponent } from './create-lineup/create-lineup.component';
 import { NgModule } from '@angular/core';
+import { LineupsListComponent } from './lineups-list/lineups-list.component';
+import { LineupDetailComponent } from './lineup-detail/lineup-detail.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'my-lineups',
-    component: MyLineupsComponent
+    redirectTo: 'list',
+    component: LineupsListComponent
   },
   {
-    path: 'my-lineups',
-    component: MyLineupsComponent
+    path: 'list',
+    component: LineupsListComponent
   },
   {
-    path: 'create-lineup',
-    component: CreateLineupComponent
-  }
+    path: 'create',
+    component: LineupDetailComponent
+},
+{
+    path: 'view/:id',
+    component: LineupDetailComponent
+},
+{
+    path: 'edit/:id',
+    component: LineupDetailComponent
+}
+
 ];
 
 @NgModule({

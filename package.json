@@ -25,6 +25,7 @@
     "@ng-select/ng-select": "^2.19.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
+    "lodash": "^4.17.11",
     "ngx-toastr": "^10.0.3",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",

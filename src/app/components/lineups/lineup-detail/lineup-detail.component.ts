@@ -2,20 +2,23 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { ClientService } from 'src/app/shared/services/client.service';
 import { LineupService } from 'src/app/shared/services/lineups.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ROUTER_DEFINITIONS } from 'src/app/shared/constants/router-definitions';
+import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-create-lineup',
-  templateUrl: './create-lineup.component.html',
-  styleUrls: ['./create-lineup.component.scss'],
+  selector: 'app-lineup-detail',
+  templateUrl: './lineup-detail.component.html',
+  styleUrls: ['./lineup-detail.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CreateLineupComponent implements OnInit {
+export class LineupDetailComponent implements OnInit {
   client;
+  action;
+  lineup;
+  lineupId;
   players;
   positionSelected = null;
   selectForm: FormGroup;
@@ -61,6 +64,7 @@ export class CreateLineupComponent implements OnInit {
   galaxyOpalPlayers = 0;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private playerService: PlayerService,
     private lineupService: LineupService,
     private authService: AuthService,
@@ -69,11 +73,28 @@ export class CreateLineupComponent implements OnInit {
     private toastrService: ToastrService
   ) {
     this.client = this.authService.getUser();
-   }
+    this.action = this.activatedRoute.snapshot.url[0].path;
+    this.lineupId = this.activatedRoute.snapshot.params.id;
+
+    switch (this.action) {
+      case 'create':
+        this.buildLineupForm(false);
+        break;
+
+      case 'edit':
+        this.getLineupById();
+        this.buildLineupForm(false);
+        break;
+
+      case 'view':
+        this.getLineupById();
+        this.buildLineupForm(true);
+        break;
+    }
+  }
 
   ngOnInit() {
     this.getPlayers();
-    this.buildLineupForm();
     this.buildSelectForm();
   }
 
@@ -83,30 +104,115 @@ export class CreateLineupComponent implements OnInit {
     });
   }
 
-  buildLineupForm() {
+  buildLineupForm(disabled) {
     this.lineupForm = this.formBuilder.group({
-      name: [{ value: null, disabled: false }],
-      overall: [{ value: null, disabled: false }],
-      inside: [{ value: null, disabled: false }],
-      outside: [{ value: null, disabled: false }],
-      playmaking: [{ value: null, disabled: false }],
-      athleticism: [{ value: null, disabled: false }],
-      defending: [{ value: null, disabled: false }],
-      rebounding: [{ value: null, disabled: false }],
-      player1: [{ value: null, disabled: false }],
-      player2: [{ value: null, disabled: false }],
-      player3: [{ value: null, disabled: false }],
-      player4: [{ value: null, disabled: false }],
-      player5: [{ value: null, disabled: false }],
-      player6: [{ value: null, disabled: false }],
-      player7: [{ value: null, disabled: false }],
-      player8: [{ value: null, disabled: false }],
-      player9: [{ value: null, disabled: false }],
-      player10: [{ value: null, disabled: false }],
-      player11: [{ value: null, disabled: false }],
-      player12: [{ value: null, disabled: false }],
-      player13: [{ value: null, disabled: false }]
+      name: [{ value: null, disabled }],
+      overall: [{ value: null, disabled }],
+      inside: [{ value: null, disabled }],
+      outside: [{ value: null, disabled }],
+      playmaking: [{ value: null, disabled }],
+      athleticism: [{ value: null, disabled }],
+      defending: [{ value: null, disabled }],
+      rebounding: [{ value: null, disabled }],
+      player1: [{ value: null, disabled }],
+      player2: [{ value: null, disabled }],
+      player3: [{ value: null, disabled }],
+      player4: [{ value: null, disabled }],
+      player5: [{ value: null, disabled }],
+      player6: [{ value: null, disabled }],
+      player7: [{ value: null, disabled }],
+      player8: [{ value: null, disabled }],
+      player9: [{ value: null, disabled }],
+      player10: [{ value: null, disabled }],
+      player11: [{ value: null, disabled }],
+      player12: [{ value: null, disabled }],
+      player13: [{ value: null, disabled }]
     });
+  }
+
+  getLineupById() {
+    this.lineupService
+      .getById(this.lineupId)
+      .subscribe((response) => {
+        this.player1 = response.player1;
+        if (response.player1 !== null) {
+          this.lineupPlayers.push(this.player1);
+        }
+        this.player2 = response.player2;
+        if (response.player2 !== null) {
+          this.lineupPlayers.push(this.player2);
+        }
+
+        this.player3 = response.player3;
+        if (response.player3 !== null) {
+          this.lineupPlayers.push(this.player3);
+        }
+
+        this.player4 = response.player4;
+        if (response.player4 !== null) {
+          this.lineupPlayers.push(this.player4);
+        }
+
+        this.player5 = response.player5;
+        if (response.player5 !== null) {
+          this.lineupPlayers.push(this.player5);
+        }
+
+        this.player6 = response.player6;
+        if (response.player6 !== null) {
+          this.lineupPlayers.push(this.player6);
+        }
+
+        this.player7 = response.player7;
+        if (response.player7 !== null) {
+          this.lineupPlayers.push(this.player7);
+        }
+
+        this.player8 = response.player8;
+        if (response.player8 !== null) {
+          this.lineupPlayers.push(this.player8);
+        }
+
+        this.player9 = response.player9;
+        if (response.player9 !== null) {
+          this.lineupPlayers.push(this.player9);
+        }
+
+        this.player10 = response.player10;
+        if (response.player10 !== null) {
+          this.lineupPlayers.push(this.player10);
+        }
+
+        this.player11 = response.player11;
+        if (response.player11 !== null) {
+          this.lineupPlayers.push(this.player11);
+        }
+
+        this.player12 = response.player12;
+        if (response.player12 !== null) {
+          this.lineupPlayers.push(this.player12);
+        }
+
+        this.player13 = response.player13;
+        if (response.player13 !== null) {
+          this.lineupPlayers.push(this.player13);
+        }
+
+        this.bronzePlayers = response.bronzePlayers;
+        this.silverPlayers = response.silverPlayers;
+        this.goldPlayers = response.goldPlayers;
+        this.emeraldPlayers = response.emeraldPlayers;
+        this.sapphirePlayers = response.sapphirePlayers;
+        this.rubyPlayers = response.rubyPlayers;
+        this.heatcheckPlayers = response.heatcheckPlayers;
+        this.amethystPlayers = response.amethystPlayers;
+        this.onyxPlayers = response.onyxPlayers;
+        this.diamondPlayers = response.diamondPlayers;
+        this.pinkDiamondPlayers = response.pinkDiamondPlayers;
+        this.galaxyOpalPlayers = response.galaxyOpalPlayers;
+        this.lineupForm.patchValue(response);
+        this.calculateOveralls();
+      });
   }
 
   sendLineup(values) {
@@ -118,13 +224,73 @@ export class CreateLineupComponent implements OnInit {
     values.athleticism = this.lineupAthleticism;
     values.defending = this.lineupDefending;
     values.rebounding = this.lineupRebounding;
+    values.bronzePlayers = this.bronzePlayers;
+    values.silverPlayers = this.silverPlayers;
+    values.goldPlayers = this.goldPlayers;
+    values.emeraldPlayers = this.emeraldPlayers;
+    values.sapphirePlayers = this.sapphirePlayers;
+    values.rubyPlayers = this.rubyPlayers;
+    values.heatcheckPlayers = this.heatcheckPlayers;
+    values.amethystPlayers = this.amethystPlayers;
+    values.onyxPlayers = this.onyxPlayers;
+    values.diamondPlayers = this.diamondPlayers;
+    values.pinkDiamondPlayers = this.pinkDiamondPlayers;
+    values.galaxyOpalPlayers = this.galaxyOpalPlayers;
 
     this.lineupService
-    .create(values)
-    .subscribe((response) => {
-      this.toastrService.success('Lineup created succesfully', 'Success');
-      this.router.navigate([this.routerDefinitions.lineups]);
-    });
+      .create(values)
+      .subscribe((response) => {
+        this.toastrService.success('Lineup created succesfully', 'Success');
+        this.router.navigate([this.routerDefinitions.lineups]);
+      });
+  }
+
+  editLineup(values) {
+    if (this.player1) {
+      values.player1 = this.player1;
+    } else {
+      delete values.player1;
+    }
+    values.player1 = this.player1;
+    values.player2 = this.player2;
+    values.player3 = this.player3;
+    values.player4 = this.player4;
+    values.player5 = this.player5;
+    values.player6 = this.player6;
+    values.player7 = this.player7;
+    values.player8 = this.player8;
+    values.player9 = this.player9;
+    values.player10 = this.player10;
+    values.player11 = this.player11;
+    values.player12 = this.player12;
+    values.player13 = this.player13;
+    values.clientId = this.client.userId;
+    values.overall = this.lineupOverall;
+    values.inside = this.lineupInside;
+    values.outside = this.lineupOutside;
+    values.playmaking = this.lineupPlaymaking;
+    values.athleticism = this.lineupAthleticism;
+    values.defending = this.lineupDefending;
+    values.rebounding = this.lineupRebounding;
+    values.bronzePlayers = this.bronzePlayers;
+    values.silverPlayers = this.silverPlayers;
+    values.goldPlayers = this.goldPlayers;
+    values.emeraldPlayers = this.emeraldPlayers;
+    values.sapphirePlayers = this.sapphirePlayers;
+    values.rubyPlayers = this.rubyPlayers;
+    values.heatcheckPlayers = this.heatcheckPlayers;
+    values.amethystPlayers = this.amethystPlayers;
+    values.onyxPlayers = this.onyxPlayers;
+    values.diamondPlayers = this.diamondPlayers;
+    values.pinkDiamondPlayers = this.pinkDiamondPlayers;
+    values.galaxyOpalPlayers = this.galaxyOpalPlayers;
+
+    this.lineupService
+      .edit(this.lineupId, values)
+      .subscribe((response) => {
+        this.toastrService.success('Lineup edited succesfully', 'Success');
+        this.router.navigate([this.routerDefinitions.lineups + '/view/' + this.lineupId]);
+      });
   }
 
   getPlayers() {
@@ -150,7 +316,7 @@ export class CreateLineupComponent implements OnInit {
     switch (id) {
       case 'player1':
         if (this.player1) {
-          this.lineupPlayers.splice(0, 1);
+          this.lineupPlayers.splice(this.findElement(this.player1), 1);
           this.removeFromCount(this.player1);
           this.player1 = null;
         } else {
@@ -159,7 +325,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player2':
         if (this.player2) {
-          this.lineupPlayers.splice(1, 1);
+          this.lineupPlayers.splice(this.findElement(this.player2), 1);
           this.removeFromCount(this.player2);
           this.player2 = null;
         } else {
@@ -168,7 +334,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player3':
         if (this.player3) {
-          this.lineupPlayers.splice(2, 1);
+          this.lineupPlayers.splice(this.findElement(this.player3), 1);
           this.removeFromCount(this.player3);
           this.player3 = null;
         } else {
@@ -177,7 +343,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player4':
         if (this.player4) {
-          this.lineupPlayers.splice(3, 1);
+          this.lineupPlayers.splice(this.findElement(this.player4), 1);
           this.removeFromCount(this.player4);
           this.player4 = null;
         } else {
@@ -186,7 +352,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player5':
         if (this.player5) {
-          this.lineupPlayers.splice(4, 1);
+          this.lineupPlayers.splice(this.findElement(this.player5), 1);
           this.removeFromCount(this.player5);
           this.player5 = null;
         } else {
@@ -195,7 +361,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player6':
         if (this.player6) {
-          this.lineupPlayers.splice(5, 1);
+          this.lineupPlayers.splice(this.findElement(this.player6), 1);
           this.removeFromCount(this.player6);
           this.player6 = null;
         } else {
@@ -204,7 +370,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player7':
         if (this.player7) {
-          this.lineupPlayers.splice(6, 1);
+          this.lineupPlayers.splice(this.findElement(this.player7), 1);
           this.removeFromCount(this.player7);
           this.player7 = null;
         } else {
@@ -213,7 +379,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player8':
         if (this.player8) {
-          this.lineupPlayers.splice(7, 1);
+          this.lineupPlayers.splice(this.findElement(this.player8), 1);
           this.removeFromCount(this.player8);
           this.player8 = null;
         } else {
@@ -222,7 +388,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player9':
         if (this.player9) {
-          this.lineupPlayers.splice(8, 1);
+          this.lineupPlayers.splice(this.findElement(this.player9), 1);
           this.removeFromCount(this.player9);
           this.player9 = null;
         } else {
@@ -231,7 +397,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player10':
         if (this.player10) {
-          this.lineupPlayers.splice(9, 1);
+          this.lineupPlayers.splice(this.findElement(this.player10), 1);
           this.removeFromCount(this.player10);
           this.player10 = null;
         } else {
@@ -240,7 +406,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player11':
         if (this.player11) {
-          this.lineupPlayers.splice(10, 1);
+          this.lineupPlayers.splice(this.findElement(this.player11), 1);
           this.removeFromCount(this.player11);
           this.player11 = null;
         } else {
@@ -249,7 +415,7 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player12':
         if (this.player12) {
-          this.lineupPlayers.splice(11, 1);
+          this.lineupPlayers.splice(this.findElement(this.player12), 1);
           this.removeFromCount(this.player12);
           this.player12 = null;
         } else {
@@ -258,15 +424,15 @@ export class CreateLineupComponent implements OnInit {
         break;
       case 'player13':
         if (this.player13) {
-          this.lineupPlayers.splice(12, 1);
+          this.lineupPlayers.splice(this.findElement(this.player13), 1);
           this.removeFromCount(this.player13);
           this.player13 = null;
         } else {
           this.positionSelected = 'player13';
         }
         break;
-
     }
+    this.calculateOveralls();
   }
 
   selectPlayer(player) {
@@ -275,7 +441,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player1':
           this.player1 = player.playerSelected;
           this.lineupPlayers.splice(0, 0, this.player1);
-          this.lineupForm.get('player1').patchValue(this.player1.id);
+          this.lineupForm.get('player1').patchValue(this.player1);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -283,7 +449,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player2':
           this.player2 = player.playerSelected;
           this.lineupPlayers.splice(1, 0, this.player2);
-          this.lineupForm.get('player2').patchValue(this.player2.id);
+          this.lineupForm.get('player2').patchValue(this.player2);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -291,7 +457,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player3':
           this.player3 = player.playerSelected;
           this.lineupPlayers.splice(2, 0, this.player3);
-          this.lineupForm.get('player3').patchValue(this.player3.id);
+          this.lineupForm.get('player3').patchValue(this.player3);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -299,7 +465,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player4':
           this.player4 = player.playerSelected;
           this.lineupPlayers.splice(3, 0, this.player4);
-          this.lineupForm.get('player4').patchValue(this.player4.id);
+          this.lineupForm.get('player4').patchValue(this.player4);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -307,7 +473,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player5':
           this.player5 = player.playerSelected;
           this.lineupPlayers.splice(4, 0, this.player5);
-          this.lineupForm.get('player5').patchValue(this.player5.id);
+          this.lineupForm.get('player5').patchValue(this.player5);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -315,7 +481,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player6':
           this.player6 = player.playerSelected;
           this.lineupPlayers.splice(5, 0, this.player6);
-          this.lineupForm.get('player6').patchValue(this.player6.id);
+          this.lineupForm.get('player6').patchValue(this.player6);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -323,7 +489,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player7':
           this.player7 = player.playerSelected;
           this.lineupPlayers.splice(6, 0, this.player7);
-          this.lineupForm.get('player7').patchValue(this.player7.id);
+          this.lineupForm.get('player7').patchValue(this.player7);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -331,7 +497,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player8':
           this.player8 = player.playerSelected;
           this.lineupPlayers.splice(7, 0, this.player8);
-          this.lineupForm.get('player8').patchValue(this.player8.id);
+          this.lineupForm.get('player8').patchValue(this.player8);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -339,7 +505,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player9':
           this.player9 = player.playerSelected;
           this.lineupPlayers.splice(8, 0, this.player9);
-          this.lineupForm.get('player9').patchValue(this.player9.id);
+          this.lineupForm.get('player9').patchValue(this.player9);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -347,7 +513,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player10':
           this.player10 = player.playerSelected;
           this.lineupPlayers.splice(9, 0, this.player10);
-          this.lineupForm.get('player10').patchValue(this.player10.id);
+          this.lineupForm.get('player10').patchValue(this.player10);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -355,7 +521,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player11':
           this.player11 = player.playerSelected;
           this.lineupPlayers.splice(10, 0, this.player11);
-          this.lineupForm.get('player11').patchValue(this.player11.id);
+          this.lineupForm.get('player11').patchValue(this.player11);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -363,7 +529,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player12':
           this.player12 = player.playerSelected;
           this.lineupPlayers.splice(11, 0, this.player12);
-          this.lineupForm.get('player12').patchValue(this.player12.id);
+          this.lineupForm.get('player12').patchValue(this.player12);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -371,7 +537,7 @@ export class CreateLineupComponent implements OnInit {
         case 'player13':
           this.player13 = player.playerSelected;
           this.lineupPlayers.splice(12, 0, this.player13);
-          this.lineupForm.get('player13').patchValue(this.player13.id);
+          this.lineupForm.get('player13').patchValue(this.player13);
           this.positionSelected = null;
           this.selectForm.reset();
           break;
@@ -498,22 +664,32 @@ export class CreateLineupComponent implements OnInit {
     this.lineupDefending = 0;
     this.lineupRebounding = 0;
 
-    this.lineupPlayers.forEach(element => {
-      this.lineupOverall += element.overall;
-      this.lineupInside += element.inside;
-      this.lineupOutside += element.outside;
-      this.lineupPlaymaking += element.playmaking;
-      this.lineupAthleticism += element.athleticism;
-      this.lineupDefending += element.defending;
-      this.lineupRebounding += element.rebounding;
-    });
+    if (this.lineupPlayers.length > 0) {
+      this.lineupPlayers.forEach(element => {
+        if (element !== null) {
+          this.lineupOverall += element.overall;
+          this.lineupInside += element.inside;
+          this.lineupOutside += element.outside;
+          this.lineupPlaymaking += element.playmaking;
+          this.lineupAthleticism += element.athleticism;
+          this.lineupDefending += element.defending;
+          this.lineupRebounding += element.rebounding;
+        }
+      });
 
-    this.lineupOverall = Math.round(this.lineupOverall / this.lineupPlayers.length);
-    this.lineupInside = Math.round(this.lineupInside / this.lineupPlayers.length);
-    this.lineupOutside = Math.round(this.lineupOutside / this.lineupPlayers.length);
-    this.lineupPlaymaking = Math.round(this.lineupPlaymaking / this.lineupPlayers.length);
-    this.lineupAthleticism = Math.round(this.lineupAthleticism / this.lineupPlayers.length);
-    this.lineupDefending = Math.round(this.lineupDefending / this.lineupPlayers.length);
-    this.lineupRebounding = Math.round(this.lineupRebounding / this.lineupPlayers.length);
+      this.lineupOverall = Math.round(this.lineupOverall / this.lineupPlayers.length);
+      this.lineupInside = Math.round(this.lineupInside / this.lineupPlayers.length);
+      this.lineupOutside = Math.round(this.lineupOutside / this.lineupPlayers.length);
+      this.lineupPlaymaking = Math.round(this.lineupPlaymaking / this.lineupPlayers.length);
+      this.lineupAthleticism = Math.round(this.lineupAthleticism / this.lineupPlayers.length);
+      this.lineupDefending = Math.round(this.lineupDefending / this.lineupPlayers.length);
+      this.lineupRebounding = Math.round(this.lineupRebounding / this.lineupPlayers.length);
+    }
+  }
+
+  findElement(player) {
+    const found = _.findIndex(this.lineupPlayers, player);
+
+    return found;
   }
 }
