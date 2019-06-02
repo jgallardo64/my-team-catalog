@@ -8,9 +8,9 @@
             <form [formGroup]="searchForm">
               <!-- <input type="text" class="search-bar" id="search" placeholder="Find players..." formControlName="search" (keyup)="getPlayers()"> -->
 
-              <ng-select #elem class="custom" [items]="results" bindLabel="bindLabel" autofocus bindValue="id"
-                formControlName="search" [clearable]="false" placeholder="Find players..."
-                (open)="onOpen(elem)" (change)="selectPlayer(searchForm.value)">
+              <ng-select #elem class="custom mt-1" [items]="results" bindLabel="bindLabel" bindValue="id"
+                formControlName="search" [clearable]="false" placeholder="Find players..." (open)="onOpen(elem)"
+                (change)="selectPlayer(searchForm.value)">
                 <ng-template ng-option-tmp let-item="item" let-index="index">
                   <img width="30" [src]="item.image" />
                   <span class="ml-2">{{item.name}} {{item.lastName}}</span>
@@ -53,11 +53,51 @@
               Admin
             </a>
           </div>
+          <ng-container *ngIf="!user">
+            <div class="btn-group mr-3 dropdowns">
+              <div class="btn-group mt-1" ngbDropdown role="group">
+                <button class="btn btn-primary" ngbDropdownToggle>Login</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                  <form [formGroup]="loginForm" class="login-form p-3">
+                    <div class="form-group">
+                      <label for="exampleDropdownFormEmail1">Email address</label>
+                      <input type="email" class="form-control" formControlName="email" id="exampleDropdownFormEmail1"
+                        placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleDropdownFormPassword1">Password</label>
+                      <input type="password" class="form-control" formControlName="password"
+                        id="exampleDropdownFormPassword1" placeholder="Password">
+                    </div>
+                    <button class="btn btn-primary" (click)="sendLoginForm(loginForm.value)">Sign in</button>
+                  </form>
+                </div>
+              </div>
+              <div class="btn-group mt-1" ngbDropdown role="group">
+                <button class="btn btn-primary" ngbDropdownToggle>Register</button>
+                <div class="dropdown-menu" ngbDropdownMenu>
+                  <button ngbDropdownItem>One</button>
+                  <button ngbDropdownItem>Two</button>
+                  <button ngbDropdownItem>Four!</button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="user">
+            <div ngbDropdown class="dropdowns">
+              <button class="btn btn-primary mt-1" id="dropdownBasic1"
+                ngbDropdownToggle>{{user?.user?.username}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button (click)="logout()" ngbDropdownItem>Logout</button>
+              </div>
+            </div>
+          </ng-container>
         </mat-toolbar>
       </div>
     </div>
   </div>
 </div>
+
 <div class="search-results">
   <ng-container *ngIf="results.length > 0">
     <mat-list *ngFor="let result of results" style="width: auto">

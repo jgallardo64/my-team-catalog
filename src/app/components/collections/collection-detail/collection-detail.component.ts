@@ -55,7 +55,6 @@ export class CollectionDetailComponent implements OnInit {
     this.playerService
     .getById(this.collection.reward)
     .subscribe((response) => {
-      console.log(response);
       this.reward = response;
     });
   }

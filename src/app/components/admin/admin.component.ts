@@ -244,7 +244,7 @@ export class AdminComponent implements OnInit {
     this.subcollectionService
     .editSubcollection(values.subcollectionId, newReward)
     .subscribe((response) => {
-      console.log(response);
+      this.toastr.success('Reward assigned succesfully', 'Success');
     });
   }
 

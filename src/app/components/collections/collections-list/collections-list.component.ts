@@ -99,9 +99,6 @@ export class CollectionsListComponent implements OnInit {
           }
         });
       });
-    console.log(this.currentEast);
-    console.log(this.currentWest);
-    console.log(this.heatCheckEast);
   }
 
 }

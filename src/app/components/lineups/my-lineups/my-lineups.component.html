@@ -1,3 +1,122 @@
-<p>
-  my-lineups works!
-</p>
+<div class="col-12 col-xl-10 offset-xl-1">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="p-3">My Lineups</h1>
+      <hr>
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>NAME</th>
+          <td mat-cell *matCellDef="let lineup">
+            {{lineup?.name}}
+          </td>
+        </ng-container>
+    
+        <!-- Overall Column -->
+        <ng-container matColumnDef="overall">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>OVR</th>
+          <td mat-cell *matCellDef="let lineup">
+              <span [ngClass]="{
+                attributeLowest: lineup.overall >= 25 && lineup.overall < 50,
+                attributeLow: lineup.overall >= 50 && lineup.overall < 60,
+                attributeMedium: lineup.overall >= 60 && lineup.overall < 80,
+                attributeHigh: lineup.overall >= 80 && lineup.overall < 90,
+                attributeHighest: lineup.overall >= 90
+              }" class="badge badge-success">{{ lineup?.overall }}</span>
+          </td>
+        </ng-container>
+    
+        <!-- Inside Column -->
+        <ng-container matColumnDef="inside">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>INS</th>
+          <td mat-cell *matCellDef="let lineup">
+            <span [ngClass]="{
+                attributeLowest: lineup.inside >= 25 && lineup.inside < 50,
+                attributeLow: lineup.inside >= 50 && lineup.inside < 60,
+                attributeMedium: lineup.inside >= 60 && lineup.inside < 80,
+                attributeHigh: lineup.inside >= 80 && lineup.inside < 90,
+                attributeHighest: lineup.inside >= 90
+              }" class="badge badge-success">{{ lineup?.inside }}</span>
+          </td>
+        </ng-container>
+    
+        <!-- Outside Column -->
+        <ng-container matColumnDef="outside">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>OUT</th>
+          <td mat-cell *matCellDef="let lineup">
+            <span [ngClass]="{
+                attributeLowest: lineup.outside >= 25 && lineup.outside < 50,
+                attributeLow: lineup.outside >= 50 && lineup.outside < 60,
+                attributeMedium: lineup.outside >= 60 && lineup.outside < 80,
+                attributeHigh: lineup.outside >= 80 && lineup.outside < 90,
+                attributeHighest: lineup.outside >= 90
+              }" class="badge badge-success">{{ lineup?.outside }}</span>
+          </td>
+        </ng-container>
+    
+        <!-- Playmaking Column -->
+        <ng-container matColumnDef="playmaking">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>PLY</th>
+          <td mat-cell *matCellDef="let lineup">
+            <span [ngClass]="{
+                attributeLowest: lineup.playmaking >= 25 && lineup.playmaking < 50,
+                attributeLow: lineup.playmaking >= 50 && lineup.playmaking < 60,
+                attributeMedium: lineup.playmaking >= 60 && lineup.playmaking < 80,
+                attributeHigh: lineup.playmaking >= 80 && lineup.playmaking < 90,
+                attributeHighest: lineup.playmaking >= 90
+              }" class="badge badge-success">{{ lineup?.playmaking }}</span>
+          </td>
+        </ng-container>
+    
+        <!-- Athleticism Column -->
+        <ng-container matColumnDef="athleticism">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ATH</th>
+          <td mat-cell *matCellDef="let lineup">
+            <span [ngClass]="{
+                attributeLowest:
+                  lineup.athleticism >= 25 && lineup.athleticism < 50,
+                attributeLow: lineup.athleticism >= 50 && lineup.athleticism < 60,
+                attributeMedium:
+                  lineup.athleticism >= 60 && lineup.athleticism < 80,
+                attributeHigh: lineup.athleticism >= 80 && lineup.athleticism < 90,
+                attributeHighest: lineup.athleticism >= 90
+              }" class="badge badge-success">{{ lineup?.athleticism }}</span>
+          </td>
+        </ng-container>
+    
+        <!-- Defending Column -->
+        <ng-container matColumnDef="defending">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>DEF</th>
+          <td mat-cell *matCellDef="let lineup">
+            <span [ngClass]="{
+                attributeLowest: lineup.defending >= 25 && lineup.defending < 50,
+                attributeLow: lineup.defending >= 50 && lineup.defending < 60,
+                attributeMedium: lineup.defending >= 60 && lineup.defending < 80,
+                attributeHigh: lineup.defending >= 80 && lineup.defending < 90,
+                attributeHighest: lineup.defending >= 90
+              }" class="badge badge-success">{{ lineup?.defending }}</span>
+          </td>
+        </ng-container>
+    
+        <!-- Rebounding Column -->
+        <ng-container matColumnDef="rebounding">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>REB</th>
+          <td mat-cell *matCellDef="let lineup">
+            <span [ngClass]="{
+                attributeLowest: lineup.rebounding >= 25 && lineup.rebounding < 50,
+                attributeLow: lineup.rebounding >= 50 && lineup.rebounding < 60,
+                attributeMedium: lineup.rebounding >= 60 && lineup.rebounding < 80,
+                attributeHigh: lineup.rebounding >= 80 && lineup.rebounding < 90,
+                attributeHighest: lineup.rebounding >= 90
+              }" class="badge badge-success">{{ lineup?.rebounding }}</span>
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="selectLineup(row)"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[2, 5, 10, 20, 50, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

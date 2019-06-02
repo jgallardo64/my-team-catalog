@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, tap } from 'rxjs/operators';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { Router } from '@angular/router';
+import { ClientService } from 'src/app/shared/services/client.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,8 +15,10 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   routerDefinitions = ROUTER_DEFINITIONS;
+  user;
 
   searchForm: FormGroup;
+  loginForm: FormGroup;
   filter;
   results = [];
   selectedPlayer;
@@ -22,25 +26,44 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
+    private clientService: ClientService,
+    private authService: AuthService,
     private playerService: PlayerService
   ) {
+    this.user = this.authService.getUser();
   }
 
   ngOnInit() {
-    this.buildForm();
+    this.buildSearchForm();
+    this.buildLoginForm();
     this.getPlayers();
-    // this.searchForm.get('search').valueChanges.pipe(debounceTime(500)).subscribe(val => {
-    // tslint:disable-next-line: max-line-length
-    //   this.filter = '{"where":{"or":[{"name":{"like":"' + val + '.*","options":"i"}},{"lastName":{"like":"' + val + '.*","options":"i"}}]}}';
-    // });
   }
 
-  // {"where":{"or":[{"name":{"like":"pau.*","options":"i"}},{"lastName":{"like":"pau.*","options":"i"}}]}}
-
-  buildForm() {
+  buildSearchForm() {
     this.searchForm = this.formBuilder.group({
       search: [{ value: null, disabled: false }]
     });
+  }
+
+  buildLoginForm() {
+    this.loginForm = this.formBuilder.group({
+      email: [{ value: null, disabled: false }],
+      password: [{ value: null, disabled: false }]
+    });
+  }
+
+  sendLoginForm(values) {
+    this.authService
+      .login(values)
+      .subscribe((response) => {
+        window.location.reload();
+      });
+  }
+
+  logout() {
+    this.authService
+    .logout();
+    window.location.reload();
   }
 
   getPlayers() {

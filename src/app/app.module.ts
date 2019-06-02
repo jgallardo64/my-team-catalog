@@ -34,6 +34,8 @@ import { TeamService } from './shared/services/team.service';
 import { CollectionService } from './shared/services/collection.service';
 import { SubcollectionService } from './shared/services/subcollection.service';
 import { SharedModule } from './shared/shared.module';
+import { ClientService } from './shared/services/client.service';
+import { AuthService } from './shared/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { SharedModule } from './shared/shared.module';
     BadgeService,
     TeamService,
     CollectionService,
+    ClientService,
+    AuthService,
     SubcollectionService
   ],
   bootstrap: [AppComponent]
