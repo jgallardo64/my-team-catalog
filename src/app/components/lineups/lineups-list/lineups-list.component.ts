@@ -38,11 +38,13 @@ export class LineupsListComponent implements OnInit {
     private clientService: ClientService,
     private authService: AuthService
   ) {
-    this.clientId = this.authService.getUser().userId;
+    if (this.authService.isAuthenticated()) {
+      this.clientId = this.authService.getUser().userId;
+      this.getMyLineups();
+    }
   }
 
   ngOnInit() {
-    this.getMyLineups();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }

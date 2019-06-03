@@ -76,26 +76,28 @@ export class LineupDetailComponent implements OnInit {
     this.action = this.activatedRoute.snapshot.url[0].path;
     this.lineupId = this.activatedRoute.snapshot.params.id;
 
-    switch (this.action) {
-      case 'create':
-        this.buildLineupForm(false);
-        break;
+    if (this.client) {
+      switch (this.action) {
+        case 'create':
+          this.buildLineupForm(false);
+          break;
 
-      case 'edit':
-        this.getLineupById();
-        this.buildLineupForm(false);
-        break;
+        case 'edit':
+          this.getLineupById();
+          this.buildLineupForm(false);
+          break;
 
-      case 'view':
-        this.getLineupById();
-        this.buildLineupForm(true);
-        break;
+        case 'view':
+          this.getLineupById();
+          this.buildLineupForm(true);
+          break;
+      }
+      this.getPlayers();
+      this.buildSelectForm();
     }
   }
 
   ngOnInit() {
-    this.getPlayers();
-    this.buildSelectForm();
   }
 
   buildSelectForm() {

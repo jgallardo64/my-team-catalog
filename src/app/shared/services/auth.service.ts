@@ -19,7 +19,9 @@ export class AuthService {
     }
 
     getUserRole(): any {
-        return this.currentClientSubject.value.user.role;
+        if (this.currentClientSubject.value !== null) {
+            return this.currentClientSubject.value.user.role;
+        }
     }
 
     login(values: any): Observable<any> {
@@ -38,5 +40,17 @@ export class AuthService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentClientSubject.next(null);
+    }
+
+    isAuthenticated(): boolean {
+        if (this.currentClientSubject.value !== null) {
+            if (this.getUser().id) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }

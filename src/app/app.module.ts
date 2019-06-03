@@ -36,6 +36,7 @@ import { SubcollectionService } from './shared/services/subcollection.service';
 import { SharedModule } from './shared/shared.module';
 import { ClientService } from './shared/services/client.service';
 import { AuthService } from './shared/services/auth.service';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { AuthService } from './shared/services/auth.service';
     CollectionService,
     ClientService,
     AuthService,
-    SubcollectionService
+    SubcollectionService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

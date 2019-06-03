@@ -48,7 +48,7 @@
             </a>
           </div>
 
-          <div class="header-links">
+          <div class="header-links" *ngIf="role === 'ADMIN'">
             <a [routerLink]="routerDefinitions.admin">
               Admin
             </a>

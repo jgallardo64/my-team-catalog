@@ -21,6 +21,16 @@ export class PlayerService {
       .pipe(map((data: any[]) => data));
   }
 
+  public getOne(skipped: any): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + `/Players?filter[skip]=${skipped}&filter[limit]=1`)
+      .pipe(map((data: any[]) => data));
+  }
+
+  public countPlayers(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + `/Players/count`)
+      .pipe(map((data: any[]) => data));
+  }
+
   public createPlayer(values: any): Observable<any> {
     return this.http.post<any>(environment.apiUrl + `Players`, values)
       .pipe(map((data: any[]) => data));

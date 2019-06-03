@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   routerDefinitions = ROUTER_DEFINITIONS;
-  user;
+  role;
 
   searchForm: FormGroup;
   loginForm: FormGroup;
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private playerService: PlayerService
   ) {
-    this.user = this.authService.getUser();
+    this.role = this.authService.getUserRole();
   }
 
   ngOnInit() {
