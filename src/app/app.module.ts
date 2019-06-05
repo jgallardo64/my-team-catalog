@@ -24,7 +24,8 @@ import {
   MatTableModule,
   MatIconModule,
   MatDialogModule,
-  MatListModule
+  MatListModule,
+  MatPaginatorModule
 } from '@angular/material';
 import { AdminComponent } from './components/admin/admin.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -37,6 +38,7 @@ import { SharedModule } from './shared/shared.module';
 import { ClientService } from './shared/services/client.service';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { LineupService } from './shared/services/lineups.service';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatPaginatorModule,
     NgSelectModule,
     MatCheckboxModule,
     MatListModule,
@@ -74,6 +77,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
   ],
   providers: [
     PlayerService,
+    LineupService,
     BadgeService,
     TeamService,
     CollectionService,
