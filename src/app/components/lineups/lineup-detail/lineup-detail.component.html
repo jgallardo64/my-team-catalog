@@ -1,15 +1,15 @@
 <div class="col-12 col-xl-10 offset-xl-1 mt-4">
-    <ng-container *ngIf="client">
-        <h3>{{action === 'view'? 'View' : (action === 'edit' ? 'Edit' : 'Create')}} Lineup</h3>
-        <form [formGroup]="selectForm">
-            <ng-select #elem [ngClass]="{'show': positionSelected !== null, 'hide': positionSelected === null}"
-                class="custom" [items]="players" bindLabel="bindLabel" [clearable]="false" [hideSelected]="true"
-                formControlName="playerSelected" placeholder="Select a player..." (open)="onOpen(elem)"
-                (change)="selectPlayer(selectForm.value)">
-                <ng-template ng-option-tmp let-item="item" let-index="index">
-                    <img width="30" [src]="item.image" />
-                    <span class="ml-2">{{item.name}} {{item.lastName}}</span>
-                    <span [ngClass]="{
+  <ng-container *ngIf="client">
+    <h3>{{action === 'view'? 'View' : (action === 'edit' ? 'Edit' : 'Create')}} Lineup</h3>
+    <form [formGroup]="selectForm">
+      <ng-select #elem [ngClass]="{'show': positionSelected !== null, 'hide': positionSelected === null}" class="custom"
+        [items]="players" bindLabel="bindLabel" [clearable]="false" [hideSelected]="true"
+        formControlName="playerSelected" placeholder="Select a player..." (open)="onOpen(elem)"
+        (change)="selectPlayer(selectForm.value)">
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+          <img width="30" [src]="item.image" />
+          <span class="ml-2">{{item.name}} {{item.lastName}}</span>
+          <span [ngClass]="{
             'overall-bronze': item.overall >= 60 && item.overall < 70,
             'overall-silver': item.overall >= 70 && item.overall < 75,
             'overall-gold': item.overall >= 75 && item.overall < 80,
@@ -20,109 +20,104 @@
             'overall-diamond': item.overall >= 94 && item.overall < 96,
             'overall-pink-diamond': item.overall >= 96 && item.overall < 99,
             'overall-galaxy-opal': item.overall == 99
-          }" class="badge badge-success float-right mt-2">{{ item?.overall }}</span>
-                </ng-template>
-            </ng-select>
+          }" class="badge badge-success float-right p-1 mt-2">{{ item?.overall }}</span>
+        </ng-template>
+      </ng-select>
 
-        </form>
-        <ng-container *ngIf="action === 'view'">
-            <div class="starters">
-                <img class="starters"
-                    [src]="player1?.image ? player1?.image : '../../../../assets/icons/placeholder_PG.png'">
-                <img class="starters"
-                    [src]="player2?.image ? player2?.image : '../../../../assets/icons/placeholder_SG.png'">
-                <img class="starters"
-                    [src]="player3?.image ? player3?.image : '../../../../assets/icons/placeholder_SF.png'">
-                <img class="starters"
-                    [src]="player4?.image ? player4?.image : '../../../../assets/icons/placeholder_PF.png'">
-                <img class="starters"
-                    [src]="player5?.image ? player5?.image : '../../../../assets/icons/placeholder_C.png'">
-            </div>
-            <div class="bench">
-                <img class="bench"
-                    [src]="player6?.image ? player6?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench"
-                    [src]="player7?.image ? player7?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench"
-                    [src]="player8?.image ? player8?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench"
-                    [src]="player9?.image ? player9?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench"
-                    [src]="player10?.image ? player10?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench"
-                    [src]="player11?.image ? player11?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench"
-                    [src]="player12?.image ? player12?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench"
-                    [src]="player13?.image ? player13?.image : '../../../../assets/icons/placeholder_substitute.png'">
-            </div>
-            <div class="m-3">
-                <span class="badge badge-success overall-bronze mr-2 p-1">{{bronzePlayers}}</span>
-                <span class="badge badge-success overall-silver mr-2 p-1">{{silverPlayers}}</span>
-                <span class="badge badge-success overall-gold mr-2 p-1">{{goldPlayers}}</span>
-                <span class="badge badge-success overall-emerald mr-2 p-1">{{emeraldPlayers}}</span>
-                <span class="badge badge-success overall-sapphire mr-2 p-1">{{sapphirePlayers}}</span>
-                <span class="badge badge-success overall-ruby mr-2 p-1">{{rubyPlayers}}</span>
-                <span class="badge badge-success overall-heatcheck mr-2 p-1">{{heatcheckPlayers}}</span>
-                <span class="badge badge-success overall-amethyst mr-2 p-1">{{amethystPlayers}}</span>
-                <span class="badge badge-success overall-onyx mr-2 p-1">{{onyxPlayers}}</span>
-                <span class="badge badge-success overall-diamond mr-2 p-1">{{diamondPlayers}}</span>
-                <span class="badge badge-success overall-pink-diamond mr-2 p-1">{{pinkDiamondPlayers}}</span>
-                <span class="badge badge-success overall-galaxy-opal p-1">{{galaxyOpalPlayers}}</span>
-            </div>
-            <div class="m-3">
-                <div class="row">
-                    <div class="col-12">
-                        <span [ngClass]="{
+    </form>
+    <ng-container *ngIf="action === 'view'">
+      <div class="starters">
+        <img class="starters" [src]="player1?.image ? player1?.image : '../../../../assets/icons/placeholder_PG.png'">
+        <img class="starters" [src]="player2?.image ? player2?.image : '../../../../assets/icons/placeholder_SG.png'">
+        <img class="starters" [src]="player3?.image ? player3?.image : '../../../../assets/icons/placeholder_SF.png'">
+        <img class="starters" [src]="player4?.image ? player4?.image : '../../../../assets/icons/placeholder_PF.png'">
+        <img class="starters" [src]="player5?.image ? player5?.image : '../../../../assets/icons/placeholder_C.png'">
+      </div>
+      <div class="bench">
+        <img class="bench"
+          [src]="player6?.image ? player6?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench"
+          [src]="player7?.image ? player7?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench"
+          [src]="player8?.image ? player8?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench"
+          [src]="player9?.image ? player9?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench"
+          [src]="player10?.image ? player10?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench"
+          [src]="player11?.image ? player11?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench"
+          [src]="player12?.image ? player12?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench"
+          [src]="player13?.image ? player13?.image : '../../../../assets/icons/placeholder_substitute.png'">
+      </div>
+      <div class="m-3">
+        <span class="badge badge-success overall-bronze mr-2 p-1">{{bronzePlayers}}</span>
+        <span class="badge badge-success overall-silver mr-2 p-1">{{silverPlayers}}</span>
+        <span class="badge badge-success overall-gold mr-2 p-1">{{goldPlayers}}</span>
+        <span class="badge badge-success overall-emerald mr-2 p-1">{{emeraldPlayers}}</span>
+        <span class="badge badge-success overall-sapphire mr-2 p-1">{{sapphirePlayers}}</span>
+        <span class="badge badge-success overall-ruby mr-2 p-1">{{rubyPlayers}}</span>
+        <span class="badge badge-success overall-heatcheck mr-2 p-1">{{heatcheckPlayers}}</span>
+        <span class="badge badge-success overall-amethyst mr-2 p-1">{{amethystPlayers}}</span>
+        <span class="badge badge-success overall-onyx mr-2 p-1">{{onyxPlayers}}</span>
+        <span class="badge badge-success overall-diamond mr-2 p-1">{{diamondPlayers}}</span>
+        <span class="badge badge-success overall-pink-diamond mr-2 p-1">{{pinkDiamondPlayers}}</span>
+        <span class="badge badge-success overall-galaxy-opal p-1">{{galaxyOpalPlayers}}</span>
+      </div>
+      <div class="m-3">
+        <div class="row">
+          <div class="col-12">
+            <span [ngClass]="{
                         attributeLowest: lineupOverall >= 25 && lineupOverall < 50,
                         attributeLow: lineupOverall >= 50 && lineupOverall < 60,
                         attributeMedium: lineupOverall >= 60 && lineupOverall < 80,
                         attributeHigh: lineupOverall >= 80 && lineupOverall < 90,
                         attributeHighest: lineupOverall >= 90
                       }" class="badge badge-success m-1 p-1">{{ lineupOverall }}</span>
-                        <span> Overall </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <ul>
-                            <li>
-                                <span [ngClass]="{
+            <span> Overall </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <ul>
+              <li>
+                <span [ngClass]="{
                         attributeLowest: lineupInside >= 25 && lineupInside < 50,
                         attributeLow: lineupInside >= 50 && lineupInside < 60,
                         attributeMedium: lineupInside >= 60 && lineupInside < 80,
                         attributeHigh: lineupInside >= 80 && lineupInside < 90,
                         attributeHighest: lineupInside >= 90
                       }" class="badge badge-success m-1 p-1">{{ lineupInside }}</span>
-                                <span> INS </span>
-                            </li>
-                            <li>
-                                <span [ngClass]="{
+                <span> INS </span>
+              </li>
+              <li>
+                <span [ngClass]="{
                             attributeLowest: lineupOutside >= 25 && lineupOutside < 50,
                             attributeLow: lineupOutside >= 50 && lineupOutside < 60,
                             attributeMedium: lineupOutside >= 60 && lineupOutside < 80,
                             attributeHigh: lineupOutside >= 80 && lineupOutside < 90,
                             attributeHighest: lineupOutside >= 90
                           }" class="badge badge-success m-1 p-1">{{ lineupOutside }}</span>
-                                <span> OUT </span>
-                            </li>
-                            <li>
-                                <span [ngClass]="{
+                <span> OUT </span>
+              </li>
+              <li>
+                <span [ngClass]="{
                             attributeLowest: lineupPlaymaking >= 25 && lineupPlaymaking < 50,
                             attributeLow: lineupPlaymaking >= 50 && lineupPlaymaking < 60,
                             attributeMedium: lineupPlaymaking >= 60 && lineupPlaymaking < 80,
                             attributeHigh: lineupPlaymaking >= 80 && lineupPlaymaking < 90,
                             attributeHighest: lineupPlaymaking >= 90
                           }" class="badge badge-success m-1 p-1">{{ lineupPlaymaking }}</span>
-                                <span> PLY </span>
-                            </li>
-                        </ul>
-                    </div>
+                <span> PLY </span>
+              </li>
+            </ul>
+          </div>
 
-                    <div class="col-6">
-                        <ul>
-                            <li>
-                                <span [ngClass]="{
+          <div class="col-6">
+            <ul>
+              <li>
+                <span [ngClass]="{
         attributeLowest:
         lineupAthleticism >= 25 && lineupAthleticism < 50,
         attributeLow: lineupAthleticism >= 50 && lineupAthleticism < 60,
@@ -131,23 +126,23 @@
         attributeHigh: lineupAthleticism >= 80 && lineupAthleticism < 90,
         attributeHighest: lineupAthleticism >= 90
       }" class="badge badge-success m-1 p-1">{{ lineupAthleticism }}</span>
-                                <span> ATH </span>
-                            </li>
+                <span> ATH </span>
+              </li>
 
-                            <li>
-                                <span [ngClass]="{
+              <li>
+                <span [ngClass]="{
         attributeLowest: lineupDefending >= 25 && lineupDefending < 50,
         attributeLow: lineupDefending >= 50 && lineupDefending < 60,
         attributeMedium: lineupDefending >= 60 && lineupDefending < 80,
         attributeHigh: lineupDefending >= 80 && lineupDefending < 90,
         attributeHighest: lineupDefending >= 90
       }" class="badge badge-success m-1 p-1">{{ lineupDefending }}</span>
-                                <span> DEF </span>
-                            </li>
+                <span> DEF </span>
+              </li>
 
-                            <li>
+              <li>
 
-                                <span [ngClass]="{
+                <span [ngClass]="{
         attributeLowest: lineupRebounding >= 25 && lineupRebounding < 50,
         attributeLow: lineupRebounding >= 50 && lineupRebounding < 60,
         attributeMedium: lineupRebounding >= 60 && lineupRebounding < 80,
@@ -155,133 +150,135 @@
         attributeHighest: lineupRebounding >= 90
       }" class="badge badge-success m-1 p-1">{{ lineupRebounding }}</span>
 
-                                <span> REB </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <span> REB </span>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-                <div class="col-12 p-0">
-                    <form [formGroup]="lineupForm">
-                        <input class="lineup-name" type="text" placeholder="Name of the lineup" formControlName="name">
-                    </form>
-                    <button mat-raised-button color="primary" class="form-buttons mt-2"
-                        [routerLink]="[routerDefinitions.lineups + '/edit/' + lineupId]">Edit</button>
-                </div>
-            </div>
-        </ng-container>
+        <div class="col-12 p-0">
+          <form [formGroup]="lineupForm">
+            <mat-form-field>
+              <input matInput placeholder="Name of the lineup" formControlName="name">
+            </mat-form-field>
+          </form>
+          <button *ngIf="client?.userId === lineup?.clientId" mat-raised-button color="primary" class="form-buttons mt-2"
+            [routerLink]="[routerDefinitions.lineups + '/edit/' + lineupId]">Edit</button>
+        </div>
+      </div>
+    </ng-container>
 
-        <ng-container *ngIf="action !== 'view'">
-            <div class="starters">
-                <img class="starters" [ngClass]="{'selected': positionSelected === 'player1'}" id="player1"
-                    (click)="selectPosition($event)"
-                    [src]="player1?.image ? player1?.image : '../../../../assets/icons/placeholder_PG.png'">
-                <img class="starters" [ngClass]="{'selected': positionSelected === 'player2'}" id="player2"
-                    (click)="selectPosition($event)"
-                    [src]="player2?.image ? player2?.image : '../../../../assets/icons/placeholder_SG.png'">
-                <img class="starters" [ngClass]="{'selected': positionSelected === 'player3'}" id="player3"
-                    (click)="selectPosition($event)"
-                    [src]="player3?.image ? player3?.image : '../../../../assets/icons/placeholder_SF.png'">
-                <img class="starters" [ngClass]="{'selected': positionSelected === 'player4'}" id="player4"
-                    (click)="selectPosition($event)"
-                    [src]="player4?.image ? player4?.image : '../../../../assets/icons/placeholder_PF.png'">
-                <img class="starters" [ngClass]="{'selected': positionSelected === 'player5'}" id="player5"
-                    (click)="selectPosition($event)"
-                    [src]="player5?.image ? player5?.image : '../../../../assets/icons/placeholder_C.png'">
-            </div>
-            <div class="bench">
-                <img class="bench" [ngClass]="{'selected': positionSelected === 'player6'}" id="player6"
-                    (click)="selectPosition($event)"
-                    [src]="player6?.image ? player6?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench" [ngClass]="{'selected': positionSelected === 'player7'}" id="player7"
-                    (click)="selectPosition($event)"
-                    [src]="player7?.image ? player7?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench" [ngClass]="{'selected': positionSelected === 'player8'}" id="player8"
-                    (click)="selectPosition($event)"
-                    [src]="player8?.image ? player8?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench" [ngClass]="{'selected': positionSelected === 'player9'}" id="player9"
-                    (click)="selectPosition($event)"
-                    [src]="player9?.image ? player9?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench" [ngClass]="{'selected': positionSelected === 'player10'}" id="player10"
-                    (click)="selectPosition($event)"
-                    [src]="player10?.image ? player10?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench" [ngClass]="{'selected': positionSelected === 'player11'}" id="player11"
-                    (click)="selectPosition($event)"
-                    [src]="player11?.image ? player11?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench" [ngClass]="{'selected': positionSelected === 'player12'}" id="player12"
-                    (click)="selectPosition($event)"
-                    [src]="player12?.image ? player12?.image : '../../../../assets/icons/placeholder_substitute.png'">
-                <img class="bench" [ngClass]="{'selected': positionSelected === 'player13'}" id="player13"
-                    (click)="selectPosition($event)"
-                    [src]="player13?.image ? player13?.image : '../../../../assets/icons/placeholder_substitute.png'">
-            </div>
-            <div class="m-3">
-                <span class="badge badge-success overall-bronze mr-2 p-1">{{bronzePlayers}}</span>
-                <span class="badge badge-success overall-silver mr-2 p-1">{{silverPlayers}}</span>
-                <span class="badge badge-success overall-gold mr-2 p-1">{{goldPlayers}}</span>
-                <span class="badge badge-success overall-emerald mr-2 p-1">{{emeraldPlayers}}</span>
-                <span class="badge badge-success overall-sapphire mr-2 p-1">{{sapphirePlayers}}</span>
-                <span class="badge badge-success overall-ruby mr-2 p-1">{{rubyPlayers}}</span>
-                <span class="badge badge-success overall-heatcheck mr-2 p-1">{{heatcheckPlayers}}</span>
-                <span class="badge badge-success overall-amethyst mr-2 p-1">{{amethystPlayers}}</span>
-                <span class="badge badge-success overall-onyx mr-2 p-1">{{onyxPlayers}}</span>
-                <span class="badge badge-success overall-diamond mr-2 p-1">{{diamondPlayers}}</span>
-                <span class="badge badge-success overall-pink-diamond mr-2 p-1">{{pinkDiamondPlayers}}</span>
-                <span class="badge badge-success overall-galaxy-opal p-1">{{galaxyOpalPlayers}}</span>
-            </div>
-            <div class="m-3">
-                <div class="row">
-                    <div class="col-12">
-                        <span [ngClass]="{
+    <ng-container *ngIf="action !== 'view'">
+      <div class="starters">
+        <img class="starters" [ngClass]="{'selected': positionSelected === 'player1'}" id="player1"
+          (click)="selectPosition($event)"
+          [src]="player1?.image ? player1?.image : '../../../../assets/icons/placeholder_PG.png'">
+        <img class="starters" [ngClass]="{'selected': positionSelected === 'player2'}" id="player2"
+          (click)="selectPosition($event)"
+          [src]="player2?.image ? player2?.image : '../../../../assets/icons/placeholder_SG.png'">
+        <img class="starters" [ngClass]="{'selected': positionSelected === 'player3'}" id="player3"
+          (click)="selectPosition($event)"
+          [src]="player3?.image ? player3?.image : '../../../../assets/icons/placeholder_SF.png'">
+        <img class="starters" [ngClass]="{'selected': positionSelected === 'player4'}" id="player4"
+          (click)="selectPosition($event)"
+          [src]="player4?.image ? player4?.image : '../../../../assets/icons/placeholder_PF.png'">
+        <img class="starters" [ngClass]="{'selected': positionSelected === 'player5'}" id="player5"
+          (click)="selectPosition($event)"
+          [src]="player5?.image ? player5?.image : '../../../../assets/icons/placeholder_C.png'">
+      </div>
+      <div class="bench">
+        <img class="bench" [ngClass]="{'selected': positionSelected === 'player6'}" id="player6"
+          (click)="selectPosition($event)"
+          [src]="player6?.image ? player6?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench" [ngClass]="{'selected': positionSelected === 'player7'}" id="player7"
+          (click)="selectPosition($event)"
+          [src]="player7?.image ? player7?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench" [ngClass]="{'selected': positionSelected === 'player8'}" id="player8"
+          (click)="selectPosition($event)"
+          [src]="player8?.image ? player8?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench" [ngClass]="{'selected': positionSelected === 'player9'}" id="player9"
+          (click)="selectPosition($event)"
+          [src]="player9?.image ? player9?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench" [ngClass]="{'selected': positionSelected === 'player10'}" id="player10"
+          (click)="selectPosition($event)"
+          [src]="player10?.image ? player10?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench" [ngClass]="{'selected': positionSelected === 'player11'}" id="player11"
+          (click)="selectPosition($event)"
+          [src]="player11?.image ? player11?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench" [ngClass]="{'selected': positionSelected === 'player12'}" id="player12"
+          (click)="selectPosition($event)"
+          [src]="player12?.image ? player12?.image : '../../../../assets/icons/placeholder_substitute.png'">
+        <img class="bench" [ngClass]="{'selected': positionSelected === 'player13'}" id="player13"
+          (click)="selectPosition($event)"
+          [src]="player13?.image ? player13?.image : '../../../../assets/icons/placeholder_substitute.png'">
+      </div>
+      <div class="m-3">
+        <span class="badge badge-success overall-bronze mr-2 p-1">{{bronzePlayers}}</span>
+        <span class="badge badge-success overall-silver mr-2 p-1">{{silverPlayers}}</span>
+        <span class="badge badge-success overall-gold mr-2 p-1">{{goldPlayers}}</span>
+        <span class="badge badge-success overall-emerald mr-2 p-1">{{emeraldPlayers}}</span>
+        <span class="badge badge-success overall-sapphire mr-2 p-1">{{sapphirePlayers}}</span>
+        <span class="badge badge-success overall-ruby mr-2 p-1">{{rubyPlayers}}</span>
+        <span class="badge badge-success overall-heatcheck mr-2 p-1">{{heatcheckPlayers}}</span>
+        <span class="badge badge-success overall-amethyst mr-2 p-1">{{amethystPlayers}}</span>
+        <span class="badge badge-success overall-onyx mr-2 p-1">{{onyxPlayers}}</span>
+        <span class="badge badge-success overall-diamond mr-2 p-1">{{diamondPlayers}}</span>
+        <span class="badge badge-success overall-pink-diamond mr-2 p-1">{{pinkDiamondPlayers}}</span>
+        <span class="badge badge-success overall-galaxy-opal p-1">{{galaxyOpalPlayers}}</span>
+      </div>
+      <div class="m-3">
+        <div class="row">
+          <div class="col-12">
+            <span [ngClass]="{
                         attributeLowest: lineupOverall >= 25 && lineupOverall < 50,
                         attributeLow: lineupOverall >= 50 && lineupOverall < 60,
                         attributeMedium: lineupOverall >= 60 && lineupOverall < 80,
                         attributeHigh: lineupOverall >= 80 && lineupOverall < 90,
                         attributeHighest: lineupOverall >= 90
                       }" class="badge badge-success m-1 p-1">{{ lineupOverall }}</span>
-                        <span> Overall </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <ul>
-                            <li>
-                                <span [ngClass]="{
+            <span> Overall </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <ul>
+              <li>
+                <span [ngClass]="{
                         attributeLowest: lineupInside >= 25 && lineupInside < 50,
                         attributeLow: lineupInside >= 50 && lineupInside < 60,
                         attributeMedium: lineupInside >= 60 && lineupInside < 80,
                         attributeHigh: lineupInside >= 80 && lineupInside < 90,
                         attributeHighest: lineupInside >= 90
                       }" class="badge badge-success m-1 p-1">{{ lineupInside }}</span>
-                                <span> INS </span>
-                            </li>
-                            <li>
-                                <span [ngClass]="{
+                <span> INS </span>
+              </li>
+              <li>
+                <span [ngClass]="{
                             attributeLowest: lineupOutside >= 25 && lineupOutside < 50,
                             attributeLow: lineupOutside >= 50 && lineupOutside < 60,
                             attributeMedium: lineupOutside >= 60 && lineupOutside < 80,
                             attributeHigh: lineupOutside >= 80 && lineupOutside < 90,
                             attributeHighest: lineupOutside >= 90
                           }" class="badge badge-success m-1 p-1">{{ lineupOutside }}</span>
-                                <span> OUT </span>
-                            </li>
-                            <li>
-                                <span [ngClass]="{
+                <span> OUT </span>
+              </li>
+              <li>
+                <span [ngClass]="{
                             attributeLowest: lineupPlaymaking >= 25 && lineupPlaymaking < 50,
                             attributeLow: lineupPlaymaking >= 50 && lineupPlaymaking < 60,
                             attributeMedium: lineupPlaymaking >= 60 && lineupPlaymaking < 80,
                             attributeHigh: lineupPlaymaking >= 80 && lineupPlaymaking < 90,
                             attributeHighest: lineupPlaymaking >= 90
                           }" class="badge badge-success m-1 p-1">{{ lineupPlaymaking }}</span>
-                                <span> PLY </span>
-                            </li>
-                        </ul>
-                    </div>
+                <span> PLY </span>
+              </li>
+            </ul>
+          </div>
 
-                    <div class="col-6">
-                        <ul>
-                            <li>
-                                <span [ngClass]="{
+          <div class="col-6">
+            <ul>
+              <li>
+                <span [ngClass]="{
         attributeLowest:
           lineupAthleticism >= 25 && lineupAthleticism < 50,
         attributeLow: lineupAthleticism >= 50 && lineupAthleticism < 60,
@@ -290,23 +287,23 @@
         attributeHigh: lineupAthleticism >= 80 && lineupAthleticism < 90,
         attributeHighest: lineupAthleticism >= 90
       }" class="badge badge-success m-1 p-1">{{ lineupAthleticism }}</span>
-                                <span> ATH </span>
-                            </li>
+                <span> ATH </span>
+              </li>
 
-                            <li>
-                                <span [ngClass]="{
+              <li>
+                <span [ngClass]="{
         attributeLowest: lineupDefending >= 25 && lineupDefending < 50,
         attributeLow: lineupDefending >= 50 && lineupDefending < 60,
         attributeMedium: lineupDefending >= 60 && lineupDefending < 80,
         attributeHigh: lineupDefending >= 80 && lineupDefending < 90,
         attributeHighest: lineupDefending >= 90
       }" class="badge badge-success m-1 p-1">{{ lineupDefending }}</span>
-                                <span> DEF </span>
-                            </li>
+                <span> DEF </span>
+              </li>
 
-                            <li>
+              <li>
 
-                                <span [ngClass]="{
+                <span [ngClass]="{
         attributeLowest: lineupRebounding >= 25 && lineupRebounding < 50,
         attributeLow: lineupRebounding >= 50 && lineupRebounding < 60,
         attributeMedium: lineupRebounding >= 60 && lineupRebounding < 80,
@@ -314,34 +311,36 @@
         attributeHighest: lineupRebounding >= 90
       }" class="badge badge-success m-1 p-1">{{ lineupRebounding }}</span>
 
-                                <span> REB </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-12 p-0">
-                    <form [formGroup]="lineupForm">
-                        <input class="lineup-name" type="text" placeholder="Name of the lineup" formControlName="name">
-                    </form>
-                    <ng-container *ngIf="action === 'edit'">
-                        <button mat-raised-button color="primary" class="form-buttons mt-2"
-                            (click)="editLineup(lineupForm.value)">Save editting</button>
-                    </ng-container>
-
-                    <ng-container *ngIf="action === 'create'">
-                        <button mat-raised-button color="primary" class="form-buttons mt-2"
-                            (click)="sendLineup(lineupForm.value)">Save</button>
-                    </ng-container>
-
-                </div>
-            </div>
-        </ng-container>
-    </ng-container>
-
-    <ng-container *ngIf="!client">
-        <div class="col-12 text-center">
-            <h4 class="mt-4">You have to be logged in to create lineups</h4>
+                <span> REB </span>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <div class="col-12 p-0">
+          <form [formGroup]="lineupForm">
+            <mat-form-field>
+              <input matInput placeholder="Name of the lineup" formControlName="name">
+            </mat-form-field>
+          </form>
+          <ng-container *ngIf="action === 'edit'">
+            <button *ngIf="client?.userId === lineup?.clientId" mat-raised-button color="primary" class="form-buttons mt-2"
+              (click)="editLineup(lineupForm.value)">Save editting</button>
+          </ng-container>
+
+          <ng-container *ngIf="action === 'create'">
+            <button mat-raised-button color="primary" class="form-buttons mt-2"
+              (click)="sendLineup(lineupForm.value)">Save</button>
+          </ng-container>
+
+        </div>
+      </div>
     </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="!client">
+    <div class="col-12 text-center">
+      <h4 class="mt-4">You have to be logged in to create lineups</h4>
+    </div>
+  </ng-container>
 </div>

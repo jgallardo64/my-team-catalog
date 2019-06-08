@@ -13,6 +13,11 @@ export class ClientService {
       .pipe(map((data: any[]) => data));
   }
 
+  getById(clientId: any): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + `Clients/${clientId}`)
+    .pipe(map((data: any[]) => data))
+  }
+
 
   getMyLineups(clientId: any): Observable<any> {
     return this.http.get<any>(environment.apiUrl + `Clients/${clientId}/lineups`)

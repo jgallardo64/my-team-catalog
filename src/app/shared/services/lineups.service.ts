@@ -8,6 +8,11 @@ import { environment } from 'src/environments/environment';
 export class LineupService {
   constructor(private http: HttpClient) { }
 
+  getAll(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + `Lineups`)
+      .pipe(map((data: any[]) => data));
+  }
+
   getById(lineupId: any): Observable<any> {
     return this.http.get<any>(environment.apiUrl + `Lineups/${lineupId}`)
       .pipe(map((data: any[]) => data));

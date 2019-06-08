@@ -42,10 +42,16 @@
             </a>
           </div>
 
-          <div class="header-links">
-            <a [routerLink]="routerDefinitions.lineups">
-              Lineups
-            </a>
+          <div ngbDropdown class="header-links">
+            <a [routerLink]="" ngbDropdownToggle>Lineups</a>
+            <div ngbDropdownMenu>
+              <button [routerLink]="routerDefinitions.lineups" ngbDropdownItem>All Lineups</button>
+              <ng-container *ngIf="user">
+                <button [routerLink]="routerDefinitions.lineups + '/user/' + user.userId" ngbDropdownItem>My Lineups</button>
+                <div class="dropdown-divider"></div>
+                <button [routerLink]="routerDefinitions.lineups + '/create'" ngbDropdownItem>Create</button>
+              </ng-container>
+            </div>
           </div>
 
           <div class="header-links" *ngIf="role === 'ADMIN'">
@@ -55,39 +61,52 @@
           </div>
           <ng-container *ngIf="!user">
             <div class="btn-group mr-3 dropdowns">
-              <div class="btn-group mt-1" ngbDropdown role="group">
-                <button class="btn btn-primary" ngbDropdownToggle>Login</button>
-                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
-                  <form [formGroup]="loginForm" class="login-form p-3">
-                    <div class="form-group">
-                      <label for="exampleDropdownFormEmail1">Email address</label>
-                      <input type="email" class="form-control" formControlName="email" id="exampleDropdownFormEmail1"
-                        placeholder="email@example.com">
+              <div class="header-links" ngbDropdown [autoClose]="'outside'">
+                <a [routerLink]="" ngbDropdownToggle>Login</a>
+                <div ngbDropdownMenu aria-labelledby="login-form">
+                  <form [formGroup]="loginForm" class="p-3">
+                    <div class="row">
+                      <mat-form-field class="col-12">
+                        <input matInput placeholder="Email address" formControlName="email">
+                      </mat-form-field>
+                      <mat-form-field class="col-12">
+                        <input matInput placeholder="Password" formControlName="password">
+                      </mat-form-field>
+                      <div class="col-12">
+                        <button mat-raised-button color="primary"
+                          (click)="sendLoginForm(loginForm.value)">Login</button>
+                      </div>
                     </div>
-                    <div class="form-group">
-                      <label for="exampleDropdownFormPassword1">Password</label>
-                      <input type="password" class="form-control" formControlName="password"
-                        id="exampleDropdownFormPassword1" placeholder="Password">
-                    </div>
-                    <button class="btn btn-primary" (click)="sendLoginForm(loginForm.value)">Sign in</button>
                   </form>
                 </div>
               </div>
-              <div class="btn-group mt-1" ngbDropdown role="group">
-                <button class="btn btn-primary" ngbDropdownToggle>Register</button>
-                <div class="dropdown-menu" ngbDropdownMenu>
-                  <button ngbDropdownItem>One</button>
-                  <button ngbDropdownItem>Two</button>
-                  <button ngbDropdownItem>Four!</button>
+              <div class="header-links" ngbDropdown [autoClose]="'outside'">
+                <a [routerLink]="" ngbDropdownToggle>Register</a>
+                <div ngbDropdownMenu>
+                  <form [formGroup]="registerForm" class="p-3">
+                    <div class="row">
+                      <mat-form-field class="col-12">
+                        <input matInput placeholder="Username" formControlName="username">
+                      </mat-form-field>
+                      <mat-form-field class="col-12">
+                        <input matInput placeholder="Email address" formControlName="email">
+                      </mat-form-field>
+                      <mat-form-field class="col-12">
+                        <input matInput placeholder="Password" formControlName="password">
+                      </mat-form-field>
+                      <div class="col-12">
+                        <button mat-raised-button color="primary" (click)="sendRegisterForm(registerForm.value)">Register</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </ng-container>
           <ng-container *ngIf="user">
-            <div ngbDropdown class="dropdowns">
-              <button class="btn btn-primary mt-1" id="dropdownBasic1"
-                ngbDropdownToggle>{{user?.user?.username}}</button>
-              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <div ngbDropdown class="header-links dropdowns">
+              <a [routerLink]="" ngbDropdownToggle>{{ user?.user?.username }}</a>
+              <div ngbDropdownMenu>
                 <button (click)="logout()" ngbDropdownItem>Logout</button>
               </div>
             </div>

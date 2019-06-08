@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { LineupsListComponent } from './lineups-list/lineups-list.component';
 import { LineupDetailComponent } from './lineup-detail/lineup-detail.component';
+import { MyLineupsComponent } from './my-lineups/my-lineups.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'list',
     component: LineupsListComponent
+  },
+  {
+    path: 'user/:id',
+    component: MyLineupsComponent
   },
   {
     path: 'create',

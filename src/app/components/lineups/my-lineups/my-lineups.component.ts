@@ -1,17 +1,18 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ClientService } from 'src/app/shared/services/client.service';
 import { ROUTER_DEFINITIONS } from 'src/app/shared/constants/router-definitions';
-import { LineupService } from 'src/app/shared/services/lineups.service';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
-  selector: 'app-lineups-list',
-  templateUrl: './lineups-list.component.html',
-  styleUrls: ['./lineups-list.component.scss'],
+  selector: 'app-my-lineups',
+  templateUrl: './my-lineups.component.html',
+  styleUrls: ['./my-lineups.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LineupsListComponent implements OnInit {
+export class MyLineupsComponent implements OnInit {
   clientId;
+  client;
 
   routerDefinitions = ROUTER_DEFINITIONS;
 
@@ -34,22 +35,33 @@ export class LineupsListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private lineupService: LineupService
+    private activatedRoute: ActivatedRoute,
+    private clientService: ClientService
   ) {
+    this.clientId = this.activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit() {
-    this.getLineups();
+    this.getMyLineups();
+    this.getClient();
   }
 
-  getLineups() {
-    this.lineupService
-      .getAll()
+  getMyLineups() {
+    this.clientService
+      .getMyLineups(this.clientId)
       .subscribe((response) => {
         this.dataSource.data = response;
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
+  }
+
+  getClient() {
+    this.clientService
+    .getById(this.clientId)
+    .subscribe((response) => {
+      this.client = response;
+    });
   }
 
   filterLineups(value) {

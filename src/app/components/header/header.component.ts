@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
 
   searchForm: FormGroup;
   loginForm: FormGroup;
+  registerForm: FormGroup;
   filter;
   results = [];
   selectedPlayer;
@@ -38,6 +39,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.buildSearchForm();
     this.buildLoginForm();
+    this.buildRegisterForm();
     this.getPlayers();
   }
 
@@ -54,9 +56,25 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  buildRegisterForm() {
+    this.registerForm = this.formBuilder.group({
+      username: [{ value: null, disabled: false }],
+      email: [{ value: null, disabled: false }],
+      password: [{ value: null, disabled: false }]
+    });
+  }
+
   sendLoginForm(values) {
     this.authService
       .login(values)
+      .subscribe((response) => {
+        window.location.reload();
+      });
+  }
+
+  sendRegisterForm(values) {
+    this.clientService
+      .register(values)
       .subscribe((response) => {
         window.location.reload();
       });

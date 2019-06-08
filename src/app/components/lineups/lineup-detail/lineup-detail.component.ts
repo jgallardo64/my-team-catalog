@@ -136,6 +136,7 @@ export class LineupDetailComponent implements OnInit {
     this.lineupService
       .getById(this.lineupId)
       .subscribe((response) => {
+        this.lineup = response;
         this.player1 = response.player1;
         if (response.player1 !== null) {
           this.lineupPlayers.push(this.player1);
