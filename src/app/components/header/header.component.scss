@@ -27,14 +27,6 @@ app-header {
     outline: none;
   }
 
-  .search-bar {
-    padding-left: 5px;
-    margin-top: 5px;
-    background: #2f2f2f;
-    color: white;
-    font-size: 18px;
-  }
-
   .ng-dropdown-panel .scroll-host {
     width: 300px;
   }
@@ -45,7 +37,11 @@ app-header {
 
   .ng-select .ng-arrow-wrapper {
     display: none !important;
-}
+  }
+
+  .search-bar {
+    width: 250px;
+  }
 
   .overall-galaxy-opal {
     font-size: 15px;
@@ -131,6 +127,15 @@ app-header {
   .login-form {
     width: 300px;
   }
+
+  .user-profile-button{
+    display: none;
+    margin-top: 10px;
+    color: white;
+    border: none;
+    background: transparent;
+}
+
 
   .header-links {
     padding: 10px;
@@ -511,4 +516,21 @@ app-header {
     text-align: right
   }
 
+  @media (max-width: 792px){
+    .user-profile-button{
+        display: block;
+    }
+
+    .search-bar {
+      display: none;
+    }
+
+    .header-links {
+      display: none;
+    }
+
+    .header-logo {
+      margin: 0 auto;
+    }
+  }
 }

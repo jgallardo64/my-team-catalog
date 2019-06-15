@@ -13,14 +13,24 @@ export class ClientService {
       .pipe(map((data: any[]) => data));
   }
 
+  getAll(clientId: string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + `Clients?filter[where][id][neq]=${clientId}`)
+    .pipe(map((data: any[]) => data));
+  }
+
   getById(clientId: any): Observable<any> {
     return this.http.get<any>(environment.apiUrl + `Clients/${clientId}`)
-    .pipe(map((data: any[]) => data))
+    .pipe(map((data: any[]) => data));
   }
 
 
   getMyLineups(clientId: any): Observable<any> {
     return this.http.get<any>(environment.apiUrl + `Clients/${clientId}/lineups`)
       .pipe(map((data: any[]) => data));
+  }
+
+  updateClient(clientId: string, values: any): Observable<any> {
+    return this.http.patch<any>(environment.apiUrl + `Clients/${clientId}`, values)
+    .pipe(map((data: any[]) => data));
   }
 }

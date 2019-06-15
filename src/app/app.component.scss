@@ -1,0 +1,25 @@
+app-root {
+
+  .mat-drawer-inner-container {
+    width: 200px;
+    background: #222;
+  }
+
+  .header-links {
+    padding: 10px;
+    a {
+      color: #9d9d9d;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 13px 0px 18px 0px;
+    }
+  }
+
+  .header-links:hover {
+    background-color: black;
+    a {
+      color: white;
+    }
+  }
+
+}

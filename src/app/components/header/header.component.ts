@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { ROUTER_DEFINITIONS } from 'src/app/shared/constants/router-definitions';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { debounceTime, tap } from 'rxjs/operators';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { Router } from '@angular/router';
 import { ClientService } from 'src/app/shared/services/client.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -25,12 +25,15 @@ export class HeaderComponent implements OnInit {
   results = [];
   selectedPlayer;
 
+  @Output('drawerToggle') public drawerToggle: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private clientService: ClientService,
     private authService: AuthService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private toastr: ToastrService
   ) {
     this.role = this.authService.getUserRole();
     this.user = this.authService.getUser();
@@ -69,6 +72,8 @@ export class HeaderComponent implements OnInit {
       .login(values)
       .subscribe((response) => {
         window.location.reload();
+      }, error => {
+        this.toastr.error('Login attempt failed', 'Error');
       });
   }
 
@@ -107,5 +112,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([this.routerDefinitions.players + '/detail/' + player.search]);
     this.searchForm.reset();
   }
+
+  onDrawerToggle() {
+    this.drawerToggle.emit(null);
+  }
+
+
+
 
 }

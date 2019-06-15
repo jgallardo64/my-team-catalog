@@ -1,3 +1,89 @@
-<app-header></app-header>
+<mat-drawer-container class="example-container" [hasBackdrop]="true" fullscreen>
+  <mat-drawer #drawer [mode]="over">
+    <div class="header-links">
+      <a [routerLink]="routerDefinitions.players" (click)="drawerToggle()">
+        Players
+      </a>
+    </div>
 
-<router-outlet></router-outlet>
+    <div class="header-links">
+      <a [routerLink]="routerDefinitions.collections" (click)="drawerToggle()">
+        Collections
+      </a>
+    </div>
+    <div ngbDropdown class="header-links">
+      <a [routerLink]="" ngbDropdownToggle>Lineups</a>
+      <div ngbDropdownMenu>
+        <button [routerLink]="routerDefinitions.lineups" ngbDropdownItem (click)="drawerToggle()">All Lineups</button>
+        <ng-container *ngIf="user">
+          <button [routerLink]="routerDefinitions.lineups + '/user/' + user.userId" ngbDropdownItem (click)="drawerToggle()">My Lineups</button>
+          <div class="dropdown-divider"></div>
+          <button [routerLink]="routerDefinitions.lineups + '/create'" ngbDropdownItem (click)="drawerToggle()">Create</button>
+        </ng-container>
+      </div>
+    </div>
+    <div class="header-links" *ngIf="role === 'ADMIN'">
+      <a [routerLink]="routerDefinitions.admin" (click)="drawerToggle()">
+        Admin
+      </a>
+    </div>
+    <ng-container *ngIf="!user">
+      <div class="dropdowns">
+        <div class="header-links" ngbDropdown [autoClose]="'outside'">
+          <a [routerLink]="" ngbDropdownToggle>Login</a>
+          <div ngbDropdownMenu aria-labelledby="login-form">
+            <form [formGroup]="loginForm" class="p-3">
+              <div class="row">
+                <mat-form-field class="col-12">
+                  <input matInput placeholder="Email address" formControlName="email">
+                </mat-form-field>
+                <mat-form-field class="col-12">
+                  <input matInput placeholder="Password" formControlName="password">
+                </mat-form-field>
+                <div class="col-12">
+                  <button mat-raised-button color="primary" (click)="sendLoginForm(loginForm.value)">Login</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="dropdowns">
+        <div class="header-links" ngbDropdown [autoClose]="'outside'">
+          <a [routerLink]="" ngbDropdownToggle>Register</a>
+          <div ngbDropdownMenu>
+            <form [formGroup]="registerForm" class="p-3">
+              <div class="row">
+                <mat-form-field class="col-12">
+                  <input matInput placeholder="Username" formControlName="username">
+                </mat-form-field>
+                <mat-form-field class="col-12">
+                  <input matInput placeholder="Email address" formControlName="email">
+                </mat-form-field>
+                <mat-form-field class="col-12">
+                  <input matInput placeholder="Password" formControlName="password">
+                </mat-form-field>
+                <div class="col-12">
+                  <button mat-raised-button color="primary"
+                    (click)="sendRegisterForm(registerForm.value)">Register</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="user">
+      <div ngbDropdown class="header-links dropdowns">
+        <a [routerLink]="" ngbDropdownToggle>{{ user?.user?.username }}</a>
+        <div ngbDropdownMenu>
+          <button (click)="logout()" ngbDropdownItem>Logout</button>
+        </div>
+      </div>
+    </ng-container>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header (drawerToggle)="drawerToggle()"></app-header>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

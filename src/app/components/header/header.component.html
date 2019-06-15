@@ -1,12 +1,14 @@
 <div class="container-fluid">
   <div class="header row">
     <div class="col-12 col-xl-10 offset-xl-1">
-      <div class="">
+      <div>
         <mat-toolbar>
+            <button class="user-profile-button" (click)="onDrawerToggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
           <img class="header-logo" [src]="'../../../assets/icons/logo.png'" [routerLink]="routerDefinitions.home">
-          <div style="width: 250px">
+          <div class="search-bar">
             <form [formGroup]="searchForm">
-              <!-- <input type="text" class="search-bar" id="search" placeholder="Find players..." formControlName="search" (keyup)="getPlayers()"> -->
 
               <ng-select #elem class="custom mt-1" [items]="results" bindLabel="bindLabel" bindValue="id"
                 formControlName="search" [clearable]="false" placeholder="Find players..." (open)="onOpen(elem)"

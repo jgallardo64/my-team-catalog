@@ -25,7 +25,8 @@ import {
   MatIconModule,
   MatDialogModule,
   MatListModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatSidenavModule
 } from '@angular/material';
 import { AdminComponent } from './components/admin/admin.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -68,6 +69,7 @@ import { LineupService } from './shared/services/lineups.service';
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
+    MatSidenavModule,
     FormsModule,
     MatToolbarModule,
     HttpClientModule,

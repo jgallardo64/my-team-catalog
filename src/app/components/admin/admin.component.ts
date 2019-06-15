@@ -10,6 +10,8 @@ import { ROUTER_DEFINITIONS } from 'src/app/shared/constants/router-definitions'
 import { TIERS } from 'src/app/shared/constants/constants';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { DialogConfirmationComponent } from 'src/app/shared/components/dialog-confirmation/dialog-confirmation.component';
+import { ClientService } from 'src/app/shared/services/client.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -18,7 +20,7 @@ import { DialogConfirmationComponent } from 'src/app/shared/components/dialog-co
   encapsulation: ViewEncapsulation.None
 })
 export class AdminComponent implements OnInit {
-
+  clientId;
   routerDefinitions = ROUTER_DEFINITIONS;
   tiers = TIERS;
   playerId;
@@ -27,6 +29,7 @@ export class AdminComponent implements OnInit {
   playersPanelState;
   rewardsPanelState;
   editDeletePanelState;
+  clientManagementPanelState;
 
   badgeList;
   collectionList;
@@ -35,10 +38,11 @@ export class AdminComponent implements OnInit {
   teamsList;
   playersList;
 
-  playersForm: FormGroup;
-  rewardsForm: FormGroup;
+  playerForm: FormGroup;
+  rewardForm: FormGroup;
+  clientForm: FormGroup;
 
-  displayedColumns: string[] = [
+  playerDisplayedColumns: string[] = [
     'name',
     'overall',
     'position',
@@ -46,7 +50,15 @@ export class AdminComponent implements OnInit {
     'actions'
   ];
 
-  dataSource = new MatTableDataSource<any>();
+  clientDisplayedColumns: string[] = [
+    'username',
+    'email',
+    'role',
+    'actions'
+  ];
+
+  playersDatasource = new MatTableDataSource<any>();
+  clientDatasource = new MatTableDataSource<any>();
 
   constructor(
     private dialog: MatDialog,
@@ -55,13 +67,18 @@ export class AdminComponent implements OnInit {
     private badgeService: BadgeService,
     private collectionService: CollectionService,
     private subcollectionService: SubcollectionService,
+    private clientService: ClientService,
+    private authService: AuthService,
     private teamService: TeamService,
     private toastr: ToastrService
-  ) { }
+  ) {
+    this.clientId = this.authService.getUser().userId;
+   }
 
   ngOnInit() {
     this.getPlayers();
-    this.buildForm();
+    this.getClients();
+    this.buildPlayerForm();
     this.buildRewardForm();
     this.getCollections();
     this.getListOfCollections();
@@ -69,8 +86,8 @@ export class AdminComponent implements OnInit {
     this.getTeams();
   }
 
-  buildForm() {
-    this.playersForm = this.formBuilder.group({
+  buildPlayerForm() {
+    this.playerForm = this.formBuilder.group({
       name: [{ value: null, disabled: false }],
       lastName: [{ value: null, disabled: false }],
       collectionId: [{ value: null, disabled: false }],
@@ -141,10 +158,18 @@ export class AdminComponent implements OnInit {
   }
 
   buildRewardForm() {
-    this.rewardsForm = this.formBuilder.group({
+    this.rewardForm = this.formBuilder.group({
       collectionId: [{ value: null, disabled: false }],
       subcollectionId: [{ value: null, disabled: false }],
       playerId: [{ value: null, disabled: false }]
+    });
+  }
+
+  buildClientForm() {
+    this.clientForm = this.formBuilder.group({
+      username: [{ value: null, disabled: false }],
+      email: [{ value: null, disabled: false }],
+      role: [{ value: null, disabled: false }]
     });
   }
 
@@ -153,7 +178,7 @@ export class AdminComponent implements OnInit {
       .createPlayer(values)
       .subscribe(response => {
         this.toastr.success('Player created succesfully', 'Done');
-        this.playersForm.reset();
+        this.playerForm.reset();
       });
   }
 
@@ -162,13 +187,13 @@ export class AdminComponent implements OnInit {
       .editPlayer(this.playerId, player)
       .subscribe(response => {
         this.toastr.success('Player edited succesfully', 'Done');
-        this.playersForm.reset();
+        this.playerForm.reset();
         this.getPlayers();
       });
   }
 
-  resetForm() {
-    this.playersForm.reset();
+  resetPlayerForm() {
+    this.playerForm.reset();
     this.editing = false;
   }
 
@@ -176,7 +201,7 @@ export class AdminComponent implements OnInit {
     this.playerService
       .getAll()
       .subscribe(response => {
-        this.dataSource.data = response;
+        this.playersDatasource.data = response;
         this.playersList = response;
       });
   }
@@ -224,15 +249,40 @@ export class AdminComponent implements OnInit {
   }
 
   filterPlayers(value) {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+    this.playersDatasource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  filterClients(value) {
+    this.clientDatasource.filter = value.trim().toLocaleLowerCase();
   }
 
   patchPlayer(player) {
     this.playerId = player.id;
-    this.playersForm.patchValue(player);
+    this.playerForm.patchValue(player);
     this.editDeletePanelState = false;
     this.playersPanelState = true;
     this.editing = true;
+  }
+
+  getClients() {
+    this.clientService
+    .getAll(this.clientId)
+    .subscribe((response) => {
+      this.clientDatasource.data = response;
+    });
+  }
+
+  updateClient(client, role) {
+    const newRole = {
+      role
+    };
+
+    this.clientService
+    .updateClient(client.id, newRole)
+    .subscribe((response) => {
+      this.toastr.success('Client updated succesfully', 'Success');
+      this.getClients();
+    });
   }
 
   assignRewardToCollection(values) {
@@ -242,10 +292,10 @@ export class AdminComponent implements OnInit {
     };
 
     this.subcollectionService
-    .editSubcollection(values.subcollectionId, newReward)
-    .subscribe((response) => {
-      this.toastr.success('Reward assigned succesfully', 'Success');
-    });
+      .editSubcollection(values.subcollectionId, newReward)
+      .subscribe((response) => {
+        this.toastr.success('Reward assigned succesfully', 'Success');
+      });
   }
 
   showDialogDeletePlayer(player) {
