@@ -10,7 +10,7 @@ export class PlayerService {
 
   public getAll(filterValues?: any): Observable<any> {
     if (!filterValues) {
-      filterValues = '{"order": "overall DESC"}';
+      filterValues = '{"order": "totalAttributes DESC"}';
     }
     const httpOptions = {
       headers: new HttpHeaders({

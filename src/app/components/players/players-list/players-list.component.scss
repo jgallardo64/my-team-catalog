@@ -75,7 +75,7 @@ app-players-list {
     width: 20px;
     margin: 5px;
   }
-  
+
   .picker {
     margin-top: -6px;
   }
@@ -131,6 +131,11 @@ app-players-list {
   .overall-bronze {
     font-size: 15px;
     background: linear-gradient(#cc5b00, #662d00);
+  }
+
+  .overall-onyx {
+    font-size: 15px;
+    background: linear-gradient(#565656, #232323);
   }
 
   .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {

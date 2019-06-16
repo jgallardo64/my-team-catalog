@@ -19,7 +19,8 @@
             'overall-amethyst': item.overall >= 90 && item.overall < 94,
             'overall-diamond': item.overall >= 94 && item.overall < 96,
             'overall-pink-diamond': item.overall >= 96 && item.overall < 99,
-            'overall-galaxy-opal': item.overall == 99
+            'overall-galaxy-opal': item.overall == 99,
+            'overall-onyx': item.tier == 'onyx'
           }" class="badge badge-success float-right p-1 mt-2">{{ item?.overall }}</span>
         </ng-template>
       </ng-select>

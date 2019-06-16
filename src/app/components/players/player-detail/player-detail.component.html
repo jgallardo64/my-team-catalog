@@ -163,9 +163,9 @@
     <div class="col-12 col-xl-10 offset-xl-1 pb-2">
       <!-- <div class="row">
         <div class="col-12"> -->
-          <div class="card p-2">
-            <h3>
-              <span [ngClass]="{
+      <div class="card p-2">
+        <h3>
+          <span [ngClass]="{
                   'overall-bronze':
                     player?.overall >= 60 && player?.overall < 70,
                   'overall-silver':
@@ -182,14 +182,15 @@
                     player?.overall >= 94 && player?.overall < 96,
                   'overall-pink-diamond':
                     player?.overall >= 96 && player?.overall < 99,
-                  'overall-galaxy-opal': player?.overall == 99
+                  'overall-galaxy-opal': player?.overall == 99,
+                  'overall-onyx': player?.tier == 'onyx'
                 }" class="badge badge-success m-1 p-1">
-                {{ player?.overall }}
-              </span>
-              <strong>Overall</strong>
-            </h3>
-          </div>
-        <!-- </div>
+            {{ player?.overall }}
+          </span>
+          <strong>Overall</strong>
+        </h3>
+      </div>
+      <!-- </div>
       </div> -->
       <div class="row mt-3">
         <div class="col-12 col-md-6 col-xl-4">
@@ -494,7 +495,7 @@
                     player?.standingDunk >= 60 && player?.standingDunk < 80,
                   attributeHigh:
                     player?.standingDunk >= 80 && player?.standingDunk < 90,
-                  attributeHighest: player?.overstandingDunkall >= 90
+                  attributeHighest: player?.standingDunk >= 90
                 }" class="badge badge-success m-1 p-1">{{ player?.standingDunk }}</span>
               Standing dunk
             </p>

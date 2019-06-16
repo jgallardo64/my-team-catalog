@@ -292,12 +292,12 @@
           <div class="row">
             <div class="col-12 col-md-4">
               <ng-select class="picker" [items]="collectionList" formControlName="collectionId" bindLabel="name"
-                bindValue="id" placeholder="Collection" appendTo="body" (change)="getSubCollections($event)">
+                bindValue="id" placeholder="Collection" (change)="getSubCollections($event)">
               </ng-select>
             </div>
             <div class="col-12 col-md-4">
               <ng-select class="picker" [items]="subcollectionList" formControlName="subcollectionId" bindLabel="name"
-                bindValue="id" placeholder="Subcollection" appendTo="body">
+                bindValue="id" placeholder="Subcollection">
               </ng-select>
             </div>
             <div class="col-12 col-md-4">
