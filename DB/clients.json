@@ -1,1 +1,4 @@
 {"_id":{"$oid":"5cf173f2ff788f0de011ea88"},"role":"ADMIN","username":"jgallardo","password":"$2a$10$W9l.tz4BbBCjC7.nh5itnuOoiQ6cpwKE7Tm8Zzhy/RcgCRGLIMttu","email":"jorgegallardo64@gmail.com"}
+{"_id":{"$oid":"5cfafe13f7128b0cf8d570ee"},"role":"ADMIN","username":"testDAW","password":"$2a$10$bopzS0U8eYH6Ksalg9nvZudzwO0t39vy.SOilAzBZsoqzPyAMSSv6","email":"testdaw@test.com"}
+{"_id":{"$oid":"5cfe9b149b40580d74ba5707"},"role":"CLIENT","username":"testClientDAW","password":"$2a$10$cZ3enJtM0odmsyLb49hHKue1ZEqmfKdyWsaLIZiWJOTobq.L01Kam","email":"testclientdaw@test.com"}
+{"_id":{"$oid":"5cfe9b3f9b40580d74ba5708"},"role":"ADMIN","username":"testAdminDAW","password":"$2a$10$8Lf1jWaZS3grMsSMPKRq7.yA4knMq/mDCte1db/UAXUcNZhEEubcO","email":"testadmindaw@test.com"}
